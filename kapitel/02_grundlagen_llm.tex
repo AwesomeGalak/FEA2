@@ -11,7 +11,7 @@ Grundlagen vom Embedding bis zur Softmax-Funktion erläutert und danach eine Tex
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.43\textwidth]{LLM.png}
+    \includegraphics[width=0.43\textwidth]{ablaufplan_LLM.jpeg}
     \caption{Datenfluss eines Large Language Models}
     \label{fig:llm_pipeline}
 \end{figure}
@@ -21,15 +21,14 @@ Grundlagen vom Embedding bis zur Softmax-Funktion erläutert und danach eine Tex
 \label{sec:tokenisierung_embedding}
 % ============================================================
 
-Bevor jedoch der Transformer zum Einsatz kommt, ist der erste Schritt eines jeden LLMs das sogenannte Tokenisieren. Ein Token im Kontext des maschinellen Lernens wurde im Januar dieses Jahres von Daniel Jurafsky \& James H. Martin wie folgt definiert: \"`Tokens sind Einheiten, welche entstehen, nachdem wir Algorithmen wie BPE oder WordPiece anwenden, um Texteingaben für LLMs vorzubereiten."'\cite{book} In Abbildung \ref{fig:llm_pipeline} wird dieser Schritt mit dem ersten Block dargestellt und heißt übergeordnet Embedding. Beim Tokenisieren werden Wörter in Arrays umgewandelt. Zur Einordnung: Einer der ersten LLMs der Firma OpenAI, GPT-2, benutzt 768 Koordinaten, um den multidimensionalen Vektor eines einzigen Tokens aufzuspannen und um dessen Kontext zu speichern (siehe 2.1 in \cite{brown2020languagemodelsfewshotlearners}). In Abbildung \ref{fig:embedding} ist das Vektor-Embedding für den Satz \"`LLMs with Igus Rebel 6 DOF"' mithilfe von Hauptachsentransformation (englisch Principal Component Analysis, kurz PCA) im dreidimensionalen Raum für GPT-2 dargestellt. Zur Tokenisierung wurde der bis heute standardmäßig verwendete Tokenisierungsalgorithmus Byte Pair Encoding verwendet.
+Bevor jedoch der Transformer zum Einsatz kommt, ist der erste Schritt eines jeden LLMs das sogenannte Tokenisieren. Ein Token im Kontext des maschinellen Lernens wurde im Januar dieses Jahres von Daniel Jurafsky \& James H. Martin wie folgt definiert: \"`Tokens sind Einheiten, welche entstehen, nachdem wir Algorithmen wie BPE oder WordPiece anwenden, um Texteingaben für LLMs vorzubereiten."'\cite{book} In Abbildung \ref{fig:rebel_context} wird dieser Schritt mit dem ersten Block dargestellt und heißt übergeordnet Embedding. Beim Tokenisieren werden Wörter in Arrays umgewandelt. Zur Einordnung: Einer der ersten LLMs der Firma OpenAI, GPT-2, benutzt 768 Koordinaten, um den multidimensionalen Vektor eines einzigen Tokens aufzuspannen und um dessen Kontext zu speichern (siehe 2.1 in \cite{brown2020languagemodelsfewshotlearners}). In Abbildung \ref{fig:rebel_context} ist das Vektor-Embedding für den Satz \"`LLMs with Igus Rebel 6 DOF"' mithilfe von Hauptachsentransformation (englisch Principal Component Analysis, kurz PCA) im dreidimensionalen Raum für GPT-2 dargestellt. Zur Tokenisierung wurde der bis heute standardmäßig verwendete Tokenisierungsalgorithmus Byte Pair Encoding verwendet.
 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.55\textwidth]{Embedding.png}
-    \caption{Datenfluss einer LLM-basierten Konversation: Spracheingabe (STT),
-        Verarbeitung durch das Sprachmodell und Sprachausgabe (TTS).}
-    \label{fig:embedding}
+    \includegraphics[width=0.55\textwidth]{rebel.jpeg}
+    \caption{Vektor-Embedding für den Satz „LLMs with Igus Rebel 6 DOF“}
+    \label{fig:rebel_context}
 \end{figure}
 
 \textbf{Byte Pair Encoding (BPE)}\label{Byte Pair Encoding}
@@ -42,10 +41,9 @@ Wörter oder Pluralformen werden in mehrere Tokens aufgeteilt.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.55\textwidth]{Embedding2.png}
-    \caption{Datenfluss einer LLM-basierten Konversation: Spracheingabe (STT),
-        Verarbeitung durch das Sprachmodell und Sprachausgabe (TTS).}
-    \label{fig:embedding2}
+    \includegraphics[width=0.55\textwidth]{tokenisierug.jpeg}
+    \caption{Beispielhafte Darstellung der Tokenisierung}
+    \label{fig:tokenisierung}
 \end{figure}
 
 Statische Embeddings wie BPE haben jedoch ein grundlegendes Problem: Jedes Wort erhält genau einen festen Vektor, unabhängig vom Kontext. In Abbildung \ref{fig:rebel_context} ist dies am Wort Rebel dargestellt, das sowohl den igus-Leichtbauroboter als auch einen Aufständischen bezeichnen kann. Im Roboter-Kontext zeigt der Vektor in ähnliche Richtungen wie igus kuka und agilus. Im Kontext eines Rebellen hingegen in Richtung eines Verwandten wortes wie Outlaw. Diese Einordnungen hat das Modell während des Trainings gelernt. Welcher Kontext gemeint ist im Prompt kann ein statisches Embedding nicht Unterscheiden erst der im folgenden Abschnitt vorgestellte Transformer löst dieses Problem.
@@ -298,7 +296,7 @@ wobei $p_0 = 2 \cdot 10^{-5}\,$Pa der Hörschwelle bei 1\,kHz (0\,dB) entspricht
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{Embedding.png}
+    \includegraphics[width=0.8\textwidth]{ablaufplan_LLM.jpeg}
     \caption{Datenfluss eines Large Language Models}
     \label{fig:spracherkennung}
 \end{figure}
