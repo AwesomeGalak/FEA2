@@ -1,0 +1,61 @@
+% ============================================================
+% Kapitel 4: Evaluation
+% ============================================================
+\chapter{Evaluation}
+Diese Kapitel führt eine Versuchsreihe durch welche mit dem im IZPL vorhanden Hardwaresetup durhc. Als LLM wurde 7Milliarden Paramter mit Piper als Text to Speach Modell. Das Githun Repository \ref{} dient hierbei als Startgerüst und wurde nur bzgl. geringen Änderungen verändert.
+
+\section{Methodik der Evaluation}
+Es werden die Durchschnittliche Antwortzeit die WER und die Qualität der Antwort verglichen. Zur Beurteilung der Hardwareanforderungen wird zudem der VRAM-Bedarf betrachtet.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{llama7b_vram.jpg}
+    \caption{Simulierter VRAM-Bedarf je Quantisierungsstufe im Vergleich zum 12-GB-Limit der RTX 3080 Ti}
+    \label{fig:eval_vram}
+\end{figure}
+
+\section{Antwortzeiten und Performanz}
+Die Performanz des Modells wird primär über die Token-Generierungsgeschwindigkeit sowie die initiale Latenz (Time-to-First-Token) gemessen.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{llama7b_tokens_per_s.jpg}
+    \caption{Generierungsgeschwindigkeit (Tokens/s) in Abhängigkeit der Quantisierung}
+    \label{fig:eval_tokens_per_s}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{llama7b_ttft.jpg}
+    \caption{Prefill-Latenz (Time-to-First-Token) über verschiedene Prompt-Längen (Q4\_K\_M)}
+    \label{fig:eval_ttft}
+\end{figure}
+
+Ein detaillierter Blick auf den Generierungsprozess im zeitlichen Verlauf zeigt die kontinuierliche Token-Ausgabe sowie die dynamische VRAM-Auslastung während der Inferenz.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{llama7b_token_gen.jpg}
+    \caption{Kumulative Token-Ausgabe über die Zeit bei der 4-Bit-Quantisierung}
+    \label{fig:eval_token_gen}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{llama7b_vram_trace.jpg}
+    \caption{Zeitlicher VRAM-Verlauf während der Modell-Ausführung gegliedert in Laden, Prefill und Generierung}
+    \label{fig:eval_vram_trace}
+\end{figure}
+
+\section{Qualität der Konversation}
+Für LLMs gibt es viele Benchmarks zu den aus objektiver sicht zählenden gehört die sogenannte Perplexity.
+Durch die Quantisierung des Modells lässt sich eine minimale Einbuße bei der Sprachqualität beobachten, welche jedoch bei 4-Bit-Gewichten noch als praxistauglich gilt.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{llama7b_perplexity.jpg}
+    \caption{Qualitätsverlust (Perplexity auf WikiText-2) durch Quantisierungsverfahren}
+    \label{fig:eval_perplexity}
+\end{figure}
+
+

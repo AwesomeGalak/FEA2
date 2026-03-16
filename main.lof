@@ -1,0 +1,17 @@
+\babel@toc {ngerman}{}\relax 
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Datenfluss eines Large Language Models}}{3}{figure.caption.5}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Datenfluss einer LLM-basierten Konversation: Spracheingabe (STT), Verarbeitung durch das Sprachmodell und Sprachausgabe (TTS).}}{4}{figure.caption.6}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Datenfluss einer LLM-basierten Konversation: Spracheingabe (STT), Verarbeitung durch das Sprachmodell und Sprachausgabe (TTS).}}{5}{figure.caption.7}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Datenfluss eines Large Language Models}}{10}{figure.caption.9}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Simulierter VRAM-Bedarf je Quantisierungsstufe im Vergleich zum 12-GB-Limit der RTX 3080 Ti}}{21}{figure.caption.24}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Generierungsgeschwindigkeit (Tokens/s) in Abhängigkeit der Quantisierung}}{22}{figure.caption.25}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Prefill-Latenz (Time-to-First-Token) über verschiedene Prompt-Längen (Q4\_K\_M)}}{22}{figure.caption.26}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Kumulative Token-Ausgabe über die Zeit bei der 4-Bit-Quantisierung}}{23}{figure.caption.27}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Zeitlicher VRAM-Verlauf während der Modell-Ausführung gegliedert in Laden, Prefill und Generierung}}{23}{figure.caption.28}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Qualitätsverlust (Perplexity auf WikiText-2) durch Quantisierungsverfahren}}{24}{figure.caption.29}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }

@@ -1,0 +1,475 @@
+% ============================================================
+% Kapitel 2: Grundlagen Large Language Models
+% ============================================================
+
+\chapter{Grundlagen Large Language Models}
+
+\vspace{-0.6cm}
+Dieses Kapitel legt die theoretischen Grundlagen für das Verständnis
+moderner Large Language Models (LLMs). Es werden zunächst die mathematischen
+Grundlagen vom Embedding bis zur Softmax-Funktion erläutert und danach eine Text to speach Pipline vorgestellt. Das Kapitel beginnt mit Abbildung \ref{fig:llm_pipeline} welche sich auf den Grundlegenden Meachanismus eines LLMs fokussiert, den Transformer. LLMs haben wie in der Überschrift ersiochtlich aus sogenannten Prompts 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.43\textwidth]{LLM.png}
+    \caption{Datenfluss eines Large Language Models}
+    \label{fig:llm_pipeline}
+\end{figure}
+
+% ============================================================
+\section{Tokenisierung und Embedding}
+\label{sec:tokenisierung_embedding}
+% ============================================================
+
+Bevor jedoch der Transformer zum Einsatz kommt, ist der erste Schritt eines jeden LLMs das sogenannte Tokenisieren. Ein Token im Kontext des maschinellen Lernens wurde im Januar dieses Jahres von Daniel Jurafsky \& James H. Martin wie folgt definiert: \"`Tokens sind Einheiten, welche entstehen, nachdem wir Algorithmen wie BPE oder WordPiece anwenden, um Texteingaben für LLMs vorzubereiten."'\cite{book} In Abbildung \ref{fig:llm_pipeline} wird dieser Schritt mit dem ersten Block dargestellt und heißt übergeordnet Embedding. Beim Tokenisieren werden Wörter in Arrays umgewandelt. Zur Einordnung: Einer der ersten LLMs der Firma OpenAI, GPT-2, benutzt 768 Koordinaten, um den multidimensionalen Vektor eines einzigen Tokens aufzuspannen und um dessen Kontext zu speichern (siehe 2.1 in \cite{brown2020languagemodelsfewshotlearners}). In Abbildung \ref{fig:embedding} ist das Vektor-Embedding für den Satz \"`LLMs with Igus Rebel 6 DOF"' mithilfe von Hauptachsentransformation (englisch Principal Component Analysis, kurz PCA) im dreidimensionalen Raum für GPT-2 dargestellt. Zur Tokenisierung wurde der bis heute standardmäßig verwendete Tokenisierungsalgorithmus Byte Pair Encoding verwendet.
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.55\textwidth]{Embedding.png}
+    \caption{Datenfluss einer LLM-basierten Konversation: Spracheingabe (STT),
+        Verarbeitung durch das Sprachmodell und Sprachausgabe (TTS).}
+    \label{fig:embedding}
+\end{figure}
+
+\textbf{Byte Pair Encoding (BPE)}\label{Byte Pair Encoding}
+ist ein datengetriebener Teilwort-Tokenizer.
+Der Algorithmus beginnt mit einem Lookup-Tabel als Trainingskorpus und fasst iterativ das häufigste benachbarte Zeichenpaar,welche er im Trainigskorpuse nachschaut, zu einem neuen Token zusammen. Dieser Prozess wiederholt sich, bis eine
+gewünschte Vokabulargröße $|\mathcal{V}|$ erreicht ist~\cite{sennrich_bpe}.
+Ursprünglich in den 90er Jahren für Speicherplatzreduzierung entwickelt zerlegt er seltene oder zusammengesetzte Wörter in häufige Teilwörter und kann somit prinzipiell jede Zeichenkette verarbeiten.
+Häufige Wörter erhalten dabei meist ein einzelnes Token, seltene
+Wörter oder Pluralformen werden in mehrere Tokens aufgeteilt. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.55\textwidth]{Embedding2.png}
+    \caption{Datenfluss einer LLM-basierten Konversation: Spracheingabe (STT),
+        Verarbeitung durch das Sprachmodell und Sprachausgabe (TTS).}
+    \label{fig:embedding2}
+\end{figure}
+
+Statische Embeddings wie BPE haben jedoch ein grundlegendes Problem: Jedes Wort erhält genau einen festen Vektor, unabhängig vom Kontext. In Abbildung \ref{fig:rebel_context} ist dies am Wort Rebel dargestellt, das sowohl den igus-Leichtbauroboter als auch einen Aufständischen bezeichnen kann. Im Roboter-Kontext zeigt der Vektor in ähnliche Richtungen wie igus kuka und agilus. Im Kontext eines Rebellen hingegen in Richtung eines Verwandten wortes wie Outlaw. Diese Einordnungen hat das Modell während des Trainings gelernt. Welcher Kontext gemeint ist im Prompt kann ein statisches Embedding nicht Unterscheiden erst der im folgenden Abschnitt vorgestellte Transformer löst dieses Problem.
+
+Token-Embedding:
+\begin{equation}
+    x_i = e_i + p_i
+    \label{eq:posembed}
+\end{equation}
+
+
+% ============================================================
+\section{Der Transformer-Block}
+\label{sec:transformer_block}
+% ============================================================
+
+Der Transformer-Block ist die zentrale Verarbeitungseinheit eines LLMs.
+Er besteht aus zwei Hauptoperationen zum ersten aus Multi-Head Self-Attention
+und einem Feed-Forward-Netzwerk (FFN) jeweils kombiniert mit
+einer Normierungsschicht und einer Residualverbindung:
+
+\begin{align}
+    x' &= x + \text{Attention}\bigl(\text{Norm}(x)\bigr) \\
+    x'' &= x' + \text{FFN}\bigl(\text{Norm}(x')\bigr)
+    \label{eq:block}
+\end{align}
+
+Durch das $N$-fache Hintereinanderschalten solcher Blöcke entsteht
+eine tiefe Architektur, die schrittweise abstrakte Repräsentationen
+aufbaut.
+
+\textbf{Normierungsschicht.}
+Zur Stabilisierung des Trainings tiefer Netze wird vor jeder
+Hauptoperation eine Normierungsschicht angewendet.
+Die klassische \emph{Layer Normalization} berechnet Mittelwert $\mu$
+und Standardabweichung $\sigma$ über die Feature-Dimension:
+\begin{equation}
+    \text{LayerNorm}(x) = \gamma \cdot \frac{x - \mu}{\sqrt{\sigma^2 + \epsilon}} + \beta,
+    \quad \mu = \frac{1}{d}\sum_{i=1}^d x_i
+    \label{eq:layernorm}
+\end{equation}
+
+Eine vereinfachte Variante ist die \textbf{RMSNorm}
+(Root Mean Square Normalization), die den Mittelwert nicht subtrahiert
+und damit rechnerisch effizienter ist:
+\begin{equation}
+    \text{RMSNorm}(x) = \gamma \cdot \frac{x}{\sqrt{\dfrac{1}{d}\sum_{i=1}^{d} x_i^2 + \epsilon}}
+    \label{eq:rmsnorm}
+\end{equation}
+Die Normierung verhindert, dass Aktivierungswerte über viele Schichten
+hinweg exponentiell wachsen oder verschwinden (Vanishing/Exploding Gradients).
+
+\textbf{Multi-Head Self-Attention.}\label{sec:attention}
+Der Self-Attention-Mechanismus ermöglicht es jedem Token, beim
+Aufbau seiner Repräsentation den gesamten bisherigen Kontext zu
+berücksichtigen. Drei lineare Projektionen erzeugen für jedes Token
+$x_i$ die Vektoren Query $q_i$, Key $k_i$ und Value $v_i$:
+\begin{equation}
+    q_i = W_Q\,x_i, \quad k_i = W_K\,x_i, \quad v_i = W_V\,x_i
+    \label{eq:qkv}
+\end{equation}
+
+Die \textbf{Scaled Dot-Product Attention} berechnet Ähnlichkeitsgewichte
+zwischen Query und Keys und aggregiert die Values entsprechend:
+\begin{equation}
+    \text{Attention}(Q, K, V) =
+    \text{softmax}\!\left(\frac{QK^T}{\sqrt{d_k}} + M\right)V
+    \label{eq:attention}
+\end{equation}
+Die \textbf{kausale Maske} $M$ stellt sicher, dass Token $t_i$ nur
+auf vorherige Positionen $t_j$ mit $j \leq i$ zugreifen kann:
+\begin{equation}
+    M_{ij} = \begin{cases}
+        0        & j \leq i \\
+        -\infty  & j > i
+    \end{cases}
+    \label{eq:mask}
+\end{equation}
+
+Bei \textbf{Multi-Head Attention} werden $h$ parallele
+Attention-Berechnungen in Unterräumen der Dimension $d_k = d/h$
+ausgeführt und anschließend konkateniert:
+\begin{equation}
+    \text{MultiHead}(Q,K,V) = \bigl[\text{head}_1 \,\|\, \cdots \,\|\, \text{head}_h\bigr]\,W_O
+    \label{eq:multihead}
+\end{equation}
+Jeder Kopf kann dabei unterschiedliche Aspekte des Kontexts erlernen
+(z.\,B. syntaktische Abhängigkeiten, semantische Ähnlichkeit, Koreferenzen).
+
+\textbf{Feed-Forward-Netzwerk.}\label{sec:mlp}
+Nach der Self-Attention verarbeitet ein positionsweises
+Feed-Forward-Netzwerk jede Token-Position unabhängig.
+In der ursprünglichen Transformer-Formulierung besteht es aus zwei
+linearen Transformationen mit einer nichtlinearen Aktivierung
+dazwischen~\cite{vaswani_attention}:
+\begin{equation}
+    \text{FFN}(x) = W_2 \cdot \text{ReLU}(W_1\,x + b_1) + b_2
+    \label{eq:ffn_relu}
+\end{equation}
+
+Die innere Dimension $d_{\text{ff}}$ ist typischerweise $4 \cdot d$.
+Das FFN speichert einen wesentlichen Teil des Faktenwissens des Modells.
+
+\textbf{Rotary Position Embeddings (RoPE).}
+Neuere Architekturen verwenden funktionale Kodierungen, die die
+Positionsinformation direkt in den Attention-Mechanismus einbetten.
+\textbf{Rotary Position Embeddings (RoPE)} kodieren die Position durch
+eine Rotation des Query- und Key-Vektors mit einem positionsabhängigen
+Winkel~\cite{su_rope}. Für einen zweidimensionalen Ausschnitt gilt:
+\begin{equation}
+    \text{RoPE}(x, i) =
+    \begin{pmatrix}
+        x_1 \cos(i\,\omega) - x_2 \sin(i\,\omega) \\
+        x_1 \sin(i\,\omega) + x_2 \cos(i\,\omega)
+    \end{pmatrix},
+    \quad \omega_k = \frac{1}{10000^{2k/d}}
+    \label{eq:rope}
+\end{equation}
+Da das Skalarprodukt zweier rotierter Vektoren nur von ihrer
+\emph{relativen} Position abhängt, kodiert RoPE die Relativdistanz
+direkt im Attention-Mechanismus.
+
+\textbf{Residualverbindungen.}
+Residualverbindungen (Skip Connections) addieren das Eingangssignal
+direkt zur Ausgabe einer Operation und lösen so das Problem der
+verschwindenden Gradienten in tiefen Netzen:
+\begin{equation}
+    \text{out} = f(x) + x
+    \label{eq:residual}
+\end{equation}
+Jeder Transformer-Block besitzt zwei Residualverbindungen: eine
+nach der Self-Attention und eine nach dem FFN.
+
+% ============================================================
+\section{Ausgabeschicht, Training und Quantisierung}
+\label{sec:ausgabe_training}
+% ============================================================
+
+Nach dem letzten Transformer-Block wird die Ausgabe des letzten Tokens
+durch eine Normierung und eine lineare Projektion auf die Vokabulargröße
+abgebildet:
+\begin{equation}
+    z = W_U \cdot \text{Norm}\!\bigl(x_T^{(N)}\bigr),
+    \quad z \in \mathbb{R}^{|\mathcal{V}|}
+    \label{eq:logits}
+\end{equation}
+
+Der resultierende Vektor $z$ (\textbf{Logits}) wird durch
+\textbf{Softmax} in eine Wahrscheinlichkeitsverteilung über das
+gesamte Vokabular umgewandelt:
+\begin{equation}
+    P\!\bigl(t_{T+1} = w \mid t_1, \ldots, t_T\bigr) =
+    \frac{\exp(z_w / \tau)}{\sum_{j} \exp(z_j / \tau)}
+    \label{eq:softmax}
+\end{equation}
+
+Der \textbf{Temperature}-Parameter $\tau$ steuert die Schärfe der
+Verteilung: kleine Werte ($\tau < 1$) machen das Modell
+deterministischer, große Werte ($\tau > 1$) erhöhen die Vielfalt.
+Das gewählte Token wird an die Sequenz angehängt und der Prozess
+wiederholt (\textbf{autoregressive Generierung}), bis ein Stopptoken
+erreicht ist.
+Gängige Sampling-Strategien sind \textbf{Top-$k$ Sampling}
+(nur die $k$ wahrscheinlichsten Tokens) und
+\textbf{Top-$p$ (Nucleus) Sampling} (kleinste Menge mit
+kumulativer Wahrscheinlichkeit $\geq p$).
+
+\textbf{Pretraining.}\label{sec:training}
+Beim Pretraining lernt das Modell, das jeweils nächste Token einer
+Text-Sequenz vorherzusagen (\textbf{Causal Language Modeling, CLM}).
+Die Verlustfunktion ist die mittlere negative Log-Likelihood
+(Cross-Entropy) über alle Positionen:
+\begin{equation}
+    \mathcal{L}_{\text{CLM}}(\theta) =
+    -\frac{1}{T}\sum_{t=1}^{T} \log P(w_t \mid w_1, \ldots, w_{t-1};\, \theta)
+    \label{eq:clm}
+\end{equation}
+Die Gewichte $\theta$ werden durch stochastischen Gradientenabstieg
+(Adam-Optimizer) minimiert. Das Pretraining auf großen Textkorpora
+befähigt das Modell, allgemeines Weltwissen und sprachliche Strukturen
+zu erlernen.
+
+\textbf{Finetuning und RLHF.}
+Nach dem Pretraining ist ein Modell nur auf Token-Vervollständigung
+optimiert. Durch \textbf{Supervised Fine-Tuning (SFT)} auf Paaren aus
+Anweisung und gewünschter Antwort wird das Modell auf Konversationen
+spezialisiert.
+\textbf{Reinforcement Learning from Human Feedback (RLHF)} verfeinert
+das Modell weiter: Menschliche Bewerter vergleichen Modellantworten,
+daraus wird ein \emph{Reward Model} trainiert, und das Sprachmodell
+wird so optimiert, dass sein Reward maximiert wird.
+
+\textbf{Quantisierung.}\label{sec:quantisierung}
+Modellgewichte werden standardmäßig als 16-Bit-Gleitkommazahlen
+gespeichert. Auf lokaler Hardware mit begrenztem VRAM ist dies für
+große Modelle oft nicht praktikabel. \textbf{Quantisierung} reduziert
+die Bitbreite der Gewichte, um Speicherbedarf und Inferenzge\-schwindigkeit
+zu verbessern:
+\begin{equation}
+    \text{VRAM}_{\text{min}} \approx
+    \frac{N_{\text{Parameter}} \times \text{Bitbreite}}{8 \times 10^9}
+    \;\text{[GB]}
+    \label{eq:vram}
+\end{equation}
+
+\begin{table}[H]
+    \centering
+    \small
+    \begin{tabular}{l c c l}
+        \toprule
+        Format       & Bitbreite & VRAM (7B-Modell) & Qualitätsverlust \\
+        \midrule
+        FP16         & 16\,Bit   & $\approx$14\,GB  & Referenz \\
+        INT8         & 8\,Bit    & $\approx$7\,GB   & minimal \\
+        Q4\_K\_M     & 4\,Bit    & $\approx$4\,GB   & gering, praxistauglich \\
+        Q2\_K        & 2\,Bit    & $\approx$2\,GB   & deutlich spürbar \\
+        \bottomrule
+    \end{tabular}
+    \caption{VRAM-Bedarf eines 7B-Sprachmodells bei verschiedenen
+        Quantisierungsstufen.}
+    \label{tab:quantisierung}
+\end{table}
+
+Das \textbf{GGUF}-Format hat sich als portables Standardformat für
+quantisierte Gewichte etabliert und wird von \texttt{llama.cpp} und
+\texttt{ollama} nativ unterstützt.
+
+% ============================================================
+\section{Sprachverarbeitung: STT und TTS}
+\label{sec:sprachverarbeitung}
+% ============================================================
+
+Da LLMs ausschließlich Text verarbeiten können, muss gesprochene Sprache zunächst
+transkribiert werden. Die Umwandlung von Audio in Text bezeichnet man als
+\textbf{Automatic Speech Recognition (ASR)} oder \textbf{Speech-to-Text (STT)}.
+
+Die Vibration der Stimmlippen versetzt Luftmoleküle in Schwingung. Durch die Kompressibilität der Luft entsteht eine sich ausbreitende Schallwelle, die physikalisch der Schwankung des Luftdrucks (Schalldruck $p$, Einheit: Pa) um den atmosphärischen Ruhedruck (1013,25\,hPa) entspricht~\cite{Moeser2015}.
+Subjektiv wird Schall durch \textit{Klangfarbe} und \textit{Lautstärke} beschrieben; die physikalischen Äquivalente sind die Frequenz $f$ und die Amplitude des Schalldrucks. Die Frequenz berechnet sich über die Periodendauer $T$:
+\begin{equation}
+    f = \frac{1}{T}
+    \label{eq:frequenz}
+\end{equation}
+Ein Signal mit genau einer Frequenzkomponente heißt \textit{Ton} (z.\,B.\ der Kammerton A4 bei 440\,Hz), eine Überlagerung ganzzahlig verwandter Frequenzen \textit{Klang}. Menschliche Sprache ist eine Überlagerung harmonischer Schwingungen im Bereich von 80\,Hz bis 12\,kHz~\cite{Mueller2015}.
+Da die menschliche Lautstärkewahrnehmung logarithmisch ist, wird der \textit{Schalldruckpegel} $L$ eingeführt:
+\begin{equation}
+    L = 20 \cdot \lg\!\left(\frac{p}{p_0}\right) \quad \text{in dB}
+    \label{eq:schalldruckpegel}
+\end{equation}
+wobei $p_0 = 2 \cdot 10^{-5}\,$Pa der Hörschwelle bei 1\,kHz (0\,dB) entspricht. Die Schmerzgrenze liegt bei 200\,Pa bzw.\ 140\,dB. Die Angabe dB ist keine Maßeinheit, sondern weist auf das logarithmische Bildungsgesetz hin; 1\,dB entspricht etwa der menschlichen Unterschiedsschwelle zwischen zwei Lautstärken. Die wahrgenommene Lautstärke (Einheit: phon) hängt zusätzlich von der Frequenz ab und wurde empirisch ermittelt, wobei die Hörschwelle bei 0\,phon und die Schmerzgrenze bei 120\,phon definiert ist.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Embedding.png}
+    \caption{Datenfluss eines Large Language Models}
+    \label{fig:spracherkennung}
+\end{figure}
+
+Das Eingangssignal ist eine Audiodatei (typischerweise 16\,kHz Mono). Um es
+für ein neuronales Netz nutzbar zu machen, wird es in ein
+\textbf{Log-Mel-Spektrogramm} umgewandelt -- eine Zeit-Frequenz-Darstellung,
+die der Wahrnehmung des menschlichen Gehörs nachgebildet ist:
+\begin{equation}
+    S_{\text{mel}}(m, t) = \log\!\Biggl(\sum_{k} |X(k, t)|^{2}
+    \cdot H_m(k) + \epsilon\Biggr)
+    \label{eq:logmel}
+\end{equation}
+wobei $X(k, t)$ das Kurzzeit-Fourierspektrum, $H_m(k)$ die $m$-te
+Mel-Filterbank und $\epsilon$ ein Glättungsterm ist. Ein neuronales Netz --
+typischerweise ein Transformer (Encoder-Decoder) -- erzeugt aus diesem
+Spektrogramm direkt die Texttranskription.
+
+\textbf{Text-to-Speech (TTS)}\label{sec:theorie_tts}
+bezeichnet die Synthese von Sprache aus Text.
+Moderne neuronale TTS-Systeme erzeugen natürlich klingende Sprache
+in einem mehrstufigen Prozess:
+\begin{enumerate}
+    \item \textbf{Phonemisierung:} Der Eingabetext wird normalisiert
+          und in eine phonetische Repräsentation (Phoneme) umgewandelt.
+    \item \textbf{Akustisches Modell:} Aus der Phonemsequenz wird ein
+          Mel-Spektrogramm generiert -- eine Zeit-Frequenz-Darstellung,
+          die Tonhöhe, Geschwindigkeit und Klangfarbe kodiert.
+    \item \textbf{Vocoder:} Das Mel-Spektrogramm wird in ein
+          Audiosignal (Wellenform) umgewandelt.
+\end{enumerate}
+
+End-to-End-Modelle wie \textbf{VITS} (Variational Inference with
+adversarial learning for end-to-end TTS)~\cite{vits} kombinieren
+diese Stufen in einem einzigen Modell und werden direkt von Text zu
+Audio trainiert. Die Trainingsschleife minimiert eine Kombination aus
+Rekonstruktionsfehler und Adversarial Loss:
+\begin{equation}
+    \mathcal{L}_{\text{VITS}} =
+    \mathcal{L}_{\text{recon}} + \lambda\,\mathcal{L}_{\text{adv}}
+    \label{eq:vits_loss}
+\end{equation}
+
+% ============================================================
+\section{Das eingesetzte System}
+\label{sec:system}
+% ============================================================
+
+Auf Basis der in den vorherigen Abschnitten beschriebenen Theorie wird
+in dieser Arbeit eine vollständige Sprachpipeline eingesetzt, die
+ausschließlich lokal ohne Cloud-Anbindung betrieben wird.
+Die drei Kernkomponenten sind:
+
+\textbf{Spracherkennung: Whisper.}\label{sec:whisper}
+\textbf{Whisper}~\cite{whisper} ist ein von OpenAI veröffentlichtes
+Open-Source-Modell zur automatischen Spracherkennung. Es wurde auf
+680.000 Stunden mehrsprachiger Audiodaten trainiert und basiert auf
+einer Transformer-Encoder-Decoder-Architektur. Der Encoder verarbeitet
+80-Kanal Log-Mel-Spektrogramme (vgl. Gleichung~\ref{eq:logmel}),
+der Decoder generiert autoregressiv die Textausgabe.
+Whisper unterstützt mehrsprachige Erkennung ohne sprachspezifische
+Anpassung und ist robust gegenüber Umgebungsgeräuschen.
+In dieser Arbeit wird Whisper lokal auf der IZPL-Hardware ausgeführt.
+Ein gesprochener Satz wie \glqq{}Wie hoch ist die aktuelle
+Raumtemperatur?\grqq{} wird innerhalb weniger hundert Millisekunden
+transkribiert und als Zeichenkette an das Sprachmodell übergeben.
+
+\textbf{Sprachmodell: LLaMA\,7B.}\label{sec:llama}
+\textbf{LLaMA\,7B}~\cite{touvron_llama} ist ein von Meta entwickeltes
+Open-Source-Sprachmodell mit 6{,}7~Milliarden Parametern. Es verwendet
+die in Abschnitt~\ref{sec:transformer_block} beschriebene
+Transformer-Architektur mit folgenden Spezifikationen:
+
+\begin{table}[H]
+    \centering
+    \small
+    \begin{tabular}{l c c c c r}
+        \toprule
+        Modell & $N$ & $d$ & $h$ & $d_{\text{ff}}$ & Parameter \\
+        \midrule
+        GPT-2 (small)       & 12 & 768    & 12 & 3.072   & 124\,M   \\
+        \textbf{LLaMA\,7B}  & \textbf{32} & \textbf{4.096} & \textbf{32} & \textbf{11.008} & \textbf{6{,}7\,B} \\
+        LLaMA\,13B          & 40 & 5.120  & 40 & 13.824  & 13\,B    \\
+        GPT-3               & 96 & 12.288 & 96 & 49.152  & 175\,B   \\
+        \bottomrule
+    \end{tabular}
+    \caption{Architekturparameter -- LLaMA\,7B (fett) ist das in dieser Arbeit
+        eingesetzte Modell.}
+    \label{tab:modelle}
+\end{table}
+
+Im Vergleich zum Standard-Transformer setzt LLaMA\,7B folgende
+Anpassungen ein:
+\begin{itemize}
+    \item \textbf{RMSNorm} (statt LayerNorm) vor jeder Operation
+          (vgl. Gleichung~\ref{eq:rmsnorm})
+    \item \textbf{SwiGLU}-Aktivierung im FFN (statt ReLU):
+          \begin{equation}
+              \text{FFN}_{\text{SwiGLU}}(x) =
+              \bigl(\text{Swish}(xW_1) \odot (xW_3)\bigr)\,W_2,
+              \quad \text{Swish}(z) = z \cdot \sigma(z)
+              \label{eq:swiglu}
+          \end{equation}
+    \item \textbf{RoPE} Positionskodierung (vgl. Gleichung~\ref{eq:rope})
+    \item Maximale Kontextlänge: $T_{\max} = 4096$ Tokens
+\end{itemize}
+
+Das Modell wird im \textbf{Q4\_K\_M}-Format über \texttt{ollama}
+lokal betrieben, was einen VRAM-Bedarf von ca.\,4\,GB ergibt und
+den Betrieb auf der verfügbaren Hardware ohne relevante
+Qualitätseinbußen ermöglicht.
+
+\textbf{Sprachsynthese: Piper TTS mit eigenem Stimmmodell.}\label{sec:piper}
+\textbf{Piper TTS}~\cite{piper} ist ein schnelles, Open-Source-TTS-System,
+das auf der VITS-Architektur (vgl. Abschnitt~\ref{sec:theorie_tts})
+basiert und für den lokalen, ressourcenschonenden Betrieb optimiert ist.
+In dieser Arbeit wurde ein eigenes Stimmmodell trainiert, um die
+Sprachausgabe natürlicher zu gestalten. Das Vorgehen folgt dem
+Verfahren von \citeauthor{networkchuck_voice}~\cite{networkchuck_voice}:
+
+\begin{enumerate}
+    \item \textbf{Datenaufbereitung:} Aufnahme von Sprachsamples
+          mit dem Piper Recording Studio. Die Samples werden
+          rauschbereinigt, auf $22{.}050$\,Hz normalisiert und den
+          zugehörigen Transkripten zugeordnet.
+    \item \textbf{Finetuning:} Training ausgehend von einem
+          vortrainierten deutschen Piper-Checkpoint über 6000~Epochen:
+\begin{lstlisting}[language=bash, basicstyle=\small\ttfamily]
+python3 -m piper_train \
+  --dataset-dir ~/sprachdaten \
+  --accelerator gpu --gpus 1 \
+  --batch-size 32 --max_epochs 6000 \
+  --resume_from_checkpoint base.ckpt \
+  --precision 16 --quality medium
+\end{lstlisting}
+    \item \textbf{ONNX-Export:} Das trainierte Modell wird in das
+          ONNX-Format (Open Neural Network Exchange) exportiert,
+          das eine hardwareunabhängige Inferenz ohne GPU ermöglicht:
+\begin{lstlisting}[language=bash, basicstyle=\small\ttfamily]
+python3 -m piper_train.export_onnx \
+  checkpoint/epoch=5999.ckpt \
+  output/stimme.onnx
+\end{lstlisting}
+\end{enumerate}
+
+Das resultierende Modell (\texttt{stimme.onnx}, ca.\,60\,MB)
+wird zusammen mit der Konfigurationsdatei \texttt{stimme.onnx.json}
+in Piper eingebunden und ermöglicht die Echtzeitsynthese auf der
+lokalen Hardware.
+
+% ============================================================
+\section{Zusammenfassung}
+% ============================================================
+
+Dieses Kapitel hat zunächst die theoretischen Grundlagen der
+LLM-Architektur -- von der Tokenisierung über den Transformer-Block
+bis zur Softmax-Ausgabe -- erläutert. Anschließend wurde das in dieser
+Arbeit eingesetzte System beschrieben:
+
+\begin{table}[H]
+    \centering
+    \small
+    \begin{tabular}{l l l}
+        \toprule
+        Komponente & Eingesetztes Modell & Besonderheit \\
+        \midrule
+        STT & Whisper & lokal, mehrsprachig, 80 Mel-Kanäle \\
+        LLM & LLaMA\,7B (Q4\_K\_M, GGUF) & $N{=}32$, $d{=}4096$, $\approx$4\,GB VRAM \\
+        TTS & Piper TTS + eigenes ONNX-Modell & VITS, $f_s{=}22{.}050$\,Hz, kein Cloud \\
+        \bottomrule
+    \end{tabular}
+    \caption{Übersicht der eingesetzten Komponenten.}
+    \label{tab:zusammenfassung}
+\end{table}

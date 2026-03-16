@@ -1,0 +1,119 @@
+% !TeX program = pdflatex
+\documentclass[a4paper,12pt]{report}
+
+% Pakete
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[ngerman]{babel}
+\usepackage{geometry}
+\usepackage[draft]{graphicx}  % draft: zeigt fehlende Bilder als Rahmen
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{booktabs}
+\usepackage{setspace}
+\usepackage{parskip}
+\usepackage{acronym}
+\usepackage{caption}
+\usepackage{float}
+\usepackage[backend=biber, style=numeric, sorting=anyt]{biblatex}
+\addbibresource{Literatur.bib}  % Deine .bib-Datei
+\geometry{left=2.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm}
+\graphicspath{{abbildungen/}}
+\setstretch{1.25}
+
+% Farben für Code-Listings
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
+}
+\lstset{style=mystyle}
+
+% Metadaten
+\title{Einsatz von Large Language Models im Umfeld der Robotik hinsichtlich On-Premise-Lösungen}
+\author{Moritz Jahn \\ Matrikelnummer: 3221169}
+\date{\today}
+
+\begin{document}
+
+% ============================================================
+% Titelseite und Verzeichnisse
+% ============================================================
+\pagenumbering{roman}
+\maketitle
+
+\tableofcontents
+\cleardoublepage
+
+\listoffigures
+\cleardoublepage
+
+\listoftables
+\cleardoublepage
+
+% ============================================================
+% Abkürzungsverzeichnis
+% ============================================================
+\chapter*{Abkürzungsverzeichnis}
+\addcontentsline{toc}{chapter}{Abkürzungsverzeichnis}
+\begin{acronym}[VRAM]
+    \acro{LLM}{Large Language Model}
+    \acro{VLM}{Visual Language Model}
+    \acro{NLP}{Natural Language Processing}
+    \acro{GPU}{Graphics Processing Unit}
+    \acro{CPU}{Central Processing Unit}
+    \acro{VRAM}{Video Random Access Memory}
+    \acro{RAM}{Random Access Memory}
+    \acro{ROS}{Robot Operating System}
+    \acro{API}{Application Programming Interface}
+    \acro{TTS}{Text-to-Speech}
+    \acro{STT}{Speech-to-Text}
+    \acro{RAG}{Retrieval-Augmented Generation}
+    \acro{GGUF}{GPT-Generated Unified Format}
+\end{acronym}
+
+\cleardoublepage
+\pagenumbering{arabic}
+
+% ============================================================
+% Kapitelimporte
+% ============================================================
+\include{kapitel/01_einfuehrung}
+\include{kapitel/02_grundlagen_llm}
+\include{kapitel/03_on_premise_infrastruktur}
+\include{kapitel/04_evaluation}
+\include{kapitel/06_ausblick}
+
+
+% ============================================================
+% Anhang
+% ============================================================
+\appendix
+\include{kapitel/A_anhang}
+
+% ============================================================
+% Literaturverzeichnis
+% ============================================================
+\printbibliography[heading=bibintoc, title={Literaturverzeichnis}]
+
+\end{document}

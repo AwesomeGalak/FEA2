@@ -1,0 +1,16 @@
+\babel@toc {ngerman}{}\relax 
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {2.1}{\ignorespaces VRAM-Bedarf eines 7B-Sprachmodells bei verschiedenen Quantisierungsstufen.}}{9}{table.caption.8}%
+\contentsline {table}{\numberline {2.2}{\ignorespaces Architekturparameter -- LLaMA\,7B (fett) ist das in dieser Arbeit eingesetzte Modell.}}{12}{table.caption.10}%
+\contentsline {table}{\numberline {2.3}{\ignorespaces Übersicht der eingesetzten Komponenten.}}{13}{table.caption.11}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {3.1}{\ignorespaces Konfiguration des nano-GPT-Modells~\blx@tocontentsinit {0}\cite {bycroft_llm}.}}{15}{table.caption.12}%
+\contentsline {table}{\numberline {3.2}{\ignorespaces Parameter-Aufschlüsselung nano-GPT (85.584 Parameter). Die Output-Projektion teilt die Gewichte mit der Token-Embedding-Matrix (\emph {weight tying})~\blx@tocontentsinit {0}\cite {bycroft_llm}.}}{15}{table.caption.13}%
+\contentsline {table}{\numberline {3.3}{\ignorespaces Geschätzte Rechenoperationen für nano-GPT bei $T=6$ Eingabe-Tokens. Der Großteil entfällt auf die MLP-Schichten.}}{17}{table.caption.19}%
+\contentsline {table}{\numberline {3.4}{\ignorespaces Vergleich Cloud-API vs. On-Premise-Betrieb.}}{18}{table.caption.21}%
+\contentsline {table}{\numberline {3.5}{\ignorespaces Gängige GPUs für lokale LLM-Inferenz. \text {$\mathsurround \z@ \mathchar "458$}\,: ausreichend, \text {$\mathsurround \z@ \mathchar "458$}\text {$\mathsurround \z@ \mathchar "458$}\,: gut geeignet, \text {$\mathsurround \z@ \mathchar "458$}\text {$\mathsurround \z@ \mathchar "458$}\text {$\mathsurround \z@ \mathchar "458$}\,: optimal.}}{19}{table.caption.22}%
+\contentsline {table}{\numberline {3.6}{\ignorespaces Hardware- und Software-Konfiguration am IZPL.}}{20}{table.caption.23}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }

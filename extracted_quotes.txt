@@ -1,0 +1,55 @@
+--- 2405.17247v1.pdf ---
+24 3.3.4 When to use LLM on pretrained backbone?
+
+
+--- 2505.09601v1.pdf ---
+— Richard Sutton, The Bitter Lesson (2019)  Robotics has long benefited from computational scalability—methods like probabilistic planning, trajectory optimization, and reinforcement learning have driven significant progress in agile locomotion [1, 2, 3, 4, 5, 6, 7].
+Yet training such models at scale remains limited by data: the largest human teleoperation datasets are over 100,000× smaller than the corpora used to train frontier LLMs and VLMs [26, 27], and are constrained by the cost, speed, and embodiment-specific nature of human teleoperated data collection.
+These successes suggest an analogous question for robotics: Can we computationally scale robot vision-action data – while not requiring dynamics simulation or human teleoperation – to train robot learning models?
+
+
+--- 2508.13073v2.pdf ---
+Index Terms—Vision-Language-Action Models, Robotic Manipulation, Embodied AI, Large Vision-Language Models  ✦  1  I NTRODUCTION  R  OBOTIC manipulation stands as a pivotal challenge at the confluence of robotics and embodied artificial intelligence [1]–[5].
+First, the terminology and modeling assumptions in this field remain inconsistent, and the research landscape is fragmented across disciplines (robotics, computer vision, natural language processing, etc.).
+InternVL2 [22] advances by introducing an LLM-guided automated filtering pipeline.
+
+
+--- An_Open_VLA_Powered_Robot_with_ROS2_for_Autonomous_Elder_Care_Assistance.pdf ---
+Experimental evaluations demonstrate a 90.2% task completion rate, 95.3% object detection accuracy, and 2.8-second average response latency across 150 trials with common eldercare objects.
+Keywords—eldercare robotics, vision-language-action models, ROS2, assistive technology, human-robot interaction, monocular depth estimation, speech recognition.
+INTRODUCTION Elder care robotics holds significant promise but faces challenges in cost, usability, and adaptation to varied settings.
+Traditional eldercare robotics approaches predominantly rely on pre-programmed actions, rigid interfaces, and constrained operational environments, limiting their adaptability to real-world scenarios.
+• Comprehensive performance evaluation measuring task completion rate, object detection accuracy, and system response latency in simulated eldercare scenarios.
+
+
+--- expose_fea1.pdf ---
+Diese Forschungsarbeit ebnet zudem den Weg für eine aufbauende Arbeit im IZPL an der OTH Regensburg, die sich mit der Frage Einsatz von Large Language Mo” dels hinsichtlich On-Premise-Lösungen für Konversations- und Reasoning-Anwendungen” befasst.
+
+
+--- expose_fea2.pdf ---
+Exposé Forschungs- und Entwicklungsarbeit 2 (FEA2) Einsatz von Large Language Models hinsichtlich On-Premise-Lösungen für Konversations- und Reasoning-Anwendungen Moritz Jahn Matrikelnummer: 3221169 17.
+Februar 2026  Problemstellung und Ausgangssituation Mit dem Aufkommen leistungsstarker Large Language Models (LLMs) ergeben sich neue Möglichkeiten zur Gestaltung von Mensch-Maschine-Interaktionen.
+LLMs ermöglichen es, durch natürliche Sprache komplexe Informationen zu verarbeiten, zu interpretieren und strukturiert wiederzugeben.
+Um zu vermeiden, dass Firmendaten auf im Ausland gehosteten Servern ausgewertet werden, gewinnen On-Premise-Lösungen (vor Ort) zunehmend an Bedeutung.
+Im Rahmen dieser Forschungsarbeit wird der Einsatz von On-Premise-LLMs am Beispiel einer Anwendung im IZPL-Labor der OTH Regensburg untersucht.
+
+
+--- Maintenance_Automation_Methods_for_Robotics_Manipulation_Planning_and_Execution.pdf ---
+2, APRIL 2023  1081  Maintenance Automation: Methods for Robotics Manipulation Planning and Execution Christian Friedrich , Ralf Gulde, Armin Lechler , and Alexander Verl , Member, IEEE  Abstract— Automating complex tasks using robotic systems requires skills for planning, control and execution.
+FRIEDRICH et al.: MAINTENANCE AUTOMATION: METHODS FOR ROBOTICS MANIPULATION PLANNING AND EXECUTION  1083  C.
+
+
+--- preprints202410.1204.v1.pdf ---
+Despite the extensive deployment and adaptations of ROS in varied robotics applications, literature lacks a cohesive synthesis that delineates the advancements, limitations, and broader impacts of ROS 2 compared to its predecessor, ROS 1.
+Furthermore, we summarize literature findings of ROS 2 challenges, advancements, and future direction in the fields of a.) security, b.) real-time, c.) middleware, d.) embedded and distributed systems, e.) communication reliability and QoS, and f.) multi-robot systems.
+Results underscore ROS2’s enhancements in modularity, real-time capabilities, and security, extending its applicability across various robotic platforms and industries.
+The original data presented in the study are openly available in https://www.ros.riotu-lab.org/ Keywords: ROS; ROS 2; robotic operating system; modularity; real-time capabilities; security; multi-robot systems; literature review  1.
+ROS allowed robotics application designers and developers to focus on their scope of work rather than being distracted by marginal side details.
+
+
+--- sapkota-1.pdf ---
+We explore diverse application domains such as humanoid robotics, autonomous vehicles, medical and industrial robotics, precision agriculture, and augmented reality navigation.
+This work serves as a foundational reference for advancing intelligent, real-world robotics and artificial general intelligence.
+Keywords: Vision-Language-Action, VLA, Artificial Intelligence, Robotics, Vision-Language Models, AI Agents, Agentic AI  Contents 1  Introduction  2  2  Concepts of Vision-Language-Action Models 2.1 Evolution and Timeline .
+Third, an in-depth review is essential for mapping the diverse range of real-world applications-from household robotics to industrial automation and assistive technologies-where VLAs are already demonstrating transformative potential.
+And Fifth, synthesizing these insights helps to inform the broader AI and robotics communities about emerging research directions and practical considerations, fostering collaboration and innovation.
