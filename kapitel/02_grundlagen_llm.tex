@@ -4,22 +4,22 @@
 
 \chapter{Grundlagen Large Language Models}
 
-\vspace{-0.6cm}
+\vspace{-1cm}
 Dieses Kapitel legt die theoretischen Grundlagen für das Verständnis
 moderner Large Language Models (LLMs). Es werden zunächst die mathematischen
-Grundlagen vom Embedding bis zur Softmax-Funktion erläutert und danach eine Text to speach Pipline vorgestellt. Das Kapitel beginnt mit Abbildung \ref{fig:llm_pipeline} welche sich auf den Grundlegenden Meachanismus eines LLMs fokussiert, den Transformer. LLMs haben wie in der Überschrift ersiochtlich aus sogenannten Prompts 
+Grundlagen vom Embedding bis zur Softmax-Funktion erläutert und danach mit dieser Technologie betriebene Anwendung Text to speach als auch Speach to text vorgestellt. Das Kapitel beginnt mit Abbildung \ref{fig:llm_pipeline} welche sich auf den Grundlegenden Meachanismus eines LLMs fokussiert, den Transformer. 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.43\textwidth]{ablaufplan_LLM.jpeg}
+    \includegraphics[width=0.40\textwidth]{ablaufplan_LLM.jpeg}
     \caption{Datenfluss eines Large Language Models}
     \label{fig:llm_pipeline}
 \end{figure}
 
-% ============================================================
+Abbildung \ref{fig:llm_pipeline} veranschaulicht den grundlegenden Datenfluss eines LLMs. Zusammengefasst verabeitet das Modell Eingabetext in und berechnet am Ende Wahrscheinlichkeiten, um das nächste logische Wort vorherzusagen.
+
 \section{Tokenisierung und Embedding}
 \label{sec:tokenisierung_embedding}
-% ============================================================
 
 Bevor jedoch der Transformer zum Einsatz kommt, ist der erste Schritt eines jeden LLMs das sogenannte Tokenisieren. Ein Token im Kontext des maschinellen Lernens wurde im Januar dieses Jahres von Daniel Jurafsky \& James H. Martin wie folgt definiert: \"`Tokens sind Einheiten, welche entstehen, nachdem wir Algorithmen wie BPE oder WordPiece anwenden, um Texteingaben für LLMs vorzubereiten."'\cite{book} In Abbildung \ref{fig:rebel_context} wird dieser Schritt mit dem ersten Block dargestellt und heißt übergeordnet Embedding. Beim Tokenisieren werden Wörter in Arrays umgewandelt. Zur Einordnung: Einer der ersten LLMs der Firma OpenAI, GPT-2, benutzt 768 Koordinaten, um den multidimensionalen Vektor eines einzigen Tokens aufzuspannen und um dessen Kontext zu speichern (siehe 2.1 in \cite{brown2020languagemodelsfewshotlearners}). In Abbildung \ref{fig:rebel_context} ist das Vektor-Embedding für den Satz \"`LLMs with Igus Rebel 6 DOF"' mithilfe von Hauptachsentransformation (englisch Principal Component Analysis, kurz PCA) im dreidimensionalen Raum für GPT-2 dargestellt. Zur Tokenisierung wurde der bis heute standardmäßig verwendete Tokenisierungsalgorithmus Byte Pair Encoding verwendet.
 
@@ -271,10 +271,10 @@ Das \textbf{GGUF}-Format hat sich als portables Standardformat für
 quantisierte Gewichte etabliert und wird von \texttt{llama.cpp} und
 \texttt{ollama} nativ unterstützt.
 
-% ============================================================
+
 \section{Sprachverarbeitung: STT und TTS}
 \label{sec:sprachverarbeitung}
-% ============================================================
+
 
 Da LLMs ausschließlich Text verarbeiten können, muss gesprochene Sprache zunächst
 transkribiert werden. Die Umwandlung von Audio in Text bezeichnet man als

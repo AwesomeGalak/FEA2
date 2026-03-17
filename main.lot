@@ -2,15 +2,15 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \contentsline {table}{\numberline {2.1}{\ignorespaces VRAM-Bedarf eines 7B-Sprachmodells bei verschiedenen Quantisierungsstufen.}}{11}{table.caption.10}%
-\contentsline {table}{\numberline {2.2}{\ignorespaces Architekturparameter -- LLaMA\,7B (fett) ist das in dieser Arbeit eingesetzte Modell.}}{15}{table.caption.12}%
-\contentsline {table}{\numberline {2.3}{\ignorespaces Übersicht der eingesetzten Komponenten.}}{16}{table.caption.13}%
+\contentsline {table}{\numberline {2.2}{\ignorespaces Architekturparameter -- LLaMA\,7B (fett) ist das in dieser Arbeit eingesetzte Modell.}}{14}{table.caption.12}%
+\contentsline {table}{\numberline {2.3}{\ignorespaces Übersicht der eingesetzten Komponenten.}}{15}{table.caption.13}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {3.1}{\ignorespaces Konfiguration des nano-GPT-Modells~\blx@tocontentsinit {0}\cite {bycroft_llm}.}}{18}{table.caption.14}%
-\contentsline {table}{\numberline {3.2}{\ignorespaces Parameter-Aufschlüsselung nano-GPT (85.584 Parameter). Die Output-Projektion teilt die Gewichte mit der Token-Embedding-Matrix (\emph {weight tying})~\blx@tocontentsinit {0}\cite {bycroft_llm}.}}{18}{table.caption.15}%
-\contentsline {table}{\numberline {3.3}{\ignorespaces Geschätzte Rechenoperationen für nano-GPT bei $T=6$ Eingabe-Tokens. Der Großteil entfällt auf die MLP-Schichten.}}{20}{table.caption.21}%
-\contentsline {table}{\numberline {3.4}{\ignorespaces Vergleich Cloud-API vs. On-Premise-Betrieb.}}{21}{table.caption.23}%
-\contentsline {table}{\numberline {3.5}{\ignorespaces Gängige GPUs für lokale LLM-Inferenz. \text {$\mathsurround \z@ \mathchar "458$}\,: ausreichend, \text {$\mathsurround \z@ \mathchar "458$}\text {$\mathsurround \z@ \mathchar "458$}\,: gut geeignet, \text {$\mathsurround \z@ \mathchar "458$}\text {$\mathsurround \z@ \mathchar "458$}\text {$\mathsurround \z@ \mathchar "458$}\,: optimal.}}{22}{table.caption.24}%
-\contentsline {table}{\numberline {3.6}{\ignorespaces Hardware- und Software-Konfiguration am IZPL.}}{23}{table.caption.25}%
+\contentsline {table}{\numberline {3.1}{\ignorespaces Konfiguration des nano-GPT-Modells~\blx@tocontentsinit {0}\cite {bycroft_llm}.}}{17}{table.caption.14}%
+\contentsline {table}{\numberline {3.2}{\ignorespaces Parameter-Aufschlüsselung nano-GPT (85.584 Parameter). Die Output-Projektion teilt die Gewichte mit der Token-Embedding-Matrix (\emph {weight tying})~\blx@tocontentsinit {0}\cite {bycroft_llm}.}}{17}{table.caption.15}%
+\contentsline {table}{\numberline {3.3}{\ignorespaces Geschätzte Rechenoperationen für nano-GPT bei $T=6$ Eingabe-Tokens. Der Großteil entfällt auf die MLP-Schichten.}}{19}{table.caption.21}%
+\contentsline {table}{\numberline {3.4}{\ignorespaces Vergleich Cloud-API vs. On-Premise-Betrieb.}}{20}{table.caption.23}%
+\contentsline {table}{\numberline {3.5}{\ignorespaces Gängige GPUs für lokale LLM-Inferenz. \text {$\mathsurround \z@ \mathchar "458$}\,: ausreichend, \text {$\mathsurround \z@ \mathchar "458$}\text {$\mathsurround \z@ \mathchar "458$}\,: gut geeignet, \text {$\mathsurround \z@ \mathchar "458$}\text {$\mathsurround \z@ \mathchar "458$}\text {$\mathsurround \z@ \mathchar "458$}\,: optimal.}}{21}{table.caption.24}%
+\contentsline {table}{\numberline {3.6}{\ignorespaces Hardware- und Software-Konfiguration am IZPL.}}{22}{table.caption.25}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

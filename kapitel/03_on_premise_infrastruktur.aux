@@ -1,51 +1,51 @@
 \relax 
 \providecommand\hyper@newdestlabel[2]{}
-\@writefile{toc}{\contentsline {chapter}{\numberline {3}On-Premise-Infrastruktur und Hardware}{17}{chapter.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {3}On-Premise-Infrastruktur und Hardware}{16}{chapter.3}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {3.1}Rechenoperationen eines LLMs -- nano-GPT als Beispiel}{17}{section.3.1}\protected@file@percent }
-\newlabel{sec:rechenoperationen}{{3.1}{17}{Rechenoperationen eines LLMs -- nano-GPT als Beispiel}{section.3.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.1}Modellkonfiguration}{18}{subsection.3.1.1}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {3.1}{\ignorespaces Konfiguration des nano-GPT-Modells~\blx@tocontentsinit {0}\cite {bycroft_llm}.}}{18}{table.caption.14}\protected@file@percent }
-\newlabel{tab:nanogpt_config}{{3.1}{18}{Konfiguration des nano-GPT-Modells~\cite {bycroft_llm}}{table.caption.14}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.2}Parameter-Aufschlüsselung}{18}{subsection.3.1.2}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {3.2}{\ignorespaces Parameter-Aufschlüsselung nano-GPT (85.584 Parameter). Die Output-Projektion teilt die Gewichte mit der Token-Embedding-Matrix (\emph  {weight tying})~\blx@tocontentsinit {0}\cite {bycroft_llm}.}}{18}{table.caption.15}\protected@file@percent }
-\newlabel{tab:nanogpt_params}{{3.2}{18}{Parameter-Aufschlüsselung nano-GPT (85.584 Parameter). Die Output-Projektion teilt die Gewichte mit der Token-Embedding-Matrix (\emph {weight tying})~\cite {bycroft_llm}}{table.caption.15}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.3}Rechenoperationen im Forward Pass}{19}{subsection.3.1.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Token- und Positions-Embedding.}{19}{section*.16}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Q, K, V Projektionen (pro Block).}{19}{section*.17}\protected@file@percent }
-\newlabel{eq:qkv_flops}{{3.1}{19}{Q, K, V Projektionen (pro Block)}{equation.3.1.1}{}}
-\@writefile{toc}{\contentsline {paragraph}{Attention-Score-Matrix.}{19}{section*.18}\protected@file@percent }
-\newlabel{eq:attn_flops}{{3.2}{19}{Attention-Score-Matrix}{equation.3.1.2}{}}
-\@writefile{toc}{\contentsline {paragraph}{MLP (pro Block).}{19}{section*.19}\protected@file@percent }
-\newlabel{eq:mlp_flops}{{3.3}{19}{MLP (pro Block)}{equation.3.1.3}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {3.3}{\ignorespaces Geschätzte Rechenoperationen für nano-GPT bei $T=6$ Eingabe-Tokens. Der Großteil entfällt auf die MLP-Schichten.}}{20}{table.caption.21}\protected@file@percent }
-\newlabel{tab:nanogpt_flops}{{3.3}{20}{Geschätzte Rechenoperationen für nano-GPT bei $T=6$ Eingabe-Tokens. Der Großteil entfällt auf die MLP-Schichten}{table.caption.21}{}}
-\@writefile{toc}{\contentsline {paragraph}{Gesamtoperationen (nano-GPT, $T=6$).}{20}{table.caption.21}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Wichtige Erkenntnis.}{20}{section*.22}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.4}Skalierung auf LLaMA\,7B}{20}{subsection.3.1.4}\protected@file@percent }
-\newlabel{eq:flops_scaling}{{3.4}{20}{Skalierung auf LLaMA\,7B}{equation.3.1.4}{}}
-\newlabel{eq:llama_flops_total}{{3.5}{20}{Skalierung auf LLaMA\,7B}{equation.3.1.5}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.2}Motivation für On-Premise-Betrieb}{20}{section.3.2}\protected@file@percent }
-\newlabel{sec:motivation_onpremise}{{3.2}{20}{Motivation für On-Premise-Betrieb}{section.3.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}Vergleich: Cloud vs. On-Premise}{21}{subsection.3.2.1}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {3.4}{\ignorespaces Vergleich Cloud-API vs. On-Premise-Betrieb.}}{21}{table.caption.23}\protected@file@percent }
-\newlabel{tab:cloud_vs_onpremise}{{3.4}{21}{Vergleich Cloud-API vs. On-Premise-Betrieb}{table.caption.23}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.3}Hardwareanforderungen}{21}{section.3.3}\protected@file@percent }
-\newlabel{sec:hardware}{{3.3}{21}{Hardwareanforderungen}{section.3.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.1}GPU und VRAM}{21}{subsection.3.3.1}\protected@file@percent }
-\newlabel{eq:kvcache}{{3.6}{21}{GPU und VRAM}{equation.3.3.6}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {3.5}{\ignorespaces Gängige GPUs für lokale LLM-Inferenz. \text  {$\mathsurround \z@ \mathchar "458$}\,: ausreichend, \text  {$\mathsurround \z@ \mathchar "458$}\text  {$\mathsurround \z@ \mathchar "458$}\,: gut geeignet, \text  {$\mathsurround \z@ \mathchar "458$}\text  {$\mathsurround \z@ \mathchar "458$}\text  {$\mathsurround \z@ \mathchar "458$}\,: optimal.}}{22}{table.caption.24}\protected@file@percent }
-\newlabel{tab:gpu_vergleich}{{3.5}{22}{Gängige GPUs für lokale LLM-Inferenz. \checkmark \,: ausreichend, \checkmark \checkmark \,: gut geeignet, \checkmark \checkmark \checkmark \,: optimal}{table.caption.24}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.2}CPU und Arbeitsspeicher}{22}{subsection.3.3.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.3}Speichersystem}{22}{subsection.3.3.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3.4}Laboraufbau am IZPL}{22}{section.3.4}\protected@file@percent }
-\newlabel{sec:izpl}{{3.4}{22}{Laboraufbau am IZPL}{section.3.4}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {3.6}{\ignorespaces Hardware- und Software-Konfiguration am IZPL.}}{23}{table.caption.25}\protected@file@percent }
-\newlabel{tab:izpl_hardware}{{3.6}{23}{Hardware- und Software-Konfiguration am IZPL}{table.caption.25}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.5}Zusammenfassung}{23}{section.3.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.1}Rechenoperationen eines LLMs -- nano-GPT als Beispiel}{16}{section.3.1}\protected@file@percent }
+\newlabel{sec:rechenoperationen}{{3.1}{16}{Rechenoperationen eines LLMs -- nano-GPT als Beispiel}{section.3.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.1}Modellkonfiguration}{17}{subsection.3.1.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3.1}{\ignorespaces Konfiguration des nano-GPT-Modells~\blx@tocontentsinit {0}\cite {bycroft_llm}.}}{17}{table.caption.14}\protected@file@percent }
+\newlabel{tab:nanogpt_config}{{3.1}{17}{Konfiguration des nano-GPT-Modells~\cite {bycroft_llm}}{table.caption.14}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.2}Parameter-Aufschlüsselung}{17}{subsection.3.1.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3.2}{\ignorespaces Parameter-Aufschlüsselung nano-GPT (85.584 Parameter). Die Output-Projektion teilt die Gewichte mit der Token-Embedding-Matrix (\emph  {weight tying})~\blx@tocontentsinit {0}\cite {bycroft_llm}.}}{17}{table.caption.15}\protected@file@percent }
+\newlabel{tab:nanogpt_params}{{3.2}{17}{Parameter-Aufschlüsselung nano-GPT (85.584 Parameter). Die Output-Projektion teilt die Gewichte mit der Token-Embedding-Matrix (\emph {weight tying})~\cite {bycroft_llm}}{table.caption.15}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.3}Rechenoperationen im Forward Pass}{18}{subsection.3.1.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Token- und Positions-Embedding.}{18}{section*.16}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Q, K, V Projektionen (pro Block).}{18}{section*.17}\protected@file@percent }
+\newlabel{eq:qkv_flops}{{3.1}{18}{Q, K, V Projektionen (pro Block)}{equation.3.1.1}{}}
+\@writefile{toc}{\contentsline {paragraph}{Attention-Score-Matrix.}{18}{section*.18}\protected@file@percent }
+\newlabel{eq:attn_flops}{{3.2}{18}{Attention-Score-Matrix}{equation.3.1.2}{}}
+\@writefile{toc}{\contentsline {paragraph}{MLP (pro Block).}{18}{section*.19}\protected@file@percent }
+\newlabel{eq:mlp_flops}{{3.3}{18}{MLP (pro Block)}{equation.3.1.3}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3.3}{\ignorespaces Geschätzte Rechenoperationen für nano-GPT bei $T=6$ Eingabe-Tokens. Der Großteil entfällt auf die MLP-Schichten.}}{19}{table.caption.21}\protected@file@percent }
+\newlabel{tab:nanogpt_flops}{{3.3}{19}{Geschätzte Rechenoperationen für nano-GPT bei $T=6$ Eingabe-Tokens. Der Großteil entfällt auf die MLP-Schichten}{table.caption.21}{}}
+\@writefile{toc}{\contentsline {paragraph}{Gesamtoperationen (nano-GPT, $T=6$).}{19}{table.caption.21}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Wichtige Erkenntnis.}{19}{section*.22}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.4}Skalierung auf LLaMA\,7B}{19}{subsection.3.1.4}\protected@file@percent }
+\newlabel{eq:flops_scaling}{{3.4}{19}{Skalierung auf LLaMA\,7B}{equation.3.1.4}{}}
+\newlabel{eq:llama_flops_total}{{3.5}{19}{Skalierung auf LLaMA\,7B}{equation.3.1.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.2}Motivation für On-Premise-Betrieb}{19}{section.3.2}\protected@file@percent }
+\newlabel{sec:motivation_onpremise}{{3.2}{19}{Motivation für On-Premise-Betrieb}{section.3.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}Vergleich: Cloud vs. On-Premise}{20}{subsection.3.2.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3.4}{\ignorespaces Vergleich Cloud-API vs. On-Premise-Betrieb.}}{20}{table.caption.23}\protected@file@percent }
+\newlabel{tab:cloud_vs_onpremise}{{3.4}{20}{Vergleich Cloud-API vs. On-Premise-Betrieb}{table.caption.23}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.3}Hardwareanforderungen}{20}{section.3.3}\protected@file@percent }
+\newlabel{sec:hardware}{{3.3}{20}{Hardwareanforderungen}{section.3.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.1}GPU und VRAM}{20}{subsection.3.3.1}\protected@file@percent }
+\newlabel{eq:kvcache}{{3.6}{20}{GPU und VRAM}{equation.3.3.6}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3.5}{\ignorespaces Gängige GPUs für lokale LLM-Inferenz. \text  {$\mathsurround \z@ \mathchar "458$}\,: ausreichend, \text  {$\mathsurround \z@ \mathchar "458$}\text  {$\mathsurround \z@ \mathchar "458$}\,: gut geeignet, \text  {$\mathsurround \z@ \mathchar "458$}\text  {$\mathsurround \z@ \mathchar "458$}\text  {$\mathsurround \z@ \mathchar "458$}\,: optimal.}}{21}{table.caption.24}\protected@file@percent }
+\newlabel{tab:gpu_vergleich}{{3.5}{21}{Gängige GPUs für lokale LLM-Inferenz. \checkmark \,: ausreichend, \checkmark \checkmark \,: gut geeignet, \checkmark \checkmark \checkmark \,: optimal}{table.caption.24}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.2}CPU und Arbeitsspeicher}{21}{subsection.3.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.3}Speichersystem}{21}{subsection.3.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.4}Laboraufbau am IZPL}{21}{section.3.4}\protected@file@percent }
+\newlabel{sec:izpl}{{3.4}{21}{Laboraufbau am IZPL}{section.3.4}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3.6}{\ignorespaces Hardware- und Software-Konfiguration am IZPL.}}{22}{table.caption.25}\protected@file@percent }
+\newlabel{tab:izpl_hardware}{{3.6}{22}{Hardware- und Software-Konfiguration am IZPL}{table.caption.25}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.5}Zusammenfassung}{22}{section.3.5}\protected@file@percent }
 \@setckpt{kapitel/03_on_premise_infrastruktur}{
-\setcounter{page}{24}
+\setcounter{page}{23}
 \setcounter{equation}{6}
 \setcounter{enumi}{2}
 \setcounter{enumii}{0}

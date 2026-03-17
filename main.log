@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2026.3.16)  16 MAR 2026 14:11
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2026.3.16)  17 MAR 2026 16:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -834,7 +834,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.i}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.35 ...{\numberline {4}Evaluation}{24}{chapter.4}
+l.35 ...{\numberline {4}Evaluation}{23}{chapter.4}
                                                   % [1
 
 ])
@@ -985,10 +985,19 @@ Kapitel 1.
 
 
 ]
-
-LaTeX Warning: Citation 'llm_definition' on page 2 undefined on input line 44.
+! Undefined control sequence.
+l.23 ...nd auch Bedenken hinsichtlich \Datenhoheit
+                                                  , Sicherheit und technolog...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
 
 [2]
+
+LaTeX Warning: Citation 'llm_definition' on page 3 undefined on input line 44.
+
 <abbildungen/vramllm.jpg, id=323, 937.08484pt x 469.99751pt>
 File: abbildungen/vramllm.jpg Graphic file (type jpg)
 <use abbildungen/vramllm.jpg>
@@ -1000,8 +1009,8 @@ File: abbildungen/llm_onpremise_leaderboard.pdf Graphic file (type pdf)
 Package pdftex.def Info: abbildungen/llm_onpremise_leaderboard.pdf  used on inp
 ut line 64.
 (pdftex.def)             Requested size: 432.48051pt x 213.83952pt.
- [3 <./abbildungen/vramllm.jpg>]) [4 <./abbildungen/llm_onpremise_leaderboard.p
-df>]
+[3 <./abbildungen/vramllm.jpg>]) [4 <./abbildungen/llm_onpremise_leaderboard.pd
+f>]
 \openout2 = `kapitel/02_grundlagen_llm.aux'.
 
  (kapitel/02_grundlagen_llm.tex
@@ -1011,31 +1020,30 @@ File: abbildungen/ablaufplan_LLM.jpeg Graphic file (type jpg)
 <use abbildungen/ablaufplan_LLM.jpeg>
 Package pdftex.def Info: abbildungen/ablaufplan_LLM.jpeg  used on input line 14
 .
-(pdftex.def)             Requested size: 195.75163pt x 367.32384pt.
+(pdftex.def)             Requested size: 182.09486pt x 341.70273pt.
 [5
 
 
 
 
-]
-<abbildungen/rebel.jpeg, id=443, 1230.5975pt x 754.82pt>
+ <./abbildungen/ablaufplan_LLM.jpeg>]
+<abbildungen/rebel.jpeg, id=444, 1230.5975pt x 754.82pt>
 File: abbildungen/rebel.jpeg Graphic file (type jpg)
 <use abbildungen/rebel.jpeg>
 Package pdftex.def Info: abbildungen/rebel.jpeg  used on input line 29.
 (pdftex.def)             Requested size: 250.38564pt x 153.57582pt.
- [6 <./abbildungen/ablaufplan_LLM.jpeg>]
-<abbildungen/tokenisierug.jpeg, id=451, 1242.6425pt x 725.71124pt>
+<abbildungen/tokenisierug.jpeg, id=446, 1242.6425pt x 725.71124pt>
 File: abbildungen/tokenisierug.jpeg Graphic file (type jpg)
 <use abbildungen/tokenisierug.jpeg>
 Package pdftex.def Info: abbildungen/tokenisierug.jpeg  used on input line 44.
 (pdftex.def)             Requested size: 250.38564pt x 146.22487pt.
- [7 <./abbildungen/rebel.jpeg> <./abbildungen/tokenisierug.jpeg>]
+ [6 <./abbildungen/rebel.jpeg>]
 Overfull \hbox (5.9406pt too wide) in paragraph at lines 63--67
 \T1/cmr/m/n/12 zwei Haupt-ope-ra-tio-nen zum ers-ten aus Multi-Head Self-Attent
 ion und ei-nem Feed-Forward-
  []
 
-[8] [9]
+[7 <./abbildungen/tokenisierug.jpeg>] [8] [9]
 Overfull \hbox (30.70802pt too wide) in paragraph at lines 229--238
 []\T1/cmr/bx/n/12 Finetuning und RL-HF. \T1/cmr/m/n/12 Nach dem Pre-trai-ning i
 st ein Mo-dell nur auf Token-Vervollständigung
@@ -1052,17 +1060,16 @@ Overfull \hbox (2.37996pt too wide) in paragraph at lines 288--291
 lo-ga-rith-misch ist, wird der \T1/cmr/m/it/12 Schall-
  []
 
-[11]
 File: abbildungen/ablaufplan_LLM.jpeg Graphic file (type jpg)
 <use abbildungen/ablaufplan_LLM.jpeg>
 Package pdftex.def Info: abbildungen/ablaufplan_LLM.jpeg  used on input line 29
 9.
 (pdftex.def)             Requested size: 364.19667pt x 683.44455pt.
- [12]
+[11]
 Overfull \vbox (5.16145pt too high) has occurred while \output is active []
 
 
-[13]
+[12]
 Overfull \hbox (8.4213pt too wide) in paragraph at lines 312--317
 \T1/cmr/m/n/12 Glät-tungs-term ist. Ein neu-ro-na-les Netz -- ty-pi-scher-wei-s
 e ein Trans-for-mer (Encoder-Decoder)
@@ -1074,7 +1081,7 @@ Overfull \hbox (34.07666pt too wide) in paragraph at lines 353--366
 ansformer-Encoder-Decoder-Architektur.
  []
 
-[14]
+[13]
 (C:\Users\aweso\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
 File: lstlang1.sty 2023/02/27 1.9 listings language file
 )
@@ -1086,7 +1093,7 @@ Overfull \hbox (15.92938pt too wide) in paragraph at lines 425--427
 or-trai-nier-ten deut-schen Piper-Checkpoint
  []
 
-[15]) [16]
+[14]) [15]
 \openout2 = `kapitel/03_on_premise_infrastruktur.aux'.
 
  (kapitel/03_on_premise_infrastruktur.tex
@@ -1097,24 +1104,24 @@ Overfull \hbox (5.08867pt too wide) in paragraph at lines 16--16
  []
 
 
-LaTeX Warning: Reference `eq:embedding' on page 17 undefined on input line 19.
+LaTeX Warning: Reference `eq:embedding' on page 16 undefined on input line 19.
 
 
-LaTeX Warning: Reference `' on page 17 undefined on input line 19.
+LaTeX Warning: Reference `' on page 16 undefined on input line 19.
 
-[17
-
-
+[16
 
 
-] [18]
+
+
+] [17]
 Overfull \hbox (7.86348pt too wide) in paragraph at lines 112--116
  []\T1/cmr/bx/n/12 Token- und Positions-Embedding.[] \T1/cmr/m/n/12 Für $\OML/c
 mm/m/it/12 T$ \T1/cmr/m/n/12 To-kens wer-den $\OML/cmm/m/it/12 T$ \T1/cmr/m/n/1
 2 Zei-len aus der Embedding-
  []
 
-[19]
+[18]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `\leavevmode@ifvmode' on input line 181.
@@ -1124,65 +1131,65 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                \kern 1.95827pt
 (hyperref)                removed on input line 181.
 
-[20] [21] [22]) [23]
+[19] [20] [21]) [22]
 \openout2 = `kapitel/04_evaluation.aux'.
 
  (kapitel/04_evaluation.tex
 Kapitel 4.
 
-LaTeX Warning: Reference `' on page 24 undefined on input line 5.
+LaTeX Warning: Reference `' on page 23 undefined on input line 5.
 
-<abbildungen/llama7b_vram.jpg, id=628, 578.16pt x 361.35pt>
+<abbildungen/llama7b_vram.jpg, id=625, 578.16pt x 361.35pt>
 File: abbildungen/llama7b_vram.jpg Graphic file (type jpg)
 <use abbildungen/llama7b_vram.jpg>
 Package pdftex.def Info: abbildungen/llama7b_vram.jpg  used on input line 12.
 (pdftex.def)             Requested size: 364.19667pt x 227.61862pt.
-<abbildungen/llama7b_tokens_per_s.jpg, id=629, 578.16pt x 361.35pt>
+<abbildungen/llama7b_tokens_per_s.jpg, id=626, 578.16pt x 361.35pt>
 File: abbildungen/llama7b_tokens_per_s.jpg Graphic file (type jpg)
 <use abbildungen/llama7b_tokens_per_s.jpg>
 Package pdftex.def Info: abbildungen/llama7b_tokens_per_s.jpg  used on input li
 ne 22.
 (pdftex.def)             Requested size: 364.19667pt x 227.61862pt.
-[24
+[23
 
 
 
 
  <./abbildungen/llama7b_vram.jpg>]
-<abbildungen/llama7b_ttft.jpg, id=634, 578.16pt x 361.35pt>
+<abbildungen/llama7b_ttft.jpg, id=631, 578.16pt x 361.35pt>
 File: abbildungen/llama7b_ttft.jpg Graphic file (type jpg)
 <use abbildungen/llama7b_ttft.jpg>
 Package pdftex.def Info: abbildungen/llama7b_ttft.jpg  used on input line 29.
 (pdftex.def)             Requested size: 364.19667pt x 227.61862pt.
-<abbildungen/llama7b_token_gen.jpg, id=635, 578.16pt x 361.35pt>
+<abbildungen/llama7b_token_gen.jpg, id=632, 578.16pt x 361.35pt>
 File: abbildungen/llama7b_token_gen.jpg Graphic file (type jpg)
 <use abbildungen/llama7b_token_gen.jpg>
 Package pdftex.def Info: abbildungen/llama7b_token_gen.jpg  used on input line 
 38.
 (pdftex.def)             Requested size: 364.19667pt x 227.61862pt.
- [25 <./abbildungen/llama7b_tokens_per_s.jpg> <./abbildungen/llama7b_ttft.jpg>]
-<abbildungen/llama7b_vram_trace.jpg, id=641, 578.16pt x 361.35pt>
+ [24 <./abbildungen/llama7b_tokens_per_s.jpg> <./abbildungen/llama7b_ttft.jpg>]
+<abbildungen/llama7b_vram_trace.jpg, id=637, 578.16pt x 361.35pt>
 File: abbildungen/llama7b_vram_trace.jpg Graphic file (type jpg)
 <use abbildungen/llama7b_vram_trace.jpg>
 Package pdftex.def Info: abbildungen/llama7b_vram_trace.jpg  used on input line
  45.
 (pdftex.def)             Requested size: 364.19667pt x 227.61862pt.
-<abbildungen/llama7b_perplexity.jpg, id=642, 578.16pt x 361.35pt>
+<abbildungen/llama7b_perplexity.jpg, id=638, 578.16pt x 361.35pt>
 File: abbildungen/llama7b_perplexity.jpg Graphic file (type jpg)
 <use abbildungen/llama7b_perplexity.jpg>
 Package pdftex.def Info: abbildungen/llama7b_perplexity.jpg  used on input line
  56.
 (pdftex.def)             Requested size: 364.19667pt x 227.61862pt.
- [26 <./abbildungen/llama7b_token_gen.jpg> <./abbildungen/llama7b_vram_trace.jp
-g>]) [27 <./abbildungen/llama7b_perplexity.jpg>]
+ [25 <./abbildungen/llama7b_token_gen.jpg> <./abbildungen/llama7b_vram_trace.jp
+g>]) [26 <./abbildungen/llama7b_perplexity.jpg>]
 \openout2 = `kapitel/06_ausblick.aux'.
 
  (kapitel/06_ausblick.tex
 Kapitel 5.
 
-LaTeX Warning: Reference `' on page 28 undefined on input line 6.
+LaTeX Warning: Reference `' on page 27 undefined on input line 6.
 
-) [28
+) [27
 
 
 
@@ -1192,7 +1199,7 @@ LaTeX Warning: Reference `' on page 28 undefined on input line 6.
 
  (kapitel/A_anhang.tex
 Anhang A.
-) [29
+) [28
 
 
 
@@ -1203,11 +1210,11 @@ Overfull \hbox (6.82797pt too wide) in paragraph at lines 117--117
 earnings . html$[] \T1/cmr/m/n/12 (be-sucht am 16.03.2026). 
  []
 
-[30
+[29
 
 
 
-] [31] (main.aux (kapitel/01_einfuehrung.aux) (kapitel/02_grundlagen_llm.aux) (
+] [30] (main.aux (kapitel/01_einfuehrung.aux) (kapitel/02_grundlagen_llm.aux) (
 kapitel/03_on_premise_infrastruktur.aux) (kapitel/04_evaluation.aux)
 (kapitel/06_ausblick.aux) (kapitel/A_anhang.aux))
  ***********
@@ -1218,6 +1225,9 @@ L3 programming layer <2024-01-04>
 
 LaTeX Warning: There were undefined references.
 
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 9CBEDBF869129EAFD95C33FC6D68437E;6721.
 Package logreq Info: Writing requests to 'main.run.xml'.
@@ -1225,8 +1235,8 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 23450 strings out of 474486
- 407583 string characters out of 5743755
+ 23449 strings out of 474486
+ 407576 string characters out of 5743755
  1980542 words of memory out of 5000000
  45217 multiletter control sequences out of 15000+600000
  581137 words of font info for 94 fonts, out of 8000000 for 9000
@@ -1264,9 +1274,9 @@ msfonts/cm/cmsy10.pfb><C:/Users/aweso/AppData/Local/Programs/MiKTeX/fonts/type1
 /public/amsfonts/cm/cmsy8.pfb><C:/Users/aweso/AppData/Local/Programs/MiKTeX/fon
 ts/type1/public/amsfonts/symbols/msam10.pfb><C:/Users/aweso/AppData/Local/Progr
 ams/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (37 pages, 1850234 bytes).
+Output written on main.pdf (36 pages, 1849750 bytes).
 PDF statistics:
- 1509 PDF objects out of 1728 (max. 8388607)
- 183 named destinations out of 1000 (max. 500000)
+ 1503 PDF objects out of 1728 (max. 8388607)
+ 182 named destinations out of 1000 (max. 500000)
  368 words of extra memory for PDF output out of 10000 (max. 10000000)
 
