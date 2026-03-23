@@ -1,0 +1,130 @@
+{
+  "source": "LM Arena Leaderboard (arena.ai)",
+  "date": "2026-03-20",
+  "notes": "VRAM-Angaben für INT4-Quantisierung (Q4_K_M, llama.cpp/GGUF), ohne KV-Cache. MoE-Modelle benötigen den vollen Gewichts-VRAM, nicht nur die aktiven Parameter.",
+  "top5_closed_source": [
+    {
+      "rank": 1,
+      "model": "claude-opus-4-6-thinking",
+      "provider": "Anthropic",
+      "license": "Proprietary",
+      "arena_score": 1502,
+      "price_input_per_m_tokens_usd": 5.00,
+      "price_output_per_m_tokens_usd": 25.00,
+      "context_length_k": 1000,
+      "access": "API"
+    },
+    {
+      "rank": 2,
+      "model": "claude-opus-4-6",
+      "provider": "Anthropic",
+      "license": "Proprietary",
+      "arena_score": 1501,
+      "price_input_per_m_tokens_usd": 5.00,
+      "price_output_per_m_tokens_usd": 25.00,
+      "context_length_k": 1000,
+      "access": "API"
+    },
+    {
+      "rank": 3,
+      "model": "gemini-3.1-pro-preview",
+      "provider": "Google",
+      "license": "Proprietary",
+      "arena_score": 1493,
+      "price_input_per_m_tokens_usd": 2.00,
+      "price_output_per_m_tokens_usd": 12.00,
+      "context_length_k": 1000,
+      "access": "API"
+    },
+    {
+      "rank": 4,
+      "model": "grok-4.20-beta1",
+      "provider": "xAI",
+      "license": "Proprietary",
+      "arena_score": 1492,
+      "price_input_per_m_tokens_usd": null,
+      "price_output_per_m_tokens_usd": null,
+      "context_length_k": null,
+      "access": "API/Grok-App",
+      "notes": "Preliminary"
+    },
+    {
+      "rank": 5,
+      "model": "gemini-3-pro",
+      "provider": "Google",
+      "license": "Proprietary",
+      "arena_score": 1486,
+      "price_input_per_m_tokens_usd": 2.00,
+      "price_output_per_m_tokens_usd": 12.00,
+      "context_length_k": 1000,
+      "access": "API"
+    }
+  ],
+  "top5_open_source_under_48gb_vram_int4": [
+    {
+      "rank": 1,
+      "model": "Qwen3-Next-80B-A3B-Instruct",
+      "provider": "Alibaba",
+      "license": "Apache 2.0",
+      "arena_score": 1401,
+      "architecture": "MoE",
+      "total_params_b": 80,
+      "active_params_b": 3,
+      "vram_int4_gb": 40,
+      "fits_48gb_single_gpu": true,
+      "fit_margin": "knapp"
+    },
+    {
+      "rank": 1,
+      "model": "Qwen3.5-35B-A3B",
+      "provider": "Alibaba",
+      "license": "Apache 2.0",
+      "arena_score": 1401,
+      "architecture": "MoE",
+      "total_params_b": 35,
+      "active_params_b": 3,
+      "vram_int4_gb": 20,
+      "fits_48gb_single_gpu": true,
+      "fit_margin": "bequem"
+    },
+    {
+      "rank": 3,
+      "model": "QwQ-32B",
+      "provider": "Alibaba",
+      "license": "Apache 2.0",
+      "arena_score": 1336,
+      "architecture": "Dense",
+      "total_params_b": 32,
+      "active_params_b": 32,
+      "vram_int4_gb": 18,
+      "fits_48gb_single_gpu": true,
+      "fit_margin": "bequem"
+    },
+    {
+      "rank": 4,
+      "model": "Llama-3.3-70B-Instruct",
+      "provider": "Meta",
+      "license": "Llama 3.3 Community",
+      "arena_score": 1318,
+      "architecture": "Dense",
+      "total_params_b": 70,
+      "active_params_b": 70,
+      "vram_int4_gb": 40,
+      "fits_48gb_single_gpu": true,
+      "fit_margin": "knapp"
+    },
+    {
+      "rank": 5,
+      "model": "Qwen3-32B",
+      "provider": "Alibaba",
+      "license": "Apache 2.0",
+      "arena_score": 1347,
+      "architecture": "Dense",
+      "total_params_b": 32,
+      "active_params_b": 32,
+      "vram_int4_gb": 18,
+      "fits_48gb_single_gpu": true,
+      "fit_margin": "bequem"
+    }
+  ]
+}

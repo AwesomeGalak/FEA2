@@ -35,10 +35,10 @@ Somit stellt sich die Frage, ob kleinere, spezialisierte Sprachmodelle, die voll
 Wie im vorherigen Kapitel bereits angesprochen, beschäftigt sich diese Arbeit primär mit der Verwendung von Large Language Models (LLM) auf Edge-Geräten und in On-Premise-Anwendungen. In diesem Kapitel wird deshalb zuerst der aktuelle Entwicklungsstand der führenden LLM-Modelle dargelegt, um den Unterschied zwischen diesen und kleinen, on Edge Modellen zu verdeutlichen.
 
 Der Begriff des maschinellen Lernens ist in der Informatik keineswegs neu. Bereits seit Anfang des 21. Jahrhunderts existieren Algorithmen, die nichtlineare Zusammenhänge in Daten erkennen können.
-Einen entscheidenden Durchbruch markierte das Jahr 2017, als ein Team um Vaswani von OpenAI die sogenannte Transformer-Architektur vorstellte.
-Diese Architektur ermöglichte den Übergang von sequenzieller zu paralleler Datenverarbeitung und erlaubte es, diese Parallelisierung mit der massiven Rechenleistung moderner GPUs zu koppeln, um deutlich größere Datenmengen effizient zu verarbeiten.
+Einen entscheidenden Durchbruch markierte das Jahr 2017, als ein Team von Google-Ingenieuren die sogenannte Transformer-Architektur vorstellte. 
+Diese Architektur ermöglichte den Übergang von sequenzieller zu paralleler Datenverarbeitung und erlaubte es, diese Parallelisierung mit der massiven Rechenleistung moderner GPUs zu koppeln, um deutlich größere Datenmengen effizient zu verarbeiten. \cite{vaswani_attention}
 
-Auf dieser Grundlage sind Modelle entstanden, die komplexe Muster in umfangreichen Textdaten erkennen und natürlichsprachliche Ausgaben erzeugen können: sogenannte Large Language Models (LLMs).
+Auf dieser Grundlage sind Modelle entstanden, die komplexe Muster in Textdaten erkennen und menschenähnliche Ausgaben erzeugen können: sogenannte Large Language Models (LLMs).
 Laut Kasneci ist ein LLM ein KI-System, das auf einer riesigen Menge von Textdaten trainiert wurde, um natürliche Sprache zu interpretieren und menschenähnliche Antworten auf textbasierte Eingabeaufforderungen oder Fragen zu generieren. \cite{llm_definition}.
 
 Seither hat sich die Leistungsfähigkeit dieser Modelle rasant weiterentwickelt. Dabei ist die Anzahl der Parameter und somit auch der Ressourcenbedarf stetig gestiegen.
@@ -53,14 +53,14 @@ Für Edge-Geräte, die auf eine begrenzte Speicherkapazität angewiesen sind, ko
 \end{figure}
 
 Die leistungsstärksten quelloffenen Modelle, die für einen On-Premise-Betrieb relevant sind, werden in Abbildung \ref{fig:llm_onpremise} gegenübergestellt.
-Dabei wird der Chatbot-Arena-Elo-Score, ein Crowdsourcing-basiertes Maß für die vom Nutzer wahrgenommene Antwortqualität, dem jeweiligen VRAM-Bedarf bei 4-Bit-Quantisierung (INT4) gegenübergestellt.
+Dabei wird der Chatbot-Arena-Elo-Score verwendet. Dieser basiert auf einem 2024 erschienen Paper namens "Chatbot Arena: An Open Platform for Evaluating LLMs by Human Preference" \cite{chiang2024chatbot} und gilt als objektive Methode LLMs zu bewerten. Er wird dem jeweiligen VRAM-Bedarf bei 4-Bit-Quantisierung (INT4) gegenübergestellt. 
 Modelle, die mit maximal 48 GB VRAM auskommen, lassen sich bereits auf einer einzelnen Consumer-GPU betreiben und sind somit für On-Premise-Szenarien besonders interessant.
-Grundsätzlich sind die jeweils neuesten Modellgenerationen die leistungsstärksten. Zum Zeitpunkt der Erstellung dieser Arbeit ist Qwen 3.5 von Alibaba mit einem relativen Chatbot-Arena-Elo-Score von 1450 das leistungsstärkste quelloffene Modell.
+Grundsätzlich sind die jeweils neuesten Modellgenerationen die leistungsstärksten. Zum Zeitpunkt der Erstellung dieser Arbeit ist Qwen 3.5 von Alibaba mit einem relativen Chatbot-Arena-Elo-Score von 1384 das leistungsstärkste quelloffene Modell.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.95\textwidth]{abbildungen/llm_onpremise_leaderboard.pdf}
-    \caption{Vergleich quelloffener LLMs: Chatbot Arena Elo vs.\ VRAM-Bedarf (INT4). Grün hervorgehobene Modelle sind für den Betrieb auf einer einzelnen Consumer-GPU ($\leq$\,48\,GB) geeignet. Datenquelle: onyx.app/self-hosted-llm-leaderboard, Stand März 2026.}
+    \caption{Vergleich quelloffener LLMs: Chatbot Arena Elo vs.\ VRAM-Bedarf (INT4). Dunkelblau hervorgehobene Modelle sind für den Betrieb auf einer einzelnen GPU ($\leq$\,48\,GB) geeignet. Datenquelle: onyx.app/self-hosted-llm-leaderboard, Stand März 2026.}
     \label{fig:llm_onpremise}
 \end{figure}
 
