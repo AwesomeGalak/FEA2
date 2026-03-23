@@ -2361,24 +2361,25 @@
     <bcf:datasource type="file" datatype="bibtex" glob="false">Literatur.bib</bcf:datasource>
   </bcf:bibdata>
   <bcf:section number="0">
-    <bcf:citekey order="3" intorder="1">brendel2025colossus</bcf:citekey>
-    <bcf:citekey order="4" intorder="1">leswing2025nvidia</bcf:citekey>
-    <bcf:citekey order="5" intorder="1">janson2025rechenzentren</bcf:citekey>
-    <bcf:citekey order="6" intorder="1">bitkom2025cloud</bcf:citekey>
-    <bcf:citekey order="7" intorder="1">llm_definition</bcf:citekey>
-    <bcf:citekey order="8" intorder="1">book</bcf:citekey>
-    <bcf:citekey order="9" intorder="1">brown2020languagemodelsfewshotlearners</bcf:citekey>
-    <bcf:citekey order="10" intorder="1">sennrich_bpe</bcf:citekey>
-    <bcf:citekey order="11" intorder="1">vaswani_attention</bcf:citekey>
-    <bcf:citekey order="12" intorder="1">su_rope</bcf:citekey>
+    <bcf:citekey order="2" intorder="1">brendel2025colossus</bcf:citekey>
+    <bcf:citekey order="3" intorder="1">leswing2025nvidia</bcf:citekey>
+    <bcf:citekey order="4" intorder="1">janson2025rechenzentren</bcf:citekey>
+    <bcf:citekey order="5" intorder="1">bitkom2025cloud</bcf:citekey>
+    <bcf:citekey order="6" intorder="1">llm_definition</bcf:citekey>
+    <bcf:citekey order="7" intorder="1">book</bcf:citekey>
+    <bcf:citekey order="8" intorder="1">brown2020languagemodelsfewshotlearners</bcf:citekey>
+    <bcf:citekey order="9" intorder="1">sennrich_bpe</bcf:citekey>
+    <bcf:citekey order="10" intorder="1">vaswani_attention</bcf:citekey>
+    <bcf:citekey order="11" intorder="1">su_rope</bcf:citekey>
+    <bcf:citekey order="12" intorder="1">chen2025inferenceperformanceevaluationllms</bcf:citekey>
     <bcf:citekey order="13" intorder="1">chen2025inferenceperformanceevaluationllms</bcf:citekey>
     <bcf:citekey order="14" intorder="1">chen2025inferenceperformanceevaluationllms</bcf:citekey>
     <bcf:citekey order="15" intorder="1">chen2025inferenceperformanceevaluationllms</bcf:citekey>
     <bcf:citekey order="16" intorder="1">chen2025inferenceperformanceevaluationllms</bcf:citekey>
-    <bcf:citekey order="17" intorder="1">chen2025inferenceperformanceevaluationllms</bcf:citekey>
-    <bcf:citekey order="18" intorder="1">Moeser2015</bcf:citekey>
-    <bcf:citekey order="19" intorder="1">Mueller2015</bcf:citekey>
-    <bcf:citekey order="20" intorder="1">vits</bcf:citekey>
+    <bcf:citekey order="17" intorder="1">Moeser2015</bcf:citekey>
+    <bcf:citekey order="18" intorder="1">Mueller2015</bcf:citekey>
+    <bcf:citekey order="19" intorder="1">vits</bcf:citekey>
+    <bcf:citekey order="20" intorder="1">glados_personality</bcf:citekey>
     <bcf:citekey order="21" intorder="1">whisper</bcf:citekey>
     <bcf:citekey order="22" intorder="1">touvron_llama</bcf:citekey>
     <bcf:citekey order="23" intorder="1">piper</bcf:citekey>
@@ -2388,10 +2389,8 @@
     <bcf:citekey order="27" intorder="1">bycroft_llm</bcf:citekey>
     <bcf:citekey order="28" intorder="1">bycroft_llm</bcf:citekey>
     <bcf:citekey order="29" intorder="1">bycroft_llm</bcf:citekey>
-    <bcf:citekey order="30" intorder="1">bycroft_llm</bcf:citekey>
+    <bcf:citekey order="30" intorder="1">kaplan_scaling</bcf:citekey>
     <bcf:citekey order="31" intorder="1">bycroft_llm</bcf:citekey>
-    <bcf:citekey order="32" intorder="1">kaplan_scaling</bcf:citekey>
-    <bcf:citekey order="33" intorder="1">bycroft_llm</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="none">

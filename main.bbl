@@ -33,8 +33,8 @@
       \strng{authorbibnamehash}{b1ac6216f08040b121e5f5afe0e294c2}
       \strng{authornamehash}{b1ac6216f08040b121e5f5afe0e294c2}
       \strng{authorfullhash}{b1ac6216f08040b121e5f5afe0e294c2}
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Linux Magazin}
@@ -65,8 +65,8 @@
       \strng{authorbibnamehash}{bb2377fa05262c9f150e23c4e2a66d47}
       \strng{authornamehash}{bb2377fa05262c9f150e23c4e2a66d47}
       \strng{authorfullhash}{bb2377fa05262c9f150e23c4e2a66d47}
-      \field{sortinit}{4}
-      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{CNBC}
@@ -97,8 +97,8 @@
       \strng{authorbibnamehash}{9ea9511ead579b18e8400d6d8d175612}
       \strng{authornamehash}{9ea9511ead579b18e8400d6d8d175612}
       \strng{authorfullhash}{9ea9511ead579b18e8400d6d8d175612}
-      \field{sortinit}{5}
-      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Statista}
@@ -127,8 +127,8 @@
       \strng{authorbibnamehash}{6668ec64dca8e5cc4d6e1c573c3bb0d7}
       \strng{authornamehash}{6668ec64dca8e5cc4d6e1c573c3bb0d7}
       \strng{authorfullhash}{6668ec64dca8e5cc4d6e1c573c3bb0d7}
-      \field{sortinit}{6}
-      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Cloud Report 2025}
@@ -163,8 +163,8 @@
       \strng{authorbibnamehash}{b5e6a2accdc2023c51f42c6ec010d19b}
       \strng{authornamehash}{b5e6a2accdc2023c51f42c6ec010d19b}
       \strng{authorfullhash}{b5e6a2accdc2023c51f42c6ec010d19b}
-      \field{sortinit}{8}
-      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{edition}{3rd}
@@ -341,8 +341,8 @@
       \strng{authorbibnamehash}{0884233a667161739ddd01569813457f}
       \strng{authornamehash}{0884233a667161739ddd01569813457f}
       \strng{authorfullhash}{b108601e4cbc36ef53b96ac01974e069}
-      \field{sortinit}{9}
-      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{eprintclass}{cs.CL}
@@ -383,8 +383,8 @@
       \strng{authorbibnamehash}{e309ceeb2dd0153b77437835a108df80}
       \strng{authornamehash}{e309ceeb2dd0153b77437835a108df80}
       \strng{authorfullhash}{e309ceeb2dd0153b77437835a108df80}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{eprinttype}{arXiv}
@@ -662,8 +662,8 @@
       \strng{authorbibnamehash}{b42c51f0eaf8678fd7c3988da193eec4}
       \strng{authornamehash}{b42c51f0eaf8678fd7c3988da193eec4}
       \strng{authorfullhash}{b42c51f0eaf8678fd7c3988da193eec4}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{eprinttype}{arXiv}
@@ -677,6 +677,34 @@
       \endverb
       \verb{url}
       \verb https://arxiv.org/abs/2106.06103
+      \endverb
+    \endentry
+    \entry{glados_personality}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=917c25d57423952af7d71df11c85b851}{%
+           family={Ng},
+           familyi={N\bibinitperiod},
+           given={David},
+           giveni={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{917c25d57423952af7d71df11c85b851}
+      \strng{fullhash}{917c25d57423952af7d71df11c85b851}
+      \strng{bibnamehash}{917c25d57423952af7d71df11c85b851}
+      \strng{authorbibnamehash}{917c25d57423952af7d71df11c85b851}
+      \strng{authornamehash}{917c25d57423952af7d71df11c85b851}
+      \strng{authorfullhash}{917c25d57423952af7d71df11c85b851}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{GitHub repository}
+      \field{title}{GLaDOS: The Personality Core}
+      \field{year}{2024}
+      \verb{urlraw}
+      \verb https://github.com/dnhkng/GLaDOS
+      \endverb
+      \verb{url}
+      \verb https://github.com/dnhkng/GLaDOS
       \endverb
     \endentry
     \entry{whisper}{misc}{}

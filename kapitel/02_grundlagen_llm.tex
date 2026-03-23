@@ -6,8 +6,8 @@
 
 \vspace{-1cm}
 Dieses Kapitel legt die theoretischen Grundlagen für das Verständnis
-moderner Large Language Models (LLMs). Es werden zunächst die mathematischen
-Grundlagen vom Embedding bis zur Softmax-Funktion erläutert und danach mit dieser Technologie betriebene Anwendung Text to speach als auch Speach to text vorgestellt. Das Kapitel beginnt mit Abbildung \ref{fig:llm_pipeline} welche sich auf den Grundlegenden Meachanismus eines LLMs fokussiert, den Transformer. 
+moderner Large Language Models (LLMs). Es werden die mathematischen
+Grundlagen vom Embedding bis zur Softmax-Funktion erläutert sowie die Konzepte des Trainings und der Quantisierung vorgestellt. Das Kapitel beginnt mit Abbildung \ref{fig:llm_pipeline}, welche sich auf den grundlegenden Mechanismus eines LLMs fokussiert, den Transformer.
 
 \begin{figure}[H]
     \centering
@@ -274,205 +274,19 @@ Die Open-Source-Community greift solche niederbittigen Quantisierungsmethoden in
 Das dabei eingesetzte Quantisierungsformat \textbf{GGUF} (bzw. GGML) verwendet eine Namenskonvention nach dem Muster \texttt{qX\_Y}. Hierbei steht \texttt{X} für die zur Gewichtsspeicherung verwendete Bitbreite. Der Wert \texttt{Y} gibt die Art der Quantisierung an: \texttt{0} kennzeichnet eine symmetrische Quantisierung ohne Nullpunkt, während \texttt{1} für eine asymmetrische Quantisierung steht, bei der jede Skalierung über einen Nullpunkt verfügt. Es wird im Allgemeinen nicht empfohlen, Formate wie \texttt{q2} oder \texttt{q3} zu verwenden, da hierbei die Inferenzgenauigkeit des Modells massiv abfällt~\cite{chen2025inferenceperformanceevaluationllms}.
 
 
-\section{Sprachverarbeitung: STT und TTS}
-\label{sec:sprachverarbeitung}
-
-
-Da LLMs ausschließlich Text verarbeiten können, muss gesprochene Sprache zunächst
-transkribiert werden. Die Umwandlung von Audio in Text bezeichnet man als
-\textbf{Automatic Speech Recognition (ASR)} oder \textbf{Speech-to-Text (STT)}.
-
-\subsection{Physikalische Eigenschaften von Audiosignalen}
-
-Die Vibration der Stimmlippen versetzt anliegende Luftmoleküle in Schwingung. Durch die Kompressibilität der Luft breiten sich diese als Schallwellen aus, welche physikalisch als orts- und zeitabhängige Schwankung des Luftdrucks $p$ um den atmosphärischen Ruhedruck ($1013,25$\,hPa) beschrieben werden~\cite{Moeser2015}. Die Einheit des Schalldrucks ist Pascal (Pa).
-Der Mensch nimmt Schallwellen primär durch die Klangfarbe (hoch/tief) und die Lautstärke wahr. Die physikalischen Äquivalente hierzu sind die Frequenz $f$ für die Klangfarbe und die Amplitude des Schalldrucks für die Lautstärke. Die Frequenz errechnet sich mit der Einheit Hertz (Hz) über die Kehrwert der Periodendauer $T$:
-\begin{equation}
-    f = \frac{1}{T}
-    \label{eq:frequenz}
-\end{equation}
-
-Ein Audiosignal, welches nur eine einzige Frequenzkomponente abdeckt (wie der musikalische Referenzton A4 mit 440\,Hz), nennt man \textit{Ton}. Eine Mischung aus Tönen mit ganzzahligen Frequenzverhältnissen (Grund- und Oberschwingungen) wird dagegen als \textit{Klang} bezeichnet~\cite{Mueller2015}. Die menschliche Sprache entsteht demnach aus einer komplexen Überlagerung solcher harmonischer Schwingungen, wobei die relevanten Frequenzen typischerweise in einer Bandbreite zwischen 80\,Hz und 12\,kHz angesiedelt sind.
-
-Da empirische Versuche gezeigt haben, dass das menschliche Lautstärkeempfinden logarithmisch funktioniert, ist die lineare Einheit Pascal zur Einordnung ungeeignet. Stattdessen zieht man den logarithmierten Schalldruckpegel $L$ (angegeben in Dezibel, dB) heran.
-\begin{equation}
-    L = 20 \cdot \log_{10}\!\left(\frac{p}{p_0}\right) \, \text{dB}
-    \label{eq:schalldruckpegel}
-\end{equation}
-Der Faktor bringt den gemessenen Effektivwert des Schalldrucks $p$ ins Verhältnis zur menschlichen Hörschwelle $p_0$, welche bei $2 \cdot 10^{-5}$\,Pa (entsprechend 0\,dB bei 1\,kHz) liegt. Der Vorfaktor von 20 wurde in der Definition bewusst so gewählt, dass eine Pegeldifferenz von 1\,dB genau der relativen Unterschiedsschwelle des Gehörs entspricht, bei der zwei Schalldrücke gerade noch als unterschiedlich laut ermittelt werden können. Die Skala erstreckt sich dabei von der Hörschwelle bis hin zur Schmerzgrenze bei etwa 200\,Pa, was einem extremen Lautstärkeeindruck von 140\,dB entspricht.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{ablaufplan_LLM.jpeg}
-    \caption{Datenfluss eines Large Language Models}
-    \label{fig:spracherkennung}
-\end{figure}
-
-Das Eingangssignal ist eine Audiodatei (typischerweise 16\,kHz Mono). Um es
-für ein neuronales Netz nutzbar zu machen, wird es in ein
-\textbf{Log-Mel-Spektrogramm} umgewandelt -- eine Zeit-Frequenz-Darstellung,
-die der Wahrnehmung des menschlichen Gehörs nachgebildet ist:
-\begin{equation}
-    S_{\text{mel}}(m, t) = \log\!\Biggl(\sum_{k} |X(k, t)|^{2}
-    \cdot H_m(k) + \epsilon\Biggr)
-    \label{eq:logmel}
-\end{equation}
-wobei $X(k, t)$ das Kurzzeit-Fourierspektrum, $H_m(k)$ die $m$-te
-Mel-Filterbank und $\epsilon$ ein Glättungsterm ist. Ein neuronales Netz --
-typischerweise ein Transformer (Encoder-Decoder) -- erzeugt aus diesem
-Spektrogramm direkt die Texttranskription.
-
-\textbf{Text-to-Speech (TTS)}\label{sec:theorie_tts}
-bezeichnet die Synthese von Sprache aus Text.
-Moderne neuronale TTS-Systeme erzeugen natürlich klingende Sprache
-in einem mehrstufigen Prozess:
-\begin{enumerate}
-    \item \textbf{Phonemisierung:} Der Eingabetext wird normalisiert
-          und in eine phonetische Repräsentation (Phoneme) umgewandelt.
-    \item \textbf{Akustisches Modell:} Aus der Phonemsequenz wird ein
-          Mel-Spektrogramm generiert -- eine Zeit-Frequenz-Darstellung,
-          die Tonhöhe, Geschwindigkeit und Klangfarbe kodiert.
-    \item \textbf{Vocoder:} Das Mel-Spektrogramm wird in ein
-          Audiosignal (Wellenform) umgewandelt.
-\end{enumerate}
-
-End-to-End-Modelle wie \textbf{VITS} (Variational Inference with
-adversarial learning for end-to-end TTS)~\cite{vits} kombinieren
-diese Stufen in einem einzigen Modell und werden direkt von Text zu
-Audio trainiert. Die Trainingsschleife minimiert eine Kombination aus
-Rekonstruktionsfehler und Adversarial Loss:
-\begin{equation}
-    \mathcal{L}_{\text{VITS}} =
-    \mathcal{L}_{\text{recon}} + \lambda\,\mathcal{L}_{\text{adv}}
-    \label{eq:vits_loss}
-\end{equation}
-
-% ============================================================
-\section{Das eingesetzte System}
-\label{sec:system}
-% ============================================================
-
-Auf Basis der in den vorherigen Abschnitten beschriebenen Theorie wird
-in dieser Arbeit eine vollständige Sprachpipeline eingesetzt, die
-ausschließlich lokal ohne Cloud-Anbindung betrieben wird.
-Die drei Kernkomponenten sind:
-
-\textbf{Spracherkennung: Whisper.}\label{sec:whisper}
-\textbf{Whisper}~\cite{whisper} ist ein von OpenAI veröffentlichtes
-Open-Source-Modell zur automatischen Spracherkennung. Es wurde auf
-680.000 Stunden mehrsprachiger Audiodaten trainiert und basiert auf
-einer Transformer-Encoder-Decoder-Architektur. Der Encoder verarbeitet
-80-Kanal Log-Mel-Spektrogramme (vgl. Gleichung~\ref{eq:logmel}),
-der Decoder generiert autoregressiv die Textausgabe.
-Whisper unterstützt mehrsprachige Erkennung ohne sprachspezifische
-Anpassung und ist robust gegenüber Umgebungsgeräuschen.
-In dieser Arbeit wird Whisper lokal auf der IZPL-Hardware ausgeführt.
-Ein gesprochener Satz wie \glqq{}Wie hoch ist die aktuelle
-Raumtemperatur?\grqq{} wird innerhalb weniger hundert Millisekunden
-transkribiert und als Zeichenkette an das Sprachmodell übergeben.
-
-\textbf{Sprachmodell: LLaMA\,7B.}\label{sec:llama}
-\textbf{LLaMA\,7B}~\cite{touvron_llama} ist ein von Meta entwickeltes
-Open-Source-Sprachmodell mit 6{,}7~Milliarden Parametern. Es verwendet
-die in Abschnitt~\ref{sec:transformer_block} beschriebene
-Transformer-Architektur mit folgenden Spezifikationen:
-
-\begin{table}[H]
-    \centering
-    \small
-    \begin{tabular}{l c c c c r}
-        \toprule
-        Modell & $N$ & $d$ & $h$ & $d_{\text{ff}}$ & Parameter \\
-        \midrule
-        GPT-2 (small)       & 12 & 768    & 12 & 3.072   & 124\,M   \\
-        \textbf{LLaMA\,7B}  & \textbf{32} & \textbf{4.096} & \textbf{32} & \textbf{11.008} & \textbf{6{,}7\,B} \\
-        LLaMA\,13B          & 40 & 5.120  & 40 & 13.824  & 13\,B    \\
-        GPT-3               & 96 & 12.288 & 96 & 49.152  & 175\,B   \\
-        \bottomrule
-    \end{tabular}
-    \caption{Architekturparameter -- LLaMA\,7B (fett) ist das in dieser Arbeit
-        eingesetzte Modell.}
-    \label{tab:modelle}
-\end{table}
-
-Im Vergleich zum Standard-Transformer setzt LLaMA\,7B folgende
-Anpassungen ein:
-\begin{itemize}
-    \item \textbf{RMSNorm} (statt LayerNorm) vor jeder Operation
-          (vgl. Gleichung~\ref{eq:rmsnorm})
-    \item \textbf{SwiGLU}-Aktivierung im FFN (statt ReLU):
-          \begin{equation}
-              \text{FFN}_{\text{SwiGLU}}(x) =
-              \bigl(\text{Swish}(xW_1) \odot (xW_3)\bigr)\,W_2,
-              \quad \text{Swish}(z) = z \cdot \sigma(z)
-              \label{eq:swiglu}
-          \end{equation}
-    \item \textbf{RoPE} Positionskodierung (vgl. Gleichung~\ref{eq:rope})
-    \item Maximale Kontextlänge: $T_{\max} = 4096$ Tokens
-\end{itemize}
-
-Das Modell wird im \textbf{Q4\_K\_M}-Format über \texttt{ollama}
-lokal betrieben, was einen VRAM-Bedarf von ca.\,4\,GB ergibt und
-den Betrieb auf der verfügbaren Hardware ohne relevante
-Qualitätseinbußen ermöglicht.
-
-\textbf{Sprachsynthese: Piper TTS mit eigenem Stimmmodell.}\label{sec:piper}
-\textbf{Piper TTS}~\cite{piper} ist ein schnelles, Open-Source-TTS-System,
-das auf der VITS-Architektur (vgl. Abschnitt~\ref{sec:theorie_tts})
-basiert und für den lokalen, ressourcenschonenden Betrieb optimiert ist.
-In dieser Arbeit wurde ein eigenes Stimmmodell trainiert, um die
-Sprachausgabe natürlicher zu gestalten. Das Vorgehen folgt dem
-Verfahren von \citeauthor{networkchuck_voice}~\cite{networkchuck_voice}:
-
-\begin{enumerate}
-    \item \textbf{Datenaufbereitung:} Aufnahme von Sprachsamples
-          mit dem Piper Recording Studio. Die Samples werden
-          rauschbereinigt, auf $22{.}050$\,Hz normalisiert und den
-          zugehörigen Transkripten zugeordnet.
-    \item \textbf{Finetuning:} Training ausgehend von einem
-          vortrainierten deutschen Piper-Checkpoint über 6000~Epochen:
-\begin{lstlisting}[language=bash, basicstyle=\small\ttfamily]
-python3 -m piper_train \
-  --dataset-dir ~/sprachdaten \
-  --accelerator gpu --gpus 1 \
-  --batch-size 32 --max_epochs 6000 \
-  --resume_from_checkpoint base.ckpt \
-  --precision 16 --quality medium
-\end{lstlisting}
-    \item \textbf{ONNX-Export:} Das trainierte Modell wird in das
-          ONNX-Format (Open Neural Network Exchange) exportiert,
-          das eine hardwareunabhängige Inferenz ohne GPU ermöglicht:
-\begin{lstlisting}[language=bash, basicstyle=\small\ttfamily]
-python3 -m piper_train.export_onnx \
-  checkpoint/epoch=5999.ckpt \
-  output/stimme.onnx
-\end{lstlisting}
-\end{enumerate}
-
-Das resultierende Modell (\texttt{stimme.onnx}, ca.\,60\,MB)
-wird zusammen mit der Konfigurationsdatei \texttt{stimme.onnx.json}
-in Piper eingebunden und ermöglicht die Echtzeitsynthese auf der
-lokalen Hardware.
-
 % ============================================================
 \section{Zusammenfassung}
 % ============================================================
 
-Dieses Kapitel hat zunächst die theoretischen Grundlagen der
-LLM-Architektur -- von der Tokenisierung über den Transformer-Block
-bis zur Softmax-Ausgabe -- erläutert. Anschließend wurde das in dieser
-Arbeit eingesetzte System beschrieben:
+Dieses Kapitel hat die theoretischen Grundlagen der
+LLM-Architektur erläutert -- von der Tokenisierung und dem Embedding
+über den Transformer-Block mit Self-Attention und Feed-Forward-Netzwerk
+bis hin zur Softmax-Ausgabeschicht. Darüber hinaus wurden die Konzepte
+des Pretrainings, Finetunings und der Quantisierung vorgestellt, die
+den lokalen Betrieb großer Sprachmodelle auf begrenzter Hardware
+ermöglichen.
 
-\begin{table}[H]
-    \centering
-    \small
-    \begin{tabular}{l l l}
-        \toprule
-        Komponente & Eingesetztes Modell & Besonderheit \\
-        \midrule
-        STT & Whisper & lokal, mehrsprachig, 80 Mel-Kanäle \\
-        LLM & LLaMA\,7B (Q4\_K\_M, GGUF) & $N{=}32$, $d{=}4096$, $\approx$4\,GB VRAM \\
-        TTS & Piper TTS + eigenes ONNX-Modell & VITS, $f_s{=}22{.}050$\,Hz, kein Cloud \\
-        \bottomrule
-    \end{tabular}
-    \caption{Übersicht der eingesetzten Komponenten.}
-    \label{tab:zusammenfassung}
-\end{table}
+Aufbauend auf diesen Grundlagen wird im nächsten Kapitel die
+Sprachverarbeitung (Speech-to-Text und Text-to-Speech) sowie das
+konkret eingesetzte System vorgestellt, das die beschriebene
+LLM-Technologie in eine vollständige Sprachpipeline einbettet.

@@ -5,18 +5,18 @@
 
 Dieses Kapitel beschreibt die Hardwareanforderungen für den lokalen Betrieb
 eines Large Language Models und den konkreten Laboraufbau am IZPL.
-Als Einstieg wird zunächst anhand eines minimalen Beispielmodells
-(nano-GPT, 85.584 Parameter) gezeigt, welche Rechenoperationen ein
-forward pass tatsächlich erfordert -- bevor diese Erkenntnisse auf das
-in dieser Arbeit eingesetzte LLaMA\,7B-Modell skaliert werden.
+Um einordnenr zu können wie viele Rechenoperationen nötig sind für 
+ein vorhergesagtes Token, wird zunächst anhand eines minimalen Beispielmodells
+(nano-GPT, 85.584 Parameter) gezeigt, um auf das
+in dieser Arbeit eingesetzte LLaMA\,7B-Modell zu skalieren.
+Für den Vergleich der Rechenoperationen wird die Einheit FLOPs verwendet.
+Ein FLOP (Floating Point Operation) bezeichnet eine einzelne Gleitkomma-Rechenoperation, also eine Addition oder Multiplikation mit Dezimalzahlen. Zur besseren Übersicht werden Vielfache verwendet: 1\,MFLOP $= 10^6$\,FLOPs (Mega), 1\,GFLOP $= 10^9$\,FLOPs (Giga) und 1\,TFLOP $= 10^{12}$\,FLOPs (Tera).
 % ============================================================
-\section{Rechenoperationen eines LLMs -- nano-GPT als Beispiel}
+\section{Rechenoperationen eines LLMs nano-GPT als Beispiel}
 \label{sec:rechenoperationen}
 % ============================================================
 Wie in Kapitel \ref{eq:embedding} bereits angeschnitten sind Large language models im ersten Schritt mit Embedding layers ausgestattet. Um die Skalierung allein dieses schrittes zu veranaschaulichen wie bereits genannt hat Gpt2 768 dimensionale Vektoren als Start vor jeder Matrixmultiplikation GPT3 jedoch hat für das 175 Milliarden Parameter modell 12288 dimensionen. \ref{}
-Um zu verstehen, warum LLMs hohe Hardware-Anforderungen stellen, ist es
-hilfreich, die Rechenoperationen eines konkreten, kleinen Modells
-vollständig nachzuvollziehen. Brendan Bycroft stellt mit der interaktiven
+Um zu verstehen, warum LLMs hohe Hardware-Anforderungen s Brendan Bycroft stellt mit der interaktiven
 Visualisierung~\cite{bycroft_llm} ein nano-GPT-Modell mit
 \textbf{85.584 Parametern} zur Verfügung, das schrittweise von der Tokenisierung bis zum Softmax-Ausgan alle Operationen zeigt.
 
@@ -24,7 +24,7 @@ Visualisierung~\cite{bycroft_llm} ein nano-GPT-Modell mit
 \subsection{Modellkonfiguration}
 %% ============================================================
 
-Das nano-GPT-Modell ist darauf ausgelegt, eine Buchstabensequenz zu
+Das nano-GPT-Modell ist auf die simple AUfgbae ausgelegt, eine Buchstabensequenz zu
 sortieren (z.\,B. \texttt{C B A B B C} $\rightarrow$ \texttt{A B B B C C}).
 Die Modellparameter sind:
 
@@ -49,134 +49,22 @@ Die Modellparameter sind:
 \end{table}
 
 %% ============================================================
-\subsection{Parameter-Aufschlüsselung}
+\subsection{Rechenoperationen und Skalierung}
 %% ============================================================
 
-Die 85.584 Parameter verteilen sich wie folgt auf die einzelnen Schichten:
+Die interaktive Visualisierung von Brendan Bycroft~\cite{bycroft_llm}
+zeigt jede einzelne Addition und Multiplikation im Forward Pass
+des nano-GPT-Modells. Die 85.584 Parameter verteilen sich auf
+Token- und Positions-Embedding, drei Transformer-Blöcke (jeweils
+mit Attention und MLP) sowie eine finale Normierungsschicht.
 
-\begin{table}[H]
-    \centering
-    \small
-    \begin{tabular}{l l r}
-        \toprule
-        Schicht & Formel & Parameter \\
-        \midrule
-        Token-Embedding-Matrix  & $|\mathcal{V}| \times C = 65 \times 48$
-                                 & 3.120 \\
-        Positions-Embedding     & $T \times C = 64 \times 48$
-                                 & 3.072 \\
-        \midrule
-        \multicolumn{3}{l}{\textit{Je Transformer-Block ($\times 3$):}} \\
-        \quad LayerNorm 1 ($\gamma, \beta$)
-                                 & $2 \times C$           & 96 \\
-        \quad Q, K, V Projektion & $3 \times (C \times C + C) = 3 \times 2.352$
-                                 & 7.056 \\
-        \quad Attention Output   & $C \times C + C$       & 2.352 \\
-        \quad LayerNorm 2        & $2 \times C$           & 96 \\
-        \quad MLP Up (FC1)       & $C \times 4C + 4C = 48 \times 192 + 192$
-                                 & 9.408 \\
-        \quad MLP Down (FC2)     & $4C \times C + C = 192 \times 48 + 48$
-                                 & 9.264 \\
-        \quad \textit{Summe pro Block}
-                                 &                        & 28.272 \\
-        \quad \textit{Summe 3 Blöcke}
-                                 &                        & 84.816 \\[3pt]
-        \midrule
-        Finale LayerNorm         & $2 \times C$           & 96 \\
-        Output-Projektion        & $C \times |\mathcal{V}|$ -- weight tying
-                                 & 0 \\
-        \midrule
-        \textbf{Gesamt}          &                        & \textbf{85.584} \\
-        \bottomrule
-    \end{tabular}
-    \caption{Parameter-Aufschlüsselung nano-GPT (85.584 Parameter).
-        Die Output-Projektion teilt die Gewichte mit der
-        Token-Embedding-Matrix (\emph{weight tying})~\cite{bycroft_llm}.}
-    \label{tab:nanogpt_params}
-\end{table}
+Für eine Eingabesequenz der Länge $T = 6$ dominieren die
+MLP-Schichten den Rechenaufwand mit $\approx 76\,\%$ der FLOPs,
+während die Attention-Berechnungen bei kurzen Sequenzen vergleichsweise
+gering ausfallen. Insgesamt ergibt sich ein Aufwand von
+$\approx 1{,}75\,\text{MFLOPs}$ pro Forward Pass.
 
-%% ============================================================
-\subsection{Rechenoperationen im Forward Pass}
-%% ============================================================
-
-Die Visualisierung \cite{bycroft_llm} zeigt jede Addition und
-Multiplikation im forward pass. Die dominierenden Operationen sind
-Matrix-Multiplikationen. Für eine Eingabesequenz der Länge $T = 6$
-(das Sortierbeispiel) ergeben sich folgende charakteristische Operationen:
-
-\paragraph{Token- und Positions-Embedding.}
-Für $T$ Tokens werden $T$ Zeilen aus der Embedding-Matrix ausgelesen
-($T \times C = 6 \times 48 = 288$ Werte) und anschließend
-elementweise mit den Positionsvektoren addiert (288 Additionen).
-Dies ist reine Lookup-/Additionsarbeit -- kaum Rechenlast.
-
-\paragraph{Q, K, V Projektionen (pro Block).}
-Für jedes der $T$ Tokens werden Q, K und V berechnet:
-\begin{equation}
-    \text{FLOPs} = 3 \times T \times C^2 \times 2
-    = 3 \times 6 \times 48^2 \times 2 = 82.944
-    \label{eq:qkv_flops}
-\end{equation}
-(Faktor 2 für Multiply-Add-Fusion). Bei $L = 3$ Blöcken ergibt das
-$3 \times 82.944 = 248.832$ FLOPs allein für die Projektionen.
-
-\paragraph{Attention-Score-Matrix.}
-Die Attention-Score-Matrix hat die Form $(T \times T)$ pro Head.
-Für $T = 6$, $H = 3$ Köpfe und Head-Dimension $d_k = 16$:
-\begin{equation}
-    \text{FLOPs}_{\text{scores}} = H \times T^2 \times d_k \times 2
-    = 3 \times 36 \times 16 \times 2 = 3.456
-    \label{eq:attn_flops}
-\end{equation}
-Die anschließende Softmax-Berechnung erfolgt zeilenweise über $T$ Elemente
-pro Head (Exponentialfunktion + Summation + Division).
-
-\paragraph{MLP (pro Block).}
-Das zweilagige Feed-Forward-Netz verarbeitet jede der $T$ Positionen
-unabhängig:
-\begin{equation}
-    \text{FLOPs}_{\text{MLP}} = T \times (C \times 4C + 4C \times C) \times 2
-    = 6 \times (48 \cdot 192 + 192 \cdot 48) \times 2 = 442.368
-    \label{eq:mlp_flops}
-\end{equation}
-
-\paragraph{Gesamtoperationen (nano-GPT, $T=6$).}
-\begin{table}[H]
-    \centering
-    \small
-    \begin{tabular}{l r}
-        \toprule
-        Operation & FLOPs \\
-        \midrule
-        Embedding (Lookup + Add)    & $<$ 1.000 \\
-        Q/K/V-Projektionen (3 Blöcke)& 248.832 \\
-        Attention-Scores (3 Blöcke) & 10.368 \\
-        Attention-Weighted Sum       & 10.368 \\
-        Output-Projektion Attention  & 110.592 \\
-        MLP FC1 + FC2 (3 Blöcke)    & 1.327.104 \\
-        LayerNorms + Residuals       & $\sim$ 10.000 \\
-        Output-Projektion + Softmax  & $\sim$ 37.000 \\
-        \midrule
-        \textbf{Gesamt (geschätzt)}  & $\mathbf{\approx 1{,}75 \text{ MFLOPs}}$ \\
-        \bottomrule
-    \end{tabular}
-    \caption{Geschätzte Rechenoperationen für nano-GPT bei $T=6$
-        Eingabe-Tokens. Der Großteil entfällt auf die MLP-Schichten.}
-    \label{tab:nanogpt_flops}
-\end{table}
-
-\paragraph{Wichtige Erkenntnis.}
-Das MLP-Netzwerk dominiert den Rechenaufwand -- weit vor der
-Attention-Berechnung. Bei einer Sequenzlänge von $T = 6$ entfällt
-auf die drei MLP-Blöcke allein $\approx 76\,\%$ der FLOPs.
-Die Attention-Scores wachsen mit $\mathcal{O}(T^2)$, werden bei
-kurzen Sequenzen aber von den linearen $\mathcal{O}(C^2)$-Matrix\-multipli\-kationen
-dominiert.
-
-%% ============================================================
-\subsection{Skalierung auf LLaMA\,7B}
-%% ============================================================
-
+\paragraph{Skalierung auf LLaMA\,7B.}
 Dieselbe Struktur gilt für LLaMA\,7B, jedoch mit deutlich größeren
 Dimensionen ($C = 4096$, $L = 32$, $H = 32$, $T_{\max} = 4096$).
 Die Anzahl der Floating-Point-Operationen pro Token lässt sich grob
@@ -194,35 +82,25 @@ ergibt das:
     \label{eq:llama_flops_total}
 \end{equation}
 
+
 % ============================================================
 \section{Motivation für On-Premise-Betrieb}
 \label{sec:motivation_onpremise}
 % ============================================================
 
-Trotz der verfügbaren Cloud-LLM-Dienste (OpenAI API, Anthropic, Gemini)
-gibt es gewichtige Gründe für einen lokalen Betrieb:
+Wie in Kapitel~1 dargelegt, sprechen insbesondere Datenschutz, Compliance und die Abhängigkeit von US-Cloud-Anbietern für einen lokalen Betrieb von Sprachmodellen. Über diese bereits diskutierten Aspekte hinaus sind für den Einsatz auf Edge-Geräten und in der Robotik zwei weitere Faktoren entscheidend:
 
 \begin{itemize}
-    \item \textbf{Datenschutz und Compliance:} Unternehmensinterne
-          Daten, Sensordaten und Strategieinformationen dürfen gemäß
-          DSGVO und internen Richtlinien in der Regel nicht an externe
-          Server übermittelt werden. Bei einem On-Premise-System
-          verlassen die Daten das lokale Netzwerk nicht.
     \item \textbf{Verfügbarkeit und Latenz:} Cloud-Dienste sind von
           Internetzugang und der Verfügbarkeit des Anbieters abhängig.
           Lokale Modelle können in Echtzeit und ohne Netzwerkverzögerung
           reagieren -- relevant für robotische Anwendungen.
-    \item \textbf{Kosten:} Bei dauerhaftem, hochfrequentem Einsatz
-          übersteigen API-Kosten schnell die Investitionskosten eigener
-          Hardware.
     \item \textbf{Anpassbarkeit:} Lokale Modelle können feinabgestimmt,
           quantisiert und mit systemspezifischem Kontext (z.\,B. RAG)
           versehen werden, ohne von Anbieterbeschränkungen abhängig zu sein.
 \end{itemize}
 
-%% ============================================================
-\subsection{Vergleich: Cloud vs. On-Premise}
-%% ============================================================
+Tabelle~\ref{tab:cloud_vs_onpremise} fasst die wesentlichen Unterschiede zwischen Cloud- und On-Premise-Betrieb zusammen.
 
 \begin{table}[H]
     \centering
@@ -375,15 +253,14 @@ Mit dieser Konfiguration werden folgende Betriebswerte erreicht:
 % ============================================================
 
 Dieses Kapitel hat den Rechenbedarf von LLMs anhand des nano-GPT-Modells
-(85.584 Parameter,~\cite{bycroft_llm}) von Grund auf hergeleitet.
-Der forward pass eines nano-GPT mit $T=6$ Token erfordert
-$\approx 1{,}75\,\text{MFLOPs}$; skaliert auf LLaMA\,7B mit 200
-Ausgabe-Token sind es $\approx 2{,}68\,\text{TFLOPs}$.
+(85.584 Parameter,~\cite{bycroft_llm}) veranschaulicht und auf
+LLaMA\,7B skaliert. Die kritischen Hardware-Ressourcen für lokale
+LLM-Inferenz sind \textbf{VRAM} (Modellgewichte + KV-Cache, vgl.
+Tabelle~\ref{tab:quantisierung}) und \textbf{Speicherbandbreite}
+(Memory-Bound-Betrieb). LLaMA\,7B im Q4\_K\_M-Format kann mit einer
+modernen Consumer-GPU ($\geq 6\,\text{GB}$ VRAM) lokal betrieben werden.
+Die IZPL-Hardware erfüllt diese Anforderungen und ermöglicht den
+On-Premise-Betrieb der vollständigen Sprachpipeline ohne Cloud-Anbindung.
 
-Die kritischen Hardware-Ressourcen für lokale LLM-Inferenz sind
-\textbf{VRAM} (Modellgewichte + KV-Cache) und
-\textbf{Speicherbandbreite} (Memory-Bound-Betrieb). LLaMA\,7B im
-Q4\_K\_M-Format kann mit einer modernen Consumer-GPU ($\geq 6\,\text{GB}$
-VRAM) lokal betrieben werden. Die IZPL-Hardware erfüllt diese
-Anforderungen und ermöglicht den On-Premise-Betrieb der vollständigen
-Sprachpipeline (Whisper + LLaMA\,7B + Piper TTS) ohne Cloud-Anbindung.
+Nachdem die theoretischen und infrastrukturellen Grundlagen gelegt sind,
+folgt im nächsten Kapitel die Evaluation des Systems im praktischen Betrieb.

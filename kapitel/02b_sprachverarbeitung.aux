@@ -1,46 +1,51 @@
 \relax 
 \providecommand\hyper@newdestlabel[2]{}
-\@writefile{toc}{\contentsline {chapter}{\numberline {5}Evaluation}{24}{chapter.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {3}Sprachverarbeitung: STT und TTS}{13}{chapter.3}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {5.1}Methodik der Evaluation}{24}{section.5.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces Simulierter VRAM-Bedarf je Quantisierungsstufe im Vergleich zum 12-GB-Limit der RTX 3080 Ti}}{24}{figure.caption.19}\protected@file@percent }
-\newlabel{fig:eval_vram}{{5.1}{24}{Simulierter VRAM-Bedarf je Quantisierungsstufe im Vergleich zum 12-GB-Limit der RTX 3080 Ti}{figure.caption.19}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.2}Antwortzeiten und Performanz}{25}{section.5.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {5.2}{\ignorespaces Generierungsgeschwindigkeit (Tokens/s) in Abhängigkeit der Quantisierung}}{25}{figure.caption.20}\protected@file@percent }
-\newlabel{fig:eval_tokens_per_s}{{5.2}{25}{Generierungsgeschwindigkeit (Tokens/s) in Abhängigkeit der Quantisierung}{figure.caption.20}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.3}{\ignorespaces Prefill-Latenz (Time-to-First-Token) über verschiedene Prompt-Längen (Q4\_K\_M)}}{25}{figure.caption.21}\protected@file@percent }
-\newlabel{fig:eval_ttft}{{5.3}{25}{Prefill-Latenz (Time-to-First-Token) über verschiedene Prompt-Längen (Q4\_K\_M)}{figure.caption.21}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.4}{\ignorespaces Kumulative Token-Ausgabe über die Zeit bei der 4-Bit-Quantisierung}}{26}{figure.caption.22}\protected@file@percent }
-\newlabel{fig:eval_token_gen}{{5.4}{26}{Kumulative Token-Ausgabe über die Zeit bei der 4-Bit-Quantisierung}{figure.caption.22}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.5}{\ignorespaces Zeitlicher VRAM-Verlauf während der Modell-Ausführung gegliedert in Laden, Prefill und Generierung}}{26}{figure.caption.23}\protected@file@percent }
-\newlabel{fig:eval_vram_trace}{{5.5}{26}{Zeitlicher VRAM-Verlauf während der Modell-Ausführung gegliedert in Laden, Prefill und Generierung}{figure.caption.23}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.3}Qualität der Konversation}{26}{section.5.3}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {5.6}{\ignorespaces Qualitätsverlust (Perplexity auf WikiText-2) durch Quantisierungsverfahren}}{27}{figure.caption.24}\protected@file@percent }
-\newlabel{fig:eval_perplexity}{{5.6}{27}{Qualitätsverlust (Perplexity auf WikiText-2) durch Quantisierungsverfahren}{figure.caption.24}{}}
-\@setckpt{kapitel/04_evaluation}{
-\setcounter{page}{28}
-\setcounter{equation}{0}
-\setcounter{enumi}{2}
+\newlabel{sec:sprachverarbeitung}{{3}{13}{Sprachverarbeitung: STT und TTS}{chapter.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.1}Physikalische Eigenschaften von Audiosignalen}{13}{section.3.1}\protected@file@percent }
+\newlabel{eq:frequenz}{{3.1}{13}{Physikalische Eigenschaften von Audiosignalen}{equation.3.1.1}{}}
+\newlabel{eq:schalldruckpegel}{{3.2}{14}{Physikalische Eigenschaften von Audiosignalen}{equation.3.1.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Datenfluss eines Large Language Models}}{15}{figure.caption.11}\protected@file@percent }
+\newlabel{fig:spracherkennung}{{3.1}{15}{Datenfluss eines Large Language Models}{figure.caption.11}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.1}Text-to-Speech (TTS)}{16}{subsection.3.1.1}\protected@file@percent }
+\newlabel{sec:theorie_tts}{{3.1.1}{16}{Text-to-Speech (TTS)}{subsection.3.1.1}{}}
+\newlabel{eq:vits_loss}{{3.3}{16}{Text-to-Speech (TTS)}{equation.3.1.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.2}Das eingesetzte System}{16}{section.3.2}\protected@file@percent }
+\newlabel{sec:system}{{3.2}{16}{Das eingesetzte System}{section.3.2}{}}
+\newlabel{sec:whisper}{{3.2}{16}{Das eingesetzte System}{section.3.2}{}}
+\newlabel{sec:llama}{{3.2}{16}{Das eingesetzte System}{section.3.2}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3.1}{\ignorespaces Architekturparameter -- LLaMA\,7B (fett) ist das in dieser Arbeit eingesetzte Modell.}}{17}{table.caption.12}\protected@file@percent }
+\newlabel{tab:modelle}{{3.1}{17}{Architekturparameter -- LLaMA\,7B (fett) ist das in dieser Arbeit eingesetzte Modell}{table.caption.12}{}}
+\newlabel{eq:swiglu}{{3.4}{17}{Das eingesetzte System}{equation.3.2.4}{}}
+\newlabel{sec:piper}{{3.2}{17}{Das eingesetzte System}{equation.3.2.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.3}Zusammenfassung}{18}{section.3.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3.2}{\ignorespaces Übersicht der eingesetzten Komponenten.}}{18}{table.caption.13}\protected@file@percent }
+\newlabel{tab:zusammenfassung}{{3.2}{18}{Übersicht der eingesetzten Komponenten}{table.caption.13}{}}
+\@setckpt{kapitel/02b_sprachverarbeitung}{
+\setcounter{page}{19}
+\setcounter{equation}{4}
+\setcounter{enumi}{3}
 \setcounter{enumii}{0}
 \setcounter{enumiii}{0}
 \setcounter{enumiv}{0}
 \setcounter{footnote}{0}
 \setcounter{mpfootnote}{0}
 \setcounter{part}{0}
-\setcounter{chapter}{5}
+\setcounter{chapter}{3}
 \setcounter{section}{3}
 \setcounter{subsection}{0}
 \setcounter{subsubsection}{0}
 \setcounter{paragraph}{0}
 \setcounter{subparagraph}{0}
-\setcounter{figure}{6}
-\setcounter{table}{0}
+\setcounter{figure}{1}
+\setcounter{table}{2}
 \setcounter{parentequation}{0}
 \setcounter{section@level}{1}
-\setcounter{Item}{8}
+\setcounter{Item}{6}
 \setcounter{Hfootnote}{0}
-\setcounter{bookmark@seq@number}{31}
+\setcounter{bookmark@seq@number}{16}
 \setcounter{lstnumber}{4}
 \setcounter{caption@flags}{2}
 \setcounter{continuedfloat}{0}
@@ -54,7 +59,7 @@
 \setcounter{citetotal}{0}
 \setcounter{multicitecount}{0}
 \setcounter{multicitetotal}{0}
-\setcounter{instcount}{30}
+\setcounter{instcount}{24}
 \setcounter{maxnames}{3}
 \setcounter{minnames}{1}
 \setcounter{maxitems}{3}

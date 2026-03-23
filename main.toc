@@ -8,40 +8,34 @@
 \contentsline {chapter}{\numberline {2}Grundlagen Large Language Models}{5}{chapter.2}%
 \contentsline {section}{\numberline {2.1}Tokenisierung und Embedding}{6}{section.2.1}%
 \contentsline {section}{\numberline {2.2}Der Transformer-Block}{7}{section.2.2}%
-\contentsline {section}{\numberline {2.3}Ausgabeschicht, Training und Quantisierung}{9}{section.2.3}%
-\contentsline {section}{\numberline {2.4}Sprachverarbeitung: STT und TTS}{11}{section.2.4}%
-\contentsline {subsection}{\numberline {2.4.1}Physikalische Eigenschaften von Audiosignalen}{12}{subsection.2.4.1}%
-\contentsline {section}{\numberline {2.5}Das eingesetzte System}{14}{section.2.5}%
-\contentsline {section}{\numberline {2.6}Zusammenfassung}{16}{section.2.6}%
-\contentsline {chapter}{\numberline {3}On-Premise-Infrastruktur und Hardware}{17}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Rechenoperationen eines LLMs -- nano-GPT als Beispiel}{17}{section.3.1}%
-\contentsline {subsection}{\numberline {3.1.1}Modellkonfiguration}{18}{subsection.3.1.1}%
-\contentsline {subsection}{\numberline {3.1.2}Parameter-Aufschlüsselung}{18}{subsection.3.1.2}%
-\contentsline {subsection}{\numberline {3.1.3}Rechenoperationen im Forward Pass}{19}{subsection.3.1.3}%
-\contentsline {paragraph}{Token- und Positions-Embedding.}{19}{section*.16}%
-\contentsline {paragraph}{Q, K, V Projektionen (pro Block).}{19}{section*.17}%
-\contentsline {paragraph}{Attention-Score-Matrix.}{19}{section*.18}%
-\contentsline {paragraph}{MLP (pro Block).}{19}{section*.19}%
-\contentsline {paragraph}{Gesamtoperationen (nano-GPT, $T=6$).}{20}{table.caption.21}%
-\contentsline {paragraph}{Wichtige Erkenntnis.}{20}{section*.22}%
-\contentsline {subsection}{\numberline {3.1.4}Skalierung auf LLaMA\,7B}{20}{subsection.3.1.4}%
-\contentsline {section}{\numberline {3.2}Motivation für On-Premise-Betrieb}{20}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}Vergleich: Cloud vs. On-Premise}{21}{subsection.3.2.1}%
-\contentsline {section}{\numberline {3.3}Hardwareanforderungen}{21}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}GPU und VRAM}{21}{subsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.2}CPU und Arbeitsspeicher}{22}{subsection.3.3.2}%
-\contentsline {subsection}{\numberline {3.3.3}Speichersystem}{22}{subsection.3.3.3}%
-\contentsline {section}{\numberline {3.4}Laboraufbau am IZPL}{22}{section.3.4}%
-\contentsline {section}{\numberline {3.5}Zusammenfassung}{23}{section.3.5}%
-\contentsline {chapter}{\numberline {4}Evaluation}{24}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Methodik der Evaluation}{24}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Antwortzeiten und Performanz}{25}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Qualität der Konversation}{26}{section.4.3}%
-\contentsline {chapter}{\numberline {5}Fazit und Ausblick}{28}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Zusammenfassung der Ergebnisse}{28}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Ausblick auf die Masterarbeit}{28}{section.5.2}%
+\contentsline {section}{\numberline {2.3}Ausgabeschicht, Training und Quantisierung}{10}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Zusammenfassung}{12}{section.2.4}%
+\contentsline {chapter}{\numberline {3}Sprachverarbeitung: STT und TTS}{13}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Physikalische Eigenschaften von Audiosignalen}{13}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Text-to-Speech (TTS)}{16}{subsection.3.1.1}%
+\contentsline {section}{\numberline {3.2}Das eingesetzte System}{16}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Zusammenfassung}{18}{section.3.3}%
+\contentsline {chapter}{\numberline {4}On-Premise-Infrastruktur und Hardware}{19}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Rechenoperationen eines LLMs nano-GPT als Beispiel}{19}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Modellkonfiguration}{20}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}Rechenoperationen und Skalierung}{20}{subsection.4.1.2}%
+\contentsline {paragraph}{Skalierung auf LLaMA\,7B.}{20}{section*.15}%
+\contentsline {section}{\numberline {4.2}Motivation für On-Premise-Betrieb}{21}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Hardwareanforderungen}{21}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}GPU und VRAM}{21}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}CPU und Arbeitsspeicher}{22}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}Speichersystem}{22}{subsection.4.3.3}%
+\contentsline {section}{\numberline {4.4}Laboraufbau am IZPL}{22}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Zusammenfassung}{23}{section.4.5}%
+\contentsline {chapter}{\numberline {5}Evaluation}{24}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Methodik der Evaluation}{24}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Antwortzeiten und Performanz}{25}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Qualität der Konversation}{26}{section.5.3}%
+\contentsline {chapter}{\numberline {6}Fazit und Ausblick}{28}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Zusammenfassung der Ergebnisse}{28}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Ausblick auf die Masterarbeit}{28}{section.6.2}%
 \contentsline {chapter}{\numberline {A}Anhang}{29}{appendix.A}%
 \contentsline {section}{\numberline {A.1}Konfigurationsdateien}{29}{section.A.1}%
 \contentsline {section}{\numberline {A.2}Testprotokolle}{29}{section.A.2}%
 \contentsline {section}{\numberline {A.3}Zusätzliche Abbildungen}{29}{section.A.3}%
-\contentsline {chapter}{Literaturverzeichnis}{30}{appendix*.32}%
+\contentsline {chapter}{Literaturverzeichnis}{30}{appendix*.25}%

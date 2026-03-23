@@ -1,0 +1,4 @@
+1. neues kapitel tts und stt separat zu Grundlagen der llms
+2. nano gpt weniger stark thematisieren und in web nachschauen wie es funktioniert
+3. ganze arbeit nach Wiederholungen untersuchen und wenn gefunden abwägen wo sinnfoller und dann nur einmal
+4. einzelne Kapitel und unterkapitel sprachlich miteinannder verknüpfen z.b. wie aus vorherigen kapitel ersichtlich … nun folgt … da gerade erläutert wissen wir nun … mit diesem wissen macht folgendes sinn …
