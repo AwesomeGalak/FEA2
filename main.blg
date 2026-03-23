@@ -1,17 +1,17 @@
 [0] Config.pm:307> INFO - This is Biber 2.19
-[0] Config.pm:310> INFO - Logfile is 'main.blg'
-[166] biber-MSWIN64:340> INFO - === 
-[216] Biber.pm:419> INFO - Reading 'main.bcf'
-[350] Biber.pm:979> INFO - Found 19 citekeys in bib section 0
-[366] Biber.pm:4419> INFO - Processing section 0
-[380] Biber.pm:4610> INFO - Looking for bibtex file 'Literatur.bib' for section 0
-[451] bibtex.pm:1713> INFO - LaTeX decoding ...
-[494] bibtex.pm:1519> INFO - Found BibTeX data source 'Literatur.bib'
-[673] UCollate.pm:68> INFO - Overriding locale 'de-DE' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[673] UCollate.pm:68> INFO - Overriding locale 'de-DE' defaults 'variable = shifted' with 'variable = non-ignorable'
-[674] Biber.pm:4239> INFO - Sorting list 'none/global//global/global' of type 'entry' with template 'none' and locale 'de-DE'
-[674] Biber.pm:4245> INFO - No sort tailoring available for locale 'de-DE'
-[698] bbl.pm:660> INFO - Writing 'main.bbl' with encoding 'UTF-8'
-[718] bbl.pm:763> INFO - Output to main.bbl
-[719] Biber.pm:131> WARN - I didn't find a database entry for 'llm_definition' (section 0)
-[719] Biber.pm:133> INFO - WARNINGS: 1
+[1] Config.pm:310> INFO - Logfile is 'main.blg'
+[140] biber-MSWIN64:340> INFO - === 
+[184] Biber.pm:419> INFO - Reading 'main.bcf'
+[318] Biber.pm:979> INFO - Found 20 citekeys in bib section 0
+[341] Biber.pm:4419> INFO - Processing section 0
+[363] Biber.pm:4610> INFO - Looking for bibtex file 'Literatur.bib' for section 0
+[436] bibtex.pm:1713> INFO - LaTeX decoding ...
+[490] bibtex.pm:1519> INFO - Found BibTeX data source 'Literatur.bib'
+[698] UCollate.pm:68> INFO - Overriding locale 'de-DE' defaults 'variable = shifted' with 'variable = non-ignorable'
+[699] UCollate.pm:68> INFO - Overriding locale 'de-DE' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[699] Biber.pm:4239> INFO - Sorting list 'none/global//global/global' of type 'entry' with template 'none' and locale 'de-DE'
+[699] Biber.pm:4245> INFO - No sort tailoring available for locale 'de-DE'
+[717] bbl.pm:660> INFO - Writing 'main.bbl' with encoding 'UTF-8'
+[739] bbl.pm:763> INFO - Output to main.bbl
+[742] Biber.pm:131> WARN - I didn't find a database entry for 'llm_definition' (section 0)
+[743] Biber.pm:133> INFO - WARNINGS: 1

@@ -1,0 +1,19 @@
+3.3. Quantitation methods
+Quantization is a technique to reduce the numeric precision of neural network weights to lower the computation
+costs of inference. INT8 quantization [33] is the most widely-used approach today given the trade-off between high
+inference performance and reasonable model accuracy. However, outliers in activations have been observed and
+those outlier values are limiting the general adoption of INT8 quantization. FP8 [34] is a newly introduced data
+type that has attracted lots of attention while it has little adoption due to hardware unavailability. On the other
+hand, weight-only quantization becomes popular as it applies the low precision (e.g., 4-bit) to weights only, while
+keeping higher precision (e.g., 16-bit floating point) for activations, therefore maintaining the model accuracy. There
+are many excellent works on 4-bit weight-only quantization [35] that have demonstrated the effectiveness in LLM
+inference. Meanwhile, the open-source community is embracing such low-bit weight-only quantization and offers
+CPP-based implementations such as llama.cpp based on GGML library. These implementations are optimized by
+multiple backends like OpenBLAS, CUDA, Metal, OpenCL and achieve best performance by hardware and software
+co-optimization. As we choose llama.cpp as the inference framework for this work, we choose the corresponding
+quantitation method GGML for the best performance.
+Table 4 summarizes the various types of quantization models by GGML. The naming convention for each type
+follows a specific format: qX Y, where X represents the number of bits used for weight storage (precision). A value
+of 0 for y indicates symmetric quantization without a zero point, while a value of 1 indicates asymmetric quantization,
+where each scale has a zero point. It is not recommended to use q 2 or q 3 version, as they significantly reduce model
+inference accuracy.

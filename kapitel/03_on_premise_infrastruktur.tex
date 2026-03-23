@@ -9,9 +9,6 @@ Als Einstieg wird zunächst anhand eines minimalen Beispielmodells
 (nano-GPT, 85.584 Parameter) gezeigt, welche Rechenoperationen ein
 forward pass tatsächlich erfordert -- bevor diese Erkenntnisse auf das
 in dieser Arbeit eingesetzte LLaMA\,7B-Modell skaliert werden.
-Der Grund für den Start des Aufschwungs des LLMs in den 2020er Jahren ist vor allem auf die 
-Erfindung des Transformers zurückzuführen dieser Algorithmus machte es möglich anstatt wie vorher nur 
-möglich eine operation gleichzeitig auszufühen konnten nun tausende parallel ausgeführt werden.
 % ============================================================
 \section{Rechenoperationen eines LLMs -- nano-GPT als Beispiel}
 \label{sec:rechenoperationen}
@@ -21,8 +18,7 @@ Um zu verstehen, warum LLMs hohe Hardware-Anforderungen stellen, ist es
 hilfreich, die Rechenoperationen eines konkreten, kleinen Modells
 vollständig nachzuvollziehen. Brendan Bycroft stellt mit der interaktiven
 Visualisierung~\cite{bycroft_llm} ein nano-GPT-Modell mit
-\textbf{85.584 Parametern} zur Verfügung, das schrittweise --- von der
-Tokenisierung bis zum Softmax-Ausgang --- alle Operationen zeigt.
+\textbf{85.584 Parametern} zur Verfügung, das schrittweise von der Tokenisierung bis zum Softmax-Ausgan alle Operationen zeigt.
 
 %% ============================================================
 \subsection{Modellkonfiguration}
@@ -103,7 +99,7 @@ Die 85.584 Parameter verteilen sich wie folgt auf die einzelnen Schichten:
 \subsection{Rechenoperationen im Forward Pass}
 %% ============================================================
 
-Die Visualisierung~\cite{bycroft_llm} zeigt jede Addition und
+Die Visualisierung \cite{bycroft_llm} zeigt jede Addition und
 Multiplikation im forward pass. Die dominierenden Operationen sind
 Matrix-Multiplikationen. Für eine Eingabesequenz der Länge $T = 6$
 (das Sortierbeispiel) ergeben sich folgende charakteristische Operationen:

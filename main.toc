@@ -10,37 +10,38 @@
 \contentsline {section}{\numberline {2.2}Der Transformer-Block}{7}{section.2.2}%
 \contentsline {section}{\numberline {2.3}Ausgabeschicht, Training und Quantisierung}{9}{section.2.3}%
 \contentsline {section}{\numberline {2.4}Sprachverarbeitung: STT und TTS}{11}{section.2.4}%
-\contentsline {section}{\numberline {2.5}Das eingesetzte System}{13}{section.2.5}%
-\contentsline {section}{\numberline {2.6}Zusammenfassung}{15}{section.2.6}%
-\contentsline {chapter}{\numberline {3}On-Premise-Infrastruktur und Hardware}{16}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Rechenoperationen eines LLMs -- nano-GPT als Beispiel}{16}{section.3.1}%
-\contentsline {subsection}{\numberline {3.1.1}Modellkonfiguration}{17}{subsection.3.1.1}%
-\contentsline {subsection}{\numberline {3.1.2}Parameter-Aufschlüsselung}{17}{subsection.3.1.2}%
-\contentsline {subsection}{\numberline {3.1.3}Rechenoperationen im Forward Pass}{18}{subsection.3.1.3}%
-\contentsline {paragraph}{Token- und Positions-Embedding.}{18}{section*.16}%
-\contentsline {paragraph}{Q, K, V Projektionen (pro Block).}{18}{section*.17}%
-\contentsline {paragraph}{Attention-Score-Matrix.}{18}{section*.18}%
-\contentsline {paragraph}{MLP (pro Block).}{18}{section*.19}%
-\contentsline {paragraph}{Gesamtoperationen (nano-GPT, $T=6$).}{19}{table.caption.21}%
-\contentsline {paragraph}{Wichtige Erkenntnis.}{19}{section*.22}%
-\contentsline {subsection}{\numberline {3.1.4}Skalierung auf LLaMA\,7B}{19}{subsection.3.1.4}%
-\contentsline {section}{\numberline {3.2}Motivation für On-Premise-Betrieb}{19}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}Vergleich: Cloud vs. On-Premise}{20}{subsection.3.2.1}%
-\contentsline {section}{\numberline {3.3}Hardwareanforderungen}{20}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}GPU und VRAM}{20}{subsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.2}CPU und Arbeitsspeicher}{21}{subsection.3.3.2}%
-\contentsline {subsection}{\numberline {3.3.3}Speichersystem}{21}{subsection.3.3.3}%
-\contentsline {section}{\numberline {3.4}Laboraufbau am IZPL}{21}{section.3.4}%
-\contentsline {section}{\numberline {3.5}Zusammenfassung}{22}{section.3.5}%
-\contentsline {chapter}{\numberline {4}Evaluation}{23}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Methodik der Evaluation}{23}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Antwortzeiten und Performanz}{24}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Qualität der Konversation}{25}{section.4.3}%
-\contentsline {chapter}{\numberline {5}Fazit und Ausblick}{27}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Zusammenfassung der Ergebnisse}{27}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Ausblick auf die Masterarbeit}{27}{section.5.2}%
-\contentsline {chapter}{\numberline {A}Anhang}{28}{appendix.A}%
-\contentsline {section}{\numberline {A.1}Konfigurationsdateien}{28}{section.A.1}%
-\contentsline {section}{\numberline {A.2}Testprotokolle}{28}{section.A.2}%
-\contentsline {section}{\numberline {A.3}Zusätzliche Abbildungen}{28}{section.A.3}%
-\contentsline {chapter}{Literaturverzeichnis}{29}{appendix*.32}%
+\contentsline {subsection}{\numberline {2.4.1}Physikalische Eigenschaften von Audiosignalen}{12}{subsection.2.4.1}%
+\contentsline {section}{\numberline {2.5}Das eingesetzte System}{14}{section.2.5}%
+\contentsline {section}{\numberline {2.6}Zusammenfassung}{16}{section.2.6}%
+\contentsline {chapter}{\numberline {3}On-Premise-Infrastruktur und Hardware}{17}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Rechenoperationen eines LLMs -- nano-GPT als Beispiel}{17}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Modellkonfiguration}{18}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Parameter-Aufschlüsselung}{18}{subsection.3.1.2}%
+\contentsline {subsection}{\numberline {3.1.3}Rechenoperationen im Forward Pass}{19}{subsection.3.1.3}%
+\contentsline {paragraph}{Token- und Positions-Embedding.}{19}{section*.16}%
+\contentsline {paragraph}{Q, K, V Projektionen (pro Block).}{19}{section*.17}%
+\contentsline {paragraph}{Attention-Score-Matrix.}{19}{section*.18}%
+\contentsline {paragraph}{MLP (pro Block).}{19}{section*.19}%
+\contentsline {paragraph}{Gesamtoperationen (nano-GPT, $T=6$).}{20}{table.caption.21}%
+\contentsline {paragraph}{Wichtige Erkenntnis.}{20}{section*.22}%
+\contentsline {subsection}{\numberline {3.1.4}Skalierung auf LLaMA\,7B}{20}{subsection.3.1.4}%
+\contentsline {section}{\numberline {3.2}Motivation für On-Premise-Betrieb}{20}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Vergleich: Cloud vs. On-Premise}{21}{subsection.3.2.1}%
+\contentsline {section}{\numberline {3.3}Hardwareanforderungen}{21}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}GPU und VRAM}{21}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}CPU und Arbeitsspeicher}{22}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Speichersystem}{22}{subsection.3.3.3}%
+\contentsline {section}{\numberline {3.4}Laboraufbau am IZPL}{22}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Zusammenfassung}{23}{section.3.5}%
+\contentsline {chapter}{\numberline {4}Evaluation}{24}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Methodik der Evaluation}{24}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Antwortzeiten und Performanz}{25}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Qualität der Konversation}{26}{section.4.3}%
+\contentsline {chapter}{\numberline {5}Fazit und Ausblick}{28}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Zusammenfassung der Ergebnisse}{28}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Ausblick auf die Masterarbeit}{28}{section.5.2}%
+\contentsline {chapter}{\numberline {A}Anhang}{29}{appendix.A}%
+\contentsline {section}{\numberline {A.1}Konfigurationsdateien}{29}{section.A.1}%
+\contentsline {section}{\numberline {A.2}Testprotokolle}{29}{section.A.2}%
+\contentsline {section}{\numberline {A.3}Zusätzliche Abbildungen}{29}{section.A.3}%
+\contentsline {chapter}{Literaturverzeichnis}{30}{appendix*.32}%

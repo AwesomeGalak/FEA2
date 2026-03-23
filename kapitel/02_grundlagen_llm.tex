@@ -60,10 +60,9 @@ Token-Embedding:
 \label{sec:transformer_block}
 % ============================================================
 
-Der Transformer-Block ist die zentrale Verarbeitungseinheit eines LLMs.
-Er besteht aus zwei Hauptoperationen zum ersten aus Multi-Head Self-Attention
-und einem Feed-Forward-Netzwerk (FFN) jeweils kombiniert mit
-einer Normierungsschicht und einer Residualverbindung:
+Die Transformer-Architektur ist ein Modell, das fundamental auf dem Self-Attention-Mechanismus beruht. In seiner ursprünglichen Form besteht ein Transformer aus einem Encoder und einem Decoder: Der Encoder berechnet kontextbezogene Repräsentationen der Eingabe, der Decoder nutzt diese, um autoregressiv das jeweils nächste Token vorherzusagen. Moderne LLMs wie LLaMA oder GPT verwenden vorwiegend den Decoder-Teil.
+
+Ein einzelner Transformer-Block ist die zentrale Verarbeitungseinheit und besteht aus zwei Hauptoperationen: \textit{Multi-Head Self-Attention} und einem \textit{Feed-Forward-Netzwerk} (FFN), jeweils kombiniert mit einer Normierungsschicht und einer Residualverbindung:
 
 \begin{align}
     x' &= x + \text{Attention}\bigl(\text{Norm}(x)\bigr) \\
@@ -72,8 +71,8 @@ einer Normierungsschicht und einer Residualverbindung:
 \end{align}
 
 Durch das $N$-fache Hintereinanderschalten solcher Blöcke entsteht
-eine tiefe Architektur, die schrittweise abstrakte Repräsentationen
-aufbaut.
+eine tiefe Architektur, die schrittweise zunehmend abstrakte Repräsentationen
+aufbaut. Die einzelnen Bestandteile werden im Folgenden erläutert.
 
 \textbf{Normierungsschicht.}
 Zur Stabilisierung des Trainings tiefer Netze wird vor jeder
@@ -96,10 +95,10 @@ und damit rechnerisch effizienter ist:
 Die Normierung verhindert, dass Aktivierungswerte über viele Schichten
 hinweg exponentiell wachsen oder verschwinden (Vanishing/Exploding Gradients).
 
-\textbf{Multi-Head Self-Attention.}\label{sec:attention}
-Der Self-Attention-Mechanismus ermöglicht es jedem Token, beim
-Aufbau seiner Repräsentation den gesamten bisherigen Kontext zu
-berücksichtigen. Drei lineare Projektionen erzeugen für jedes Token
+\textbf{Attention -- Intuition.}\label{sec:attention}
+Grundidee des Attention-Mechanismus: Gegeben eine Anfrage (Query $q$), soll ermittelt werden, welchem Schlüssel (Key $k$) die Anfrage die meiste Aufmerksamkeit schenken soll, um den zugehörigen Wert (Value $v$) abzufragen. In natürlicher Sprache bedeutet dies: Wenn ein Token wie \glqq{}Bär\grqq{} verarbeitet wird, berechnet der Mechanismus, wie stark es auf Kontextwörter wie \glqq{}Teddy\grqq{} oder \glqq{}süß\grqq{} achten soll, um seine eigene Bedeutung im Satz korrekt zu erfassen.
+
+Formal erzeugen drei lineare Projektionen für jedes Token
 $x_i$ die Vektoren Query $q_i$, Key $k_i$ und Value $v_i$:
 \begin{equation}
     q_i = W_Q\,x_i, \quad k_i = W_K\,x_i, \quad v_i = W_V\,x_i
@@ -107,13 +106,13 @@ $x_i$ die Vektoren Query $q_i$, Key $k_i$ und Value $v_i$:
 \end{equation}
 
 Die \textbf{Scaled Dot-Product Attention} berechnet Ähnlichkeitsgewichte
-zwischen Query und Keys und aggregiert die Values entsprechend:
+zwischen Query und allen Keys und aggregiert die Values entsprechend gewichtet:
 \begin{equation}
     \text{Attention}(Q, K, V) =
     \text{softmax}\!\left(\frac{QK^T}{\sqrt{d_k}} + M\right)V
     \label{eq:attention}
 \end{equation}
-Die \textbf{kausale Maske} $M$ stellt sicher, dass Token $t_i$ nur
+Die Division durch $\sqrt{d_k}$ skaliert die Skalarprodukte, um numerisch stabile Softmax-Werte zu gewährleisten. Die \textbf{kausale Maske} $M$ stellt sicher, dass Token $t_i$ nur
 auf vorherige Positionen $t_j$ mit $j \leq i$ zugreifen kann:
 \begin{equation}
     M_{ij} = \begin{cases}
@@ -123,15 +122,16 @@ auf vorherige Positionen $t_j$ mit $j \leq i$ zugreifen kann:
     \label{eq:mask}
 \end{equation}
 
-Bei \textbf{Multi-Head Attention} werden $h$ parallele
+\textbf{Multi-Head Attention (MHA).}
+Eine einzelne Attention-Berechnung kann nur einen Aspekt des Kontexts erfassen. Beim \textbf{Multi-Head Attention} werden daher $h$ parallele
 Attention-Berechnungen in Unterräumen der Dimension $d_k = d/h$
-ausgeführt und anschließend konkateniert:
+ausgeführt und anschließend konkateniert. Die Rückprojektion in den Ausgaberaum erfolgt mit der Matrix $W_O$:
 \begin{equation}
     \text{MultiHead}(Q,K,V) = \bigl[\text{head}_1 \,\|\, \cdots \,\|\, \text{head}_h\bigr]\,W_O
     \label{eq:multihead}
 \end{equation}
-Jeder Kopf kann dabei unterschiedliche Aspekte des Kontexts erlernen
-(z.\,B. syntaktische Abhängigkeiten, semantische Ähnlichkeit, Koreferenzen).
+Jeder Kopf verfügt über eigene Gewichtsmatrizen $W^Q$, $W^K$, $W^V$ und kann somit unterschiedliche Aspekte des Kontexts erlernen
+(z.\,B. syntaktische Abhängigkeiten, semantische Ähnlichkeit oder Koreferenzen). Varianten wie \textit{Grouped-Query Attention} (GQA) und \textit{Multi-Query Attention} (MQA) reduzieren den Rechenaufwand, indem Key- und Value-Matrizen über mehrere Attention-Köpfe hinweg geteilt werden.
 
 \textbf{Feed-Forward-Netzwerk.}\label{sec:mlp}
 Nach der Self-Attention verarbeitet ein positionsweises
@@ -239,15 +239,18 @@ wird so optimiert, dass sein Reward maximiert wird.
 \textbf{Quantisierung.}\label{sec:quantisierung}
 Modellgewichte werden standardmäßig als 16-Bit-Gleitkommazahlen
 gespeichert. Auf lokaler Hardware mit begrenztem VRAM ist dies für
-große Modelle oft nicht praktikabel. \textbf{Quantisierung} reduziert
-die Bitbreite der Gewichte, um Speicherbedarf und Inferenzge\-schwindigkeit
-zu verbessern:
+große Modelle oft nicht praktikabel. \textbf{Quantisierung} ist eine Technik, welche die numerische Präzision neuronaler Netzwerk-Gewichte reduziert, um die Rechenkosten und den Speicherbedarf bei der Inferenz zu senken~\cite{chen2025inferenceperformanceevaluationllms}.
+Der theoretische VRAM-Bedarf lässt sich durch die Reduktion der Bitbreite stark minimieren:
 \begin{equation}
     \text{VRAM}_{\text{min}} \approx
     \frac{N_{\text{Parameter}} \times \text{Bitbreite}}{8 \times 10^9}
     \;\text{[GB]}
     \label{eq:vram}
 \end{equation}
+
+Obwohl die INT8-Quantisierung derzeit aufgrund eines guten Verhältnisses zwischen Inferenzleistung und Modellgenauigkeit weit verbreitet ist, wird ihre allgemeine Akzeptanz durch teilweise auftretende Ausreißer in den Aktivierungswerten limitiert. Zwar stellt FP8 einen vielversprechenden neuen Datentyp dar, dieser wird jedoch bisher durch fehlende Hardware-Verfügbarkeit eingeschränkt~\cite{chen2025inferenceperformanceevaluationllms}.
+
+Infolgedessen gewinnt die sogenannte \textit{Weight-Only Quantization} stark an Popularität. Bei diesem Ansatz werden lediglich die Gewichte in niedriger Präzision (z.\,B. 4-Bit) quantisiert, während für die Aktivierungen die höhere Präzision (z.\,B. 16-Bit-Gleitkommazahlen) beibehalten wird. Dies gewährleistet, dass die Genauigkeit des Modells erhalten bleibt. Insbesondere Ansätze der 4-Bit-Weight-Only-Quantisierung haben sich bei der Inferenz von LLMs als äußerst effektiv erwiesen~\cite{chen2025inferenceperformanceevaluationllms}.
 
 \begin{table}[H]
     \centering
@@ -267,9 +270,8 @@ zu verbessern:
     \label{tab:quantisierung}
 \end{table}
 
-Das \textbf{GGUF}-Format hat sich als portables Standardformat für
-quantisierte Gewichte etabliert und wird von \texttt{llama.cpp} und
-\texttt{ollama} nativ unterstützt.
+Die Open-Source-Community greift solche niederbittigen Quantisierungsmethoden intensiv auf. Eine führende Implementierung stellt das C++-basierte Framework \texttt{llama.cpp} dar, welches auf der GGML-Bibliothek aufbaut. Solche Implementierungen sind durch spezifische Backends (wie OpenBLAS, CUDA, Metal, OpenCL) extrem optimiert und erreichen durch diese Co-Optimierung von Hard- und Software Höchstleistungen~\cite{chen2025inferenceperformanceevaluationllms}.
+Das dabei eingesetzte Quantisierungsformat \textbf{GGUF} (bzw. GGML) verwendet eine Namenskonvention nach dem Muster \texttt{qX\_Y}. Hierbei steht \texttt{X} für die zur Gewichtsspeicherung verwendete Bitbreite. Der Wert \texttt{Y} gibt die Art der Quantisierung an: \texttt{0} kennzeichnet eine symmetrische Quantisierung ohne Nullpunkt, während \texttt{1} für eine asymmetrische Quantisierung steht, bei der jede Skalierung über einen Nullpunkt verfügt. Es wird im Allgemeinen nicht empfohlen, Formate wie \texttt{q2} oder \texttt{q3} zu verwenden, da hierbei die Inferenzgenauigkeit des Modells massiv abfällt~\cite{chen2025inferenceperformanceevaluationllms}.
 
 
 \section{Sprachverarbeitung: STT und TTS}
@@ -280,20 +282,23 @@ Da LLMs ausschließlich Text verarbeiten können, muss gesprochene Sprache zunä
 transkribiert werden. Die Umwandlung von Audio in Text bezeichnet man als
 \textbf{Automatic Speech Recognition (ASR)} oder \textbf{Speech-to-Text (STT)}.
 
-Die Vibration der Stimmlippen versetzt Luftmoleküle in Schwingung. Durch die Kompressibilität der Luft entsteht eine sich ausbreitende Schallwelle, die physikalisch der Schwankung des Luftdrucks (Schalldruck $p$, Einheit: Pa) um den atmosphärischen Ruhedruck (1013,25\,hPa) entspricht~\cite{Moeser2015}.
-Subjektiv wird Schall durch \textit{Klangfarbe} und \textit{Lautstärke} beschrieben; die physikalischen Äquivalente sind die Frequenz $f$ und die Amplitude des Schalldrucks. Die Frequenz berechnet sich über die Periodendauer $T$:
+\subsection{Physikalische Eigenschaften von Audiosignalen}
+
+Die Vibration der Stimmlippen versetzt anliegende Luftmoleküle in Schwingung. Durch die Kompressibilität der Luft breiten sich diese als Schallwellen aus, welche physikalisch als orts- und zeitabhängige Schwankung des Luftdrucks $p$ um den atmosphärischen Ruhedruck ($1013,25$\,hPa) beschrieben werden~\cite{Moeser2015}. Die Einheit des Schalldrucks ist Pascal (Pa).
+Der Mensch nimmt Schallwellen primär durch die Klangfarbe (hoch/tief) und die Lautstärke wahr. Die physikalischen Äquivalente hierzu sind die Frequenz $f$ für die Klangfarbe und die Amplitude des Schalldrucks für die Lautstärke. Die Frequenz errechnet sich mit der Einheit Hertz (Hz) über die Kehrwert der Periodendauer $T$:
 \begin{equation}
     f = \frac{1}{T}
     \label{eq:frequenz}
 \end{equation}
-Ein Signal mit genau einer Frequenzkomponente heißt \textit{Ton} (z.\,B.\ der Kammerton A4 bei 440\,Hz), eine Überlagerung ganzzahlig verwandter Frequenzen \textit{Klang}. Menschliche Sprache ist eine Überlagerung harmonischer Schwingungen im Bereich von 80\,Hz bis 12\,kHz~\cite{Mueller2015}.
-Da die menschliche Lautstärkewahrnehmung logarithmisch ist, wird der \textit{Schalldruckpegel} $L$ eingeführt:
+
+Ein Audiosignal, welches nur eine einzige Frequenzkomponente abdeckt (wie der musikalische Referenzton A4 mit 440\,Hz), nennt man \textit{Ton}. Eine Mischung aus Tönen mit ganzzahligen Frequenzverhältnissen (Grund- und Oberschwingungen) wird dagegen als \textit{Klang} bezeichnet~\cite{Mueller2015}. Die menschliche Sprache entsteht demnach aus einer komplexen Überlagerung solcher harmonischer Schwingungen, wobei die relevanten Frequenzen typischerweise in einer Bandbreite zwischen 80\,Hz und 12\,kHz angesiedelt sind.
+
+Da empirische Versuche gezeigt haben, dass das menschliche Lautstärkeempfinden logarithmisch funktioniert, ist die lineare Einheit Pascal zur Einordnung ungeeignet. Stattdessen zieht man den logarithmierten Schalldruckpegel $L$ (angegeben in Dezibel, dB) heran.
 \begin{equation}
-    L = 20 \cdot \lg\!\left(\frac{p}{p_0}\right) \quad \text{in dB}
+    L = 20 \cdot \log_{10}\!\left(\frac{p}{p_0}\right) \, \text{dB}
     \label{eq:schalldruckpegel}
 \end{equation}
-wobei $p_0 = 2 \cdot 10^{-5}\,$Pa der Hörschwelle bei 1\,kHz (0\,dB) entspricht. Die Schmerzgrenze liegt bei 200\,Pa bzw.\ 140\,dB. Die Angabe dB ist keine Maßeinheit, sondern weist auf das logarithmische Bildungsgesetz hin; 1\,dB entspricht etwa der menschlichen Unterschiedsschwelle zwischen zwei Lautstärken. Die wahrgenommene Lautstärke (Einheit: phon) hängt zusätzlich von der Frequenz ab und wurde empirisch ermittelt, wobei die Hörschwelle bei 0\,phon und die Schmerzgrenze bei 120\,phon definiert ist.
-
+Der Faktor bringt den gemessenen Effektivwert des Schalldrucks $p$ ins Verhältnis zur menschlichen Hörschwelle $p_0$, welche bei $2 \cdot 10^{-5}$\,Pa (entsprechend 0\,dB bei 1\,kHz) liegt. Der Vorfaktor von 20 wurde in der Definition bewusst so gewählt, dass eine Pegeldifferenz von 1\,dB genau der relativen Unterschiedsschwelle des Gehörs entspricht, bei der zwei Schalldrücke gerade noch als unterschiedlich laut ermittelt werden können. Die Skala erstreckt sich dabei von der Hörschwelle bis hin zur Schmerzgrenze bei etwa 200\,Pa, was einem extremen Lautstärkeeindruck von 140\,dB entspricht.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{ablaufplan_LLM.jpeg}

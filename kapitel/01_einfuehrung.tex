@@ -3,15 +3,14 @@
 % ============================================================
 \chapter{Einführung}
 
-Kaum ein anderes Thema hat die Technologiebranche in den letzten Jahren so geprägt wie künstliche Intelligenz.
-Um im globalen Wettbewerb um die leistungsfähigsten Sprachmodelle bestehen zu können, investieren
-Unternehmen Milliardensummen in Recheninfrastruktur.
-Erst 2024 nahm xAi die Firma von Elon Musk ein Cluster in Betrieb, welches über 100.000 NVIDIA HGX H100 GPUs verfügt. Eine dieser GPUs entspricht der Das in Tennessee befindliche Cluster stellt den bislang größten KI-Supercomputer der Welt dar und dient dem Training des generativen Modells Grok sowie zur Bereitstellung der Rechenkapazitäten zum Betrieb dessen. \cite{brendel2025colossus}. 
-Nicht nur xAi sondern auch Meta Google OpenAI haben ähnlichen Zugang zu solch großen Cluster.
+Kaum ein anderes Thema hat die Technologiebranche in den letzten Jahren so sehr geprägt wie künstliche Intelligenz.
+Um im globalen Wettbewerb um die leistungsfähigsten Sprachmodelle bestehen zu können, investieren Unternehmen Milliardensummen in Recheninfrastruktur.
+So nahm xAi, die Firma von Elon Musk, erst 2024 einen Cluster mit über 100.000 NVIDIA HGX H100 GPUs in Betrieb. Eine dieser GPUs hat einen Wert  von 40.000 US-Dollar. Das in Tennessee befindliche Cluster stellt den bislang größten KI-Supercomputer der Welt dar und dient dem Training des generativen Modells Grok sowie zur Bereitstellung der Rechenkapazitäten für dessen Betrieb. \cite{brendel2025colossus}.
+Nicht nur xAi, sondern auch Meta, Google und OpenAI haben ähnlichen Zugang zu solchen großen Clustern.
 Die für solche Systeme benötigte Hardware stammt nahezu ausschließlich vom Branchenführer NVIDIA, der über 90 \% des Marktes für Datenzentren-GPUs hält.
-CEO Jensen Huang bezifferte das Auftragsvolumen des Unternehmens für die Jahre 2025 und 2026 auf rund 500 Milliarden US-Dollar, ein Zeichen für die nach wie vor rasant wachsende Nachfrage \cite{leswing2025nvidia}.
+CEO Jensen Huang bezifferte das Auftragsvolumen des Unternehmens für die Jahre 2025 und 2026 auf rund 500 Milliarden US-Dollar. \cite{leswing2025nvidia}
 Dieser massive Ausbau von Rechenzentren hat auch weitreichende energetische Konsequenzen:
-Laut einer Prognose der Internationalen Energieagentur (IEA) könnte sich der weltweite Stromverbrauch von Rechenzentren bis 2030 verdoppeln, wobei der Bedarf an GPU-Cluster wie sie für KI-Workloads eingesetzt werden im Zeitraum 2025 bis 2030 um 225 \% steigt~\cite{janson2025rechenzentren}.
+Laut einer Prognose der Internationalen Energieagentur (IEA) könnte sich der weltweite Stromverbrauch von Rechenzentren bis 2030 verdoppeln, wobei der Bedarf an GPU-Clustern, wie sie für KI-Workloads eingesetzt werden, im Zeitraum 2025 bis 2030 um 225 \% steigt \cite{janson2025rechenzentren}.
 
 Angesichts dieser Entwicklungen stellt sich die Frage, ob der Betrieb solcher ressourcenintensiver Modelle für jeden Anwendungsfall notwendig ist.
 Insbesondere in industriellen Einsatzszenarien etwa auf Edge-Geräten oder Robotern in der Produktion, die häufig keine dauerhafte Internetverbindung wünschen oder zulassen bieten sich deutlich kleinere, spezialisierte Modelle an.
@@ -20,32 +19,31 @@ Die vorliegende Arbeit untersucht daher, inwieweit solche lokalen Modelle für s
 
 \section{Problemstellung}
 
-Der rasante Ausbau cloudbasierter KI-Dienste wirft wie bereits erwähnt, neben technischen und energetischen Fragen zunehmend auch Bedenken hinsichtlich \Datenhoheit, Sicherheit und technologischer Unabhängigkeit auf.
-Die dominierenden KI-Plattformen darunter Dienste von OpenAI, Google und Anthropic werden überwiegend in Rechenzentren in den USA betrieben.
-europäische Konkurenz im Bereich der führenden Sprachmodelle gibt es kaum.
+Wie bereits erwähnt, wirft der rasante Ausbau cloudbasierter KI-Dienste neben technischen und energetischen Fragen zunehmend auch Bedenken hinsichtlich Datenhoheit, Sicherheit und technologischer Unabhängigkeit auf.
+Die dominierenden KI-Plattformen, darunter Dienste von OpenAI, Google und Anthropic, werden überwiegend in Rechenzentren in den USA betrieben.
+Europäische Konkurrenz im Bereich der führenden Sprachmodelle gibt es kaum.
 Daten, die an diese Modelle übermittelt werden, verlassen damit häufig den europäischen Rechtsraum und unterliegen potenziell dem Zugriff ausländischer Behörden, etwa im Rahmen des US-amerikanischen CLOUD Act.
-Laut dem Bitkom Cloud Report 2025 sehen 78 \% der deutschen Unternehmen eine zu starke Abhängigkeit von US-Cloud-Anbietern, und für 97 \% der befragten Cloud-Nutzer spielt die Herkunft des Anbieters bei der Auswahl eine wesentliche Rolle \cite{bitkom2025cloud}.
+Laut dem Bitkom Cloud Report 2025 sehen 78 \% der deutschen Unternehmen eine zu starke Abhängigkeit von US-Cloud-Anbietern und für 97 \% der befragten Cloud-Nutzer spielt die Herkunft des Anbieters bei der Auswahl eine wesentliche Rolle. \cite{bitkom2025cloud}.
 
-Für produzierende Unternehmen verschärft sich diese Problematik zusätzlich:
-Sensible Produktionsdaten, Prozessparameter oder Qualitätsinformationen dürfen aus Gründen des Geschäftsgeheimnisschutzes und der Compliance häufig das Unternehmensnetzwerk nicht verlassen.
-Roboter und Edge-Geräte in der Fertigung operieren zudem oft in Umgebungen ohne zuverlässige oder gewünschte Internetanbindung.
+Für produzierende Unternehmen verschärft sich diese Problematik zusätzlich: Sensible Produktionsdaten, Prozessparameter oder Qualitätsinformationen dürfen aus Gründen des Schutzes von Geschäftsgeheimnissen und zur Sicherstellung der Compliance häufig das Unternehmensnetzwerk nicht verlassen.
+Roboter und Edge-Geräte in der Fertigung operieren zudem oft in Umgebungen ohne zuverlässige oder verfügbare Internetanbindung.
 Die Nutzung cloudbasierter KI-Modelle ist in solchen Szenarien daher entweder nicht möglich oder mit erheblichen Risiken verbunden.
-Es stellt sich somit die Frage, ob kleinere, spezialisierte Sprachmodelle, die vollständig vor Ort, also On-Premise, betrieben werden können, eine sichere, unabhängige und zugleich leistungsfähige Alternative für industrielle Anwendungsfälle darstellen. Bevor jedoch auf die Problematik eingegangen wird, wird im folgenden Kapitel der Stand der Technik erläutert.
+Somit stellt sich die Frage, ob kleinere, spezialisierte Sprachmodelle, die vollständig vor Ort, also On-Premise, betrieben werden können, eine sichere, unabhängige und zugleich leistungsfähige Alternative für industrielle Anwendungsfälle darstellen. Bevor auf diese Frage eingegangen wird, wird im folgenden Kapitel der Stand der Technik erläutert.
 
 \section{Stand der Technik}
 
-Wie im vorherigen Kapitel bereits aufgegriffen, beschäftigt sich diese Arbeit primär mit der Verwendung von Large Language Models auf Edge-Geräten und On-Premise Anwendung. Deshalb wird in diesem Kapitel zuerst der aktuelle Entiwcklungsstand der führenden LLM-Modelle dargelegt um den Unterschied zwischen diesen und kleinen, spezialisierten Modellen zu verdeutlichen.
+Wie im vorherigen Kapitel bereits angesprochen, beschäftigt sich diese Arbeit primär mit der Verwendung von Large Language Models (LLM) auf Edge-Geräten und in On-Premise-Anwendungen. In diesem Kapitel wird deshalb zuerst der aktuelle Entwicklungsstand der führenden LLM-Modelle dargelegt, um den Unterschied zwischen diesen und kleinen, spezialisierten Modellen zu verdeutlichen.
 
-Der Begriff des maschinellen Lernens ist in der Informatik keineswegs neu bereits seit Anfang des 21.Jahrhunderts existieren Algorithmen, die nichtlineare Zusammenhänge in Daten erkennen können.
-Einen entscheidenden Durchbruch markierte das Jahr 2017, als ein Team aus Ingenieuren um Vaswani von OpenAi die sogenannte Transformer-Architektur vorstellte.
+Der Begriff des maschinellen Lernens ist in der Informatik keineswegs neu: Bereits seit Anfang des 21. Jahrhunderts existieren Algorithmen, die nichtlineare Zusammenhänge in Daten erkennen können.
+Einen entscheidenden Durchbruch markierte das Jahr 2017, als ein Team um Vaswani von OpenAI die sogenannte Transformer-Architektur vorstellte.
 Diese Architektur ermöglichte den Übergang von sequenzieller zu paralleler Datenverarbeitung und erlaubte es, diese Parallelisierung mit der massiven Rechenleistung moderner GPUs zu koppeln, um deutlich größere Datenmengen effizient zu verarbeiten.
 
-Auf dieser Grundlage entstanden Modelle, die in der Lage sind, komplexe Muster in umfangreichen Textdaten zu erkennen und natürlichsprachliche Ausgaben zu erzeugen, sogenannte \textit{Large Language Models} (LLMs).
-Laut Kasneci ist ein LLM ein künstliches Intelligenzsystem, das auf einer riesigen Menge von Textdaten trainiert wurde, um natürliche Sprache zu interpretieren und menschenähnliche Antworten auf textbasierte Eingabeaufforderungen oder Fragen zu generieren~\cite{llm_definition}.
+Auf dieser Grundlage sind Modelle entstanden, die komplexe Muster in umfangreichen Textdaten erkennen und natürlichsprachliche Ausgaben erzeugen können: sogenannte Large Language Models (LLMs).
+Laut Kasneci ist ein LLM ein KI-System, das auf einer riesigen Menge von Textdaten trainiert wurde, um natürliche Sprache zu interpretieren und menschenähnliche Antworten auf textbasierte Eingabeaufforderungen oder Fragen zu generieren. \cite{llm_definition}.
 
-Seitdem hat sich die Leistungsfähigkeit dieser Modelle rasant weiterentwickelt, wobei die Parameteranzahl und damit auch der Ressourcenbedarf stetig gestiegen sind.
-In Abbildung~\ref{fig:vram_llm} werden die geschätzten Mengen an schnell zugänglichem Grafikspeicher (VRAM) dargestellt, die für den Betrieb aktueller Flagschiffmodelle erforderlich sind.
-Für Edge"=Geräte, die auf eine begrenzte Speicherkapazität angewiesen sind, kommen diese Modelle daher nicht in Frage.
+Seither hat sich die Leistungsfähigkeit dieser Modelle rasant weiterentwickelt. Dabei ist die Anzahl der Parameter und somit auch der Ressourcenbedarf stetig gestiegen.
+Abbildung \ref{fig:vram_llm} zeigt die geschätzten Mengen an schnell zugänglichem Grafikspeicher (VRAM), die für den Betrieb aktueller Flaggschiffmodelle erforderlich sind.
+Für Edge-Geräte, die auf eine begrenzte Speicherkapazität angewiesen sind, kommen diese Modelle daher nicht infrage.
 
 \begin{figure}[H]
     \centering
@@ -54,10 +52,10 @@ Für Edge"=Geräte, die auf eine begrenzte Speicherkapazität angewiesen sind, k
     \label{fig:vram_llm}
 \end{figure}
 
-Die leistungsstärksten quelloffenen Modelle, die für einen On"=Premise"=Betrieb relevant sind, werden in Abbildung \ref{fig:llm_onpremise} gegenübergestellt.
-Dabei wird der Chatbot-Arena-Elo-Score, ein crowdsource-basiertes Maß für die vom Nutzer wahrgenommene Antwortqualität, dem jeweiligen VRAM Bedarf bei 4"=Bit"=Quantisierung (INT4) gegenübergestellt.
-Modelle, die mit maximal 48GB VRAM auskommen, lassen sich bereits auf einer einzelnen ConsumerGPU betreiben und sind somit für On Premise Szenarien besonders interessant.
-Prinzipiell sind die jeweils neuesten Modellgenerationen die leistungsstärksten; zum Zeitpunkt der Erstellung dieser Arbeit stellt Qwen 3.5 von Alibaba mit einem relativen Arena-Elo-Score von 1450 das leistungsstärkste quelloffene Modell dar.
+Die leistungsstärksten quelloffenen Modelle, die für einen On-Premise-Betrieb relevant sind, werden in Abbildung \ref{fig:llm_onpremise} gegenübergestellt.
+Dabei wird der Chatbot-Arena-Elo-Score, ein Crowdsourcing-basiertes Maß für die vom Nutzer wahrgenommene Antwortqualität, dem jeweiligen VRAM-Bedarf bei 4-Bit-Quantisierung (INT4) gegenübergestellt.
+Modelle, die mit maximal 48 GB VRAM auskommen, lassen sich bereits auf einer einzelnen Consumer-GPU betreiben und sind somit für On-Premise-Szenarien besonders interessant.
+Grundsätzlich sind die jeweils neuesten Modellgenerationen die leistungsstärksten. Zum Zeitpunkt der Erstellung dieser Arbeit ist Qwen 3.5 von Alibaba mit einem relativen Chatbot-Arena-Elo-Score von 1450 das leistungsstärkste quelloffene Modell.
 
 \begin{figure}[H]
     \centering
@@ -73,4 +71,4 @@ Im Rahmen dieser Forschungsarbeit wird der Einsatz von On-Premise-LLMs am Beispi
 
 \section{Aufbau der Arbeit}
 
-Zunächst erfolgt eine Einführung in die mathematischen Konzepte, auf denen die Modelle basieren. Die im Folgenden aufgeführten Hardwarespezifikationen legen dar, welche Computing-Kapazitäten erforderlich sind, um sogenannte "künstliche Intelligenzen" (KI) zu betreiben. Nach Evaluation einer Testanwendung in Kapitel 4 werden Sicherheits- und Fehlerbilder aufgezeigt. Die vorliegende Arbeit findet ihren Abschluss in Kapitel 6, das einen Ausblick auf zukünftige Forschungsgebiete gibt und ein Fazit zieht.
+Zunächst erfolgt eine Einführung in die mathematischen Konzepte, auf denen die Modelle basieren. Die im Folgenden aufgeführten Hardwarespezifikationen zeigen, welche Computing-Kapazitäten erforderlich sind, um „künstliche Intelligenzen” (KI) zu betreiben. Nach der Evaluation einer Testanwendung in Kapitel 4 werden Sicherheits- und Fehlerbilder aufgezeigt. Die vorliegende Arbeit schließt mit Kapitel 6, das einen Ausblick auf zukünftige Forschungsgebiete gibt und ein Fazit zieht.

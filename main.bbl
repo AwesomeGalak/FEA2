@@ -522,6 +522,63 @@
       \verb https://arxiv.org/abs/2104.09864
       \endverb
     \endentry
+    \entry{chen2025inferenceperformanceevaluationllms}{misc}{}
+      \name{author}{6}{}{%
+        {{hash=dd060cd064f8f607eb1bee6712820270}{%
+           family={Chen},
+           familyi={C\bibinitperiod},
+           given={Hao},
+           giveni={H\bibinitperiod}}}%
+        {{hash=e3c5f4e4c0db3c7a7b070fcb57dd0da9}{%
+           family={Tian},
+           familyi={T\bibinitperiod},
+           given={Cong},
+           giveni={C\bibinitperiod}}}%
+        {{hash=ecfd5d85c9cc1a8a5cf31d308db4b372}{%
+           family={He},
+           familyi={H\bibinitperiod},
+           given={Zixuan},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=43d22dc81cc0e5bb1d24d5eeb65ecbae}{%
+           family={Yu},
+           familyi={Y\bibinitperiod},
+           given={Bin},
+           giveni={B\bibinitperiod}}}%
+        {{hash=46dbae95524ea61981fe3555dc9bcc2b}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Yepang},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=bfb6360ddd268ae06aacb442e63886de}{%
+           family={Cao},
+           familyi={C\bibinitperiod},
+           given={Jialun},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{34bcb9ba6216c3c32c851b701b4b5b33}
+      \strng{fullhash}{5cf3550b5e99031e780870c79555934f}
+      \strng{bibnamehash}{34bcb9ba6216c3c32c851b701b4b5b33}
+      \strng{authorbibnamehash}{34bcb9ba6216c3c32c851b701b4b5b33}
+      \strng{authornamehash}{34bcb9ba6216c3c32c851b701b4b5b33}
+      \strng{authorfullhash}{5cf3550b5e99031e780870c79555934f}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprintclass}{cs.PF}
+      \field{eprinttype}{arXiv}
+      \field{title}{Inference performance evaluation for LLMs on edge devices with a novel benchmarking framework and metric}
+      \field{year}{2025}
+      \verb{eprint}
+      \verb 2508.11269
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/2508.11269
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/2508.11269
+      \endverb
+    \endentry
     \entry{Moeser2015}{book}{}
       \name{author}{1}{}{%
         {{hash=b618872562545020d973d975915d0c7c}{%
@@ -605,8 +662,8 @@
       \strng{authorbibnamehash}{b42c51f0eaf8678fd7c3988da193eec4}
       \strng{authornamehash}{b42c51f0eaf8678fd7c3988da193eec4}
       \strng{authorfullhash}{b42c51f0eaf8678fd7c3988da193eec4}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{eprinttype}{arXiv}
@@ -661,8 +718,8 @@
       \strng{authorbibnamehash}{ca3baa5a22057195db1c71be39b4c922}
       \strng{authornamehash}{ca3baa5a22057195db1c71be39b4c922}
       \strng{authorfullhash}{e202abc1ca19ec84987f68e0aec49fa3}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{eprinttype}{arXiv}
@@ -757,8 +814,8 @@
       \strng{authorbibnamehash}{c237483431fea681283a37adbb23a59f}
       \strng{authornamehash}{c237483431fea681283a37adbb23a59f}
       \strng{authorfullhash}{39aeaa201007bcb705db32778f923cb2}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{eprinttype}{arXiv}
@@ -788,8 +845,8 @@
       \strng{authorbibnamehash}{d11c7950c8079db168a1b6a176ff7427}
       \strng{authornamehash}{d11c7950c8079db168a1b6a176ff7427}
       \strng{authorfullhash}{d11c7950c8079db168a1b6a176ff7427}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Piper: A fast, local neural text to speech system}
@@ -813,8 +870,8 @@
       \strng{authorbibnamehash}{292d4ec768a4cbd0a343ee3e2f879bff}
       \strng{authornamehash}{292d4ec768a4cbd0a343ee3e2f879bff}
       \strng{authorfullhash}{292d4ec768a4cbd0a343ee3e2f879bff}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Clone Your Own Voice with AI}
@@ -912,8 +969,8 @@
       \strng{authorbibnamehash}{b2dab6d559c573eed2d134686678fe84}
       \strng{authornamehash}{b2dab6d559c573eed2d134686678fe84}
       \strng{authorfullhash}{e6d1bc69376f936360a0a70ddcc99051}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{eprinttype}{arXiv}
