@@ -96,7 +96,16 @@ Die Normierung verhindert, dass Aktivierungswerte über viele Schichten
 hinweg exponentiell wachsen oder verschwinden (Vanishing/Exploding Gradients).
 
 \textbf{Attention -- Intuition.}\label{sec:attention}
-Grundidee des Attention-Mechanismus: Gegeben eine Anfrage (Query $q$), soll ermittelt werden, welchem Schlüssel (Key $k$) die Anfrage die meiste Aufmerksamkeit schenken soll, um den zugehörigen Wert (Value $v$) abzufragen. In natürlicher Sprache bedeutet dies: Wenn ein Token wie \glqq{}Bär\grqq{} verarbeitet wird, berechnet der Mechanismus, wie stark es auf Kontextwörter wie \glqq{}Teddy\grqq{} oder \glqq{}süß\grqq{} achten soll, um seine eigene Bedeutung im Satz korrekt zu erfassen.
+Die Grundidee des Attention-Mechanismus lässt sich anhand einer Analogie erläutern. Gegeben sei eine Anfrage (Englisch: Query (Q) vgl. Gleichung \ref{eq:attention})und es soll ermittelt werden welchem Schlüssel (Englisch: Key (K) vgl. Gleichung \ref{eq:attention}) die größte Aufmerksamkeit zukommt, um den zugehörigen Wert (Englisch: Value (V) vgl. Gleichung \ref{eq:attention}) abzurufen.
+Betrachtet man den in Abbildung \ref{fig:rebel_context} dargestellten Satz "LLMs with Igus Rebel 6 DOF", so stellt sich bei der Verarbeitung des Tokens Rebel die Frage, welche der übrigen Wörter für dessen Bedeutung besonders relevant sind. Der Attention Mechanismus berechnet hierzu Gewichte, die ausdrücken, wie stark Rebel auf jeden Kontext achten soll. Das Wort Igus erhält beispielsweise ein hohes Gewicht, weil es den Hersteller benennt und damit die Bedeutung von Rebel als konkreten Robotertyp festlegt. Ebenso würde in einem Satz wie "The Rebel is a good Robot" das Wort Robot stark gewichtet, um Rebel als Roboter zu identifizieren. Das LLM verarbeitet durch diesen Mechanismus während des Trainings die Zusammenhänge zwischen den Token und lernt so, welche Token für welche Bedeutungen relevant sind. Es stellt so die Parameter ein. Visulisieren lässt sich dies durch die Abbildung /ref{dials} wobei die Parameter des Attention Mechanismus als sich während des Trainings verändernde Regler dargestellt werden.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.55\textwidth]{parameter_dials.jpg}
+    \caption{Visualisierung der Parameter des Attention Mechanismus}
+    \label{fig:dials}
+\end{figure}
+
 
 Formal erzeugen drei lineare Projektionen für jedes Token
 $x_i$ die Vektoren Query $q_i$, Key $k_i$ und Value $v_i$:
