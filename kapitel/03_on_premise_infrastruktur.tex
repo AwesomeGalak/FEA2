@@ -232,9 +232,8 @@ der OTH Regensburg. Das System umfasst:
                              \\
         \midrule
         LLM-Laufzeitumgebung & \texttt{ollama} \\
-        Modell              & LLaMA\,7B (Q4\_K\_M, GGUF) \\
-        STT                 & Whisper (lokal) \\
-        TTS                 & Piper TTS (ONNX, lokal) \\
+        Modell              & Qwen 3.5 9B \\
+        STT                 & Parakeet TDT 0.6B (ONNX, lokal) \\
         \bottomrule
     \end{tabular}
     \caption{Hardware- und Software-Konfiguration am IZPL.}
@@ -254,10 +253,10 @@ Mit dieser Konfiguration werden folgende Betriebswerte erreicht:
 
 Dieses Kapitel hat den Rechenbedarf von LLMs anhand des nano-GPT-Modells
 (85.584 Parameter,~\cite{bycroft_llm}) veranschaulicht und auf
-LLaMA\,7B skaliert. Die kritischen Hardware-Ressourcen für lokale
+größere Modelle skaliert. Die kritischen Hardware-Ressourcen für lokale
 LLM-Inferenz sind \textbf{VRAM} (Modellgewichte + KV-Cache, vgl.
 Tabelle~\ref{tab:quantisierung}) und \textbf{Speicherbandbreite}
-(Memory-Bound-Betrieb). LLaMA\,7B im Q4\_K\_M-Format kann mit einer
+(Memory-Bound-Betrieb). Das eingesetzte Qwen 3.5 9B kann mit einer
 modernen Consumer-GPU ($\geq 6\,\text{GB}$ VRAM) lokal betrieben werden.
 Die IZPL-Hardware erfüllt diese Anforderungen und ermöglicht den
 On-Premise-Betrieb der vollständigen Sprachpipeline ohne Cloud-Anbindung.

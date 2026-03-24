@@ -2,60 +2,222 @@
 % Kapitel 4: Evaluation
 % ============================================================
 \chapter{Evaluation}
-Diese Kapitel führt eine Versuchsreihe durch welche mit dem im IZPL vorhanden Hardwaresetup durhc. Als LLM wurde 7Milliarden Paramter mit Piper als Text to Speach Modell. Das Githun Repository \ref{} dient hierbei als Startgerüst und wurde nur bzgl. geringen Änderungen verändert.
+\label{sec:evaluation}
 
-\section{Methodik der Evaluation}
-Es werden die Durchschnittliche Antwortzeit die WER und die Qualität der Antwort verglichen. Zur Beurteilung der Hardwareanforderungen wird zudem der VRAM-Bedarf betrachtet.
+Dieses Kapitel evaluiert die im IZPL eingesetzte On-Premise-Sprachpipeline in zwei Bereichen:
+die \textbf{LLM-Inferenzleistung} des Qwen 3.5 9B Modells (via Ollama auf einer NVIDIA RTX 3080 Ti)
+sowie die \textbf{Spracherkennungsqualität} des Parakeet TDT 0.6B ASR-Modells.
+Alle Benchmarks wurden auf dem in Abschnitt~\ref{sec:izpl} beschriebenen Laboraufbau durchgeführt.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{llama7b_vram.jpg}
-    \caption{Simulierter VRAM-Bedarf je Quantisierungsstufe im Vergleich zum 12-GB-Limit der RTX 3080 Ti}
-    \label{fig:eval_vram}
-\end{figure}
+% ============================================================
+\section{LLM-Benchmark: Qwen 3.5 9B}
+\label{sec:eval_llm}
+% ============================================================
 
-\section{Antwortzeiten und Performanz}
-Die Performanz des Modells wird primär über die Token-Generierungsgeschwindigkeit sowie die initiale Latenz (Time-to-First-Token) gemessen.
+Zur Evaluierung der LLM-Inferenzleistung wurden fünf robotikspezifische Prompts
+aus dem Bereich ROS2 und dem igus ReBeL 6-DOF-Roboter verwendet. Jeder Prompt
+wurde einzeln verarbeitet; dabei wurden Token-Generierungsgeschwindigkeit,
+Latenz, GPU-/CPU-Auslastung und Energieverbrauch gemessen.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{llama7b_tokens_per_s.jpg}
-    \caption{Generierungsgeschwindigkeit (Tokens/s) in Abhängigkeit der Quantisierung}
-    \label{fig:eval_tokens_per_s}
-\end{figure}
+\subsection{Generierungsgeschwindigkeit}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{llama7b_ttft.jpg}
-    \caption{Prefill-Latenz (Time-to-First-Token) über verschiedene Prompt-Längen (Q4\_K\_M)}
-    \label{fig:eval_ttft}
+    \includegraphics[width=0.85\textwidth]{llm_generierungsgeschwindigkeit.png}
+    \caption{Token-Generierungsgeschwindigkeit (Tokens/s) für fünf robotikspezifische Prompts.
+    Alle Prompts werden mit einer konsistenten Geschwindigkeit von ca.\,93 Tokens/s verarbeitet.}
+    \label{fig:eval_gen_speed}
 \end{figure}
 
-Ein detaillierter Blick auf den Generierungsprozess im zeitlichen Verlauf zeigt die kontinuierliche Token-Ausgabe sowie die dynamische VRAM-Auslastung während der Inferenz.
+Die Generierungsgeschwindigkeit liegt konsistent bei durchschnittlich
+\textbf{93,7 Tokens/s} über alle fünf Prompts (Abbildung~\ref{fig:eval_gen_speed}).
+Die geringe Varianz ($\pm$\,1,5 Tokens/s) zeigt, dass die Inferenzgeschwindigkeit
+weitgehend unabhängig von der Prompt-Komplexität ist, sie hängt
+primär von der Speicherbandbreite der GPU ab.
+
+\subsection{Antwortzeit-Aufschlüsselung}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{llama7b_token_gen.jpg}
-    \caption{Kumulative Token-Ausgabe über die Zeit bei der 4-Bit-Quantisierung}
-    \label{fig:eval_token_gen}
+    \includegraphics[width=0.85\textwidth]{llm_antwortzeit.png}
+    \caption{Zeitliche Aufschlüsselung der Antwortzeiten: Modell laden, Prompt-Auswertung (Prefill) und Generierung. Die Gesamtzeit skaliert linear mit der Antwortlänge.}
+    \label{fig:eval_latency}
 \end{figure}
+
+Abbildung~\ref{fig:eval_latency} schlüsselt die Antwortzeit auf.
+Die Prefill-Phase (Prompt-Auswertung) benötigt nur wenige Sekunden,
+während die Generierungsphase proportional zur Antwortlänge skaliert.
+Für den längsten Prompt (ROS2 Node Code, $\approx$10.000 Tokens)
+beträgt die Gesamtantwortzeit ca.\,110 Sekunden.
+
+\subsection{GPU-Auslastung und VRAM}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{llama7b_vram_trace.jpg}
-    \caption{Zeitlicher VRAM-Verlauf während der Modell-Ausführung gegliedert in Laden, Prefill und Generierung}
-    \label{fig:eval_vram_trace}
+    \includegraphics[width=0.85\textwidth]{llm_gpu_vram.png}
+    \caption{GPU-Auslastung und VRAM-Belegung während des Benchmarks. Die GPU-Auslastung liegt
+    stabil bei ca.\,90\,\%, der VRAM-Bedarf beträgt konstant ca.\,8\,GB.}
+    \label{fig:eval_gpu_vram}
 \end{figure}
 
-\section{Qualität der Konversation}
-Für LLMs gibt es viele Benchmarks zu den aus objektiver sicht zählenden gehört die sogenannte Perplexity.
-Durch die Quantisierung des Modells lässt sich eine minimale Einbuße bei der Sprachqualität beobachten, welche jedoch bei 4-Bit-Gewichten noch als praxistauglich gilt.
+Die GPU-Auslastung liegt während der Inferenz stabil bei ca.\,90\,\%
+(Abbildung~\ref{fig:eval_gpu_vram}). Der VRAM-Bedarf des Qwen 3.5 9B
+beträgt konstant ca.\,8\,GB und liegt damit deutlich unter dem
+12-GB-Limit der RTX 3080 Ti. Der verbleibende VRAM steht für den
+KV-Cache und ggf. parallele Prozesse zur Verfügung.
+
+\subsection{CPU- und RAM-Auslastung}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{llama7b_perplexity.jpg}
-    \caption{Qualitätsverlust (Perplexity auf WikiText-2) durch Quantisierungsverfahren}
-    \label{fig:eval_perplexity}
+    \includegraphics[width=0.85\textwidth]{llm_cpu_ram.png}
+    \caption{CPU- und RAM-Auslastung während der LLM-Inferenz. Die CPU-Belastung bleibt
+    unter 15\,\%, der RAM-Bedarf bei ca.\,4\,GB.}
+    \label{fig:eval_cpu_ram}
 \end{figure}
 
-Die hier gewonnenen Evaluationsergebnisse werden im folgenden Kapitel um Sicherheits- und Fehlerbetrachtungen ergänzt, die für den produktiven Einsatz in der Robotik entscheidend sind.
+Da die gesamte Inferenz auf der GPU stattfindet, bleibt die CPU-Auslastung
+gering ($<$\,15\,\%, Abbildung~\ref{fig:eval_cpu_ram}). Der Arbeitsspeicherverbrauch
+ist mit ca.\,4\,GB ebenfalls moderat, was den parallelen Betrieb weiterer
+Anwendungen (z.\,B. ROS2-Nodes) ermöglicht.
+
+\subsection{GPU-Leistungsaufnahme}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{llm_gpu_leistung.png}
+    \caption{GPU-Leistungsaufnahme während des Benchmarks. Die Leistung liegt bei ca.\,320\,W
+    (TDP-Grenze: 350\,W), was einer nahezu vollständigen Auslastung der GPU entspricht.}
+    \label{fig:eval_gpu_power}
+\end{figure}
+
+Die GPU-Leistungsaufnahme beträgt während der Inferenz ca.\,320\,W
+(Abbildung~\ref{fig:eval_gpu_power}), was nahe an der TDP-Grenze von
+350\,W liegt. Für den Dauerbetrieb ist daher eine ausreichende Kühlung
+sicherzustellen.
+
+\subsection{Netzwerk- und Festplatten-E/A}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{llm_netzwerk_io.png}
+    \caption{Kumulativer Netzwerk- und Festplatten-E/A während des Benchmarks.
+    Der Netzwerkverkehr resultiert aus der Kommunikation mit der Ollama-API.}
+    \label{fig:eval_io}
+\end{figure}
+
+Abbildung~\ref{fig:eval_io} zeigt den kumulativen E/A-Verlauf.
+Da das Modell nach dem initialen Laden vollständig im GPU-Speicher
+liegt, ist die Festplattenaktivität vernachlässigbar. Der Netzwerkverkehr
+resultiert aus der lokalen HTTP-Kommunikation mit der Ollama-API.
+
+% ============================================================
+\section{ASR-Benchmark: Parakeet TDT 0.6B}
+\label{sec:eval_asr}
+% ============================================================
+
+Zur Evaluierung der Spracherkennung wurde eine Testaufnahme mit 14 Sätzen
+aus dem robotikspezifischen Kontext (ROS2, igus ReBeL) verwendet.
+Die Aufnahme (55\,s, 16\,kHz Mono) wurde durch das Parakeet TDT 0.6B
+Modell transkribiert und die Ergebnisse satzweise gegen die Referenztranskription
+ausgewertet. Als Metriken dienen die \textbf{Wortfehlerrate} (WER),
+die \textbf{Zeichenfehlerrate} (CER) sowie der \textbf{Echtzeit-Faktor} (RTF).
+
+\subsection{Wortfehlerrate pro Satz}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{asr_wer_pro_satz.png}
+    \caption{Wortfehlerrate (WER) pro Satz. 6 von 14 Sätzen werden fehlerfrei transkribiert.
+    Die durchschnittliche WER beträgt 9,8\,\%.}
+    \label{fig:eval_wer}
+\end{figure}
+
+Abbildung~\ref{fig:eval_wer} zeigt die WER pro Satz. Die durchschnittliche
+Gesamt-WER beträgt \textbf{9,8\,\%}; 6 von 14 Sätzen werden fehlerfrei
+transkribiert (WER\,=\,0\,\%). Die höchste Fehlerrate tritt bei Satz~8 auf
+(\glqq{}Set the maximum velocity to fifty percent\grqq{}, WER\,=\,29\,\%),
+da das Modell die ausgeschriebene Zahl \glqq{}fifty percent\grqq{} als
+\glqq{}50\,\%\grqq{} transkribiert.
+
+\subsection{Fehlerverteilung}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{asr_fehlerverteilung.png}
+    \caption{Fehlerverteilung pro Satz: Anzahl korrekter Wörter, Ersetzungen, Löschungen und Einfügungen.
+    Die Mehrzahl der Wörter wird korrekt erkannt.}
+    \label{fig:eval_error_dist}
+\end{figure}
+
+Die Fehleranalyse in Abbildung~\ref{fig:eval_error_dist} zeigt, dass die
+dominierenden Fehlerquellen Ersetzungen sind, insbesondere bei domänentypisch fachspezifischen
+Eigennamen wie \glqq{}Igus ReBeL\grqq{} (transkribiert als \glqq{}EGOS
+Rebel\grqq{}) und \glqq{}MoveIt\grqq{} (transkribiert als \glqq{}MoveId\grqq{}).
+Solche Fehler könnten durch ein domänenspezifisches Sprachmodell (Language Model)
+oder eine Nachverarbeitungspipeline reduziert werden.
+
+\subsection{WER vs. CER}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{asr_wer_vs_cer.png}
+    \caption{Vergleich von Wortfehlerrate (WER) und Zeichenfehlerrate (CER) pro Satz.
+    Die CER liegt durchgehend unter der WER, was auf phonetisch korrekte Transkriptionen hindeutet.}
+    \label{fig:eval_wer_cer}
+\end{figure}
+
+Abbildung~\ref{fig:eval_wer_cer} vergleicht WER und CER. Die CER liegt
+mit \textbf{5,4\,\%} deutlich unter der WER (9,8\,\%), was darauf hindeutet,
+dass die meisten Fehler nur einzelne Zeichen innerhalb eines Wortes betreffen
+(z.\,B. \glqq{}ReBeL\grqq{} $\rightarrow$ \glqq{}Rebel\grqq{}).
+Die phonetische Grundstruktur der Wörter wird weitgehend korrekt erfasst.
+
+\subsection{Zusammenfassung der ASR-Ergebnisse}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{asr_zusammenfassung.png}
+    \caption{Zusammenfassung der ASR-Benchmark-Kennzahlen: Gesamt-WER 9,8\,\%, Gesamt-CER 5,4\,\%,
+    Echtzeit-Faktor 0,09x (ca.\,11-fache Echtzeitverarbeitung).}
+    \label{fig:eval_asr_summary}
+\end{figure}
+
+Die Zusammenfassung in Abbildung~\ref{fig:eval_asr_summary} zeigt die
+wichtigsten Kennzahlen. Der Echtzeit-Faktor von \textbf{0,09x} bedeutet,
+dass 55 Sekunden Audio in nur 4,9 Sekunden verarbeitet werden, was einer
+ca.\,11-fachen Echtzeitverarbeitung auf der CPU entspricht.
+
+% ============================================================
+\section{Zusammenfassung der Evaluation}
+% ============================================================
+
+\begin{table}[H]
+    \centering
+    \small
+    \begin{tabular}{l l r}
+        \toprule
+        Metrik & Komponente & Ergebnis \\
+        \midrule
+        Generierungsgeschwindigkeit & LLM (Qwen 3.5 9B) & 93,7 Tokens/s \\
+        VRAM-Belegung & LLM & $\approx$\,8\,GB \\
+        GPU-Leistungsaufnahme & LLM & $\approx$\,320\,W \\
+        \midrule
+        Gesamt-WER & ASR (Parakeet TDT) & 9,8\,\% \\
+        Gesamt-CER & ASR & 5,4\,\% \\
+        Echtzeit-Faktor (RTF) & ASR & 0,09x \\
+        Perfekte Sätze & ASR & 6/14 (43\,\%) \\
+        \bottomrule
+    \end{tabular}
+    \caption{Zusammenfassung der Evaluationsergebnisse.}
+    \label{tab:eval_zusammenfassung}
+\end{table}
+
+Die Evaluation zeigt, dass die eingesetzte On-Premise-Lösung sowohl bei der
+LLM-Inferenz als auch bei der Spracherkennung praxistaugliche Ergebnisse liefert.
+Das Qwen 3.5 9B Modell erreicht eine hohe Generierungsgeschwindigkeit von über
+90 Tokens/s auf der RTX 3080 Ti, während das Parakeet TDT 0.6B ASR-Modell
+eine Gesamt-WER von unter 10\,\% bei 11-facher Echtzeitverarbeitung erzielt.
+Die hier gewonnenen Evaluationsergebnisse werden im folgenden Kapitel um
+Sicherheits- und Fehlerbetrachtungen ergänzt, die für den produktiven Einsatz
+in der Robotik entscheidend sind.

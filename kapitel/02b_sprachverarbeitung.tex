@@ -1,11 +1,11 @@
 % ============================================================
-% Kapitel 3: Sprachverarbeitung: STT und TTS
+% Kapitel 3: Sprachverarbeitung: Speech-to-Text
 % ============================================================
 
-\chapter{Sprachverarbeitung: STT und TTS}
+\chapter{Sprachverarbeitung: Speech-to-Text}
 \label{sec:sprachverarbeitung}
 
-Aufbauend auf den im vorherigen Kapitel beschriebenen Grundlagen der Transformer-Architektur wird nun die Sprachverarbeitung behandelt. Um die LLM-Technologie möglichst intuitiv in realen Anwendungen einsetzen zu können, war es in dieser Arbeit das Ziel, gesprochene Sprache in Text umzuwandeln und umgekehrt. Die Umwandlung von gesprochener Sprache in Text bezeichnet man als Speech-to-Text (STT) und die Umwandlung von Text in gesprochene Sprache als Text-to-Speech (TTS). Bevor diese Themen im Detail erläutert werden, wird zunächst eine physikalische Grundlage von Audiosignalen eingeführt, um die nachfolgenden Abschnitte besser einordnen zu können.
+Aufbauend auf den im vorherigen Kapitel beschriebenen Grundlagen der Transformer-Architektur wird nun die Sprachverarbeitung behandelt. Um die LLM-Technologie möglichst intuitiv in realen Anwendungen einsetzen zu können, war es in dieser Arbeit das Ziel, gesprochene Sprache in Text umzuwandeln (Speech-to-Text, STT). So kann ein Benutzer Befehle oder Fragen direkt per Mikrofon an das System richten, ohne eine Tastatureingabe vornehmen zu müssen. Bevor die eingesetzte STT-Lösung im Detail erläutert wird, wird zunächst eine physikalische Grundlage von Audiosignalen eingeführt, um die nachfolgenden Abschnitte besser einordnen zu können.
 
 \section{Physikalische Eigenschaften von Audiosignalen}
 
@@ -27,39 +27,13 @@ Der Faktor bringt den gemessenen Effektivwert des Schalldrucks $p$ ins Verhältn
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{physik_sprache.png}
-    \caption{Datenfluss eines Large Language Models}
+    \caption{Schematische Darstellung des Datenflusses in einer sprachgesteuerten KI-Pipeline}
     \label{fig:spracherkennung}
 \end{figure}
 
 Das Eingangssignal ist eine Audiodatei (typischerweise 16\,kHz Mono). Um es
-für eine Tranformer-Architektur nutzbar zu machen, wird es in ein
+für eine Transformer-Architektur nutzbar zu machen, wird es in ein
 \textbf{Log-Mel-Spektrogramm} umgewandelt, eine Zeit-Frequenz-Darstellung.
-
-
-\subsection{Text-to-Speech (TTS)}\label{sec:theorie_tts}
-Text-to-Speech bezeichnet die Erzeugung von Sprache aus Text.
-Moderne neuronale TTS-Systeme erzeugen natürlich klingende Sprache
-in einem mehrstufigen Prozess:
-\begin{enumerate}
-    \item \textbf{Phonemisierung:} Der Eingabetext wird normalisiert
-          und in eine phonetische Repräsentation (Phoneme) umgewandelt.
-    \item \textbf{Akustisches Modell:} Aus der Phonemsequenz wird ein
-          Mel-Spektrogramm generiert eine Zeit-Frequenz-Darstellung,
-          die Tonhöhe, Geschwindigkeit und Klangfarbe kodiert.
-    \item \textbf{Vocoder:} Das Mel-Spektrogramm wird in ein
-          Audiosignal (Wellenform) umgewandelt.
-\end{enumerate}
-
-End-to-End-Modelle wie \textbf{VITS} (Variational Inference with
-adversarial learning for end-to-end TTS)~\cite{vits} kombinieren
-diese Stufen in einem einzigen Modell und werden direkt von Text zu
-Audio trainiert. Die Trainingsschleife minimiert eine Kombination aus
-Rekonstruktionsfehler und Adversarial Loss:
-\begin{equation}
-    \mathcal{L}_{\text{VITS}} =
-    \mathcal{L}_{\text{recon}} + \lambda\,\mathcal{L}_{\text{adv}}
-    \label{eq:vits_loss}
-\end{equation}
 
 % ============================================================
 \section{Das eingesetzte System}
@@ -69,24 +43,31 @@ Rekonstruktionsfehler und Adversarial Loss:
 Auf Basis der in den vorherigen Abschnitten beschriebenen Theorie wird
 in dieser Arbeit eine vollständige Sprachpipeline eingesetzt\cite{glados_personality}, die
 ausschließlich lokal ohne Cloud-Anbindung betrieben wird.
-Die drei Kernkomponenten sind:
+Die zwei Kernkomponenten sind:
 
-\textbf{Spracherkennung: Whisper.}\label{sec:whisper}
-\textbf{Whisper}~\cite{whisper} ist ein von OpenAI veröffentlichtes
-Open-Source-Modell zur automatischen Spracherkennung. Es wurde auf
-680.000 Stunden mehrsprachiger Audiodaten trainiert und basiert auf
-einer Transformer-Architektur.
-Whisper unterstützt mehrsprachige Erkennung.
-In dieser Arbeit wird Whisper lokal auf der IZPL-Hardware ausgeführt.
-Ein gesprochener Satz wie \glqq{}Wie hoch ist die aktuelle
-Raumtemperatur?\grqq{} wird innerhalb weniger hundert Millisekunden
-transkribiert und als Zeichenkette an das Sprachmodell übergeben.
+\textbf{Spracherkennung: Parakeet TDT 0.6B.}\label{sec:parakeet}
+\textbf{Parakeet TDT 0.6B} ist ein von NVIDIA entwickeltes
+Open-Source-Modell zur automatischen Spracherkennung (ASR) mit ca.\,600 Millionen Parametern.
+Es basiert auf der \textbf{Token-and-Duration Transducer} (TDT)-Architektur,
+einer Weiterentwicklung des klassischen RNN-Transducers, die sowohl Token-
+als auch Dauerschätzungen für jedes Zeitsegment vorhersagt. Die
+TDT-Architektur erreicht dadurch eine höhere Erkennungsgenauigkeit bei
+gleichzeitig schnellerer Inferenz, da überflüssige Blank-Token effizienter
+übersprungen werden können.
+Das Modell wurde auf über 65.000 Stunden englischsprachiger Audiodaten trainiert
+und wird in dieser Arbeit im ONNX-Format (Open Neural Network Exchange) lokal
+auf der IZPL-Hardware ausgeführt. Die ONNX-Runtime ermöglicht eine
+hardwareunabhängige Inferenz sowohl auf GPU als auch auf CPU.
+Ein gesprochener Satz wie \glqq{}Bewege den Roboter zur Startposition\grqq{}
+wird innerhalb weniger hundert Millisekunden transkribiert und als Zeichenkette
+an das Sprachmodell übergeben.
 
-\textbf{Sprachmodell: LLaMA\,7B.}\label{sec:llama}
-\textbf{LLaMA\,7B}~\cite{touvron_llama} ist ein von Meta entwickeltes
-Open-Source-Sprachmodell mit 6{,}7~Milliarden Parametern. Es verwendet
+\textbf{Sprachmodell: Qwen 3.5 9B.}\label{sec:qwen}
+\textbf{Qwen 3.5 9B} ist ein von Alibaba Cloud entwickeltes
+Open-Source-Sprachmodell mit ca.\,9 Milliarden Parametern. Es verwendet
 die in Abschnitt~\ref{sec:transformer_block} beschriebene
-Transformer-Architektur mit folgenden Spezifikationen:
+Transformer-Architektur und zeichnet sich durch eine starke
+Leistungsfähigkeit im Verhältnis zu seiner Modellgröße aus.
 
 \begin{table}[H]
     \centering
@@ -96,17 +77,17 @@ Transformer-Architektur mit folgenden Spezifikationen:
         Modell & $N$ & $d$ & $h$ & $d_{\text{ff}}$ & Parameter \\
         \midrule
         GPT-2 (small)       & 12 & 768    & 12 & 3.072   & 124\,M   \\
-        \textbf{LLaMA\,7B}  & \textbf{32} & \textbf{4.096} & \textbf{32} & \textbf{11.008} & \textbf{6{,}7\,B} \\
-        LLaMA\,13B          & 40 & 5.120  & 40 & 13.824  & 13\,B    \\
+        LLaMA\,7B            & 32 & 4.096  & 32 & 11.008  & 6{,}7\,B \\
+        \textbf{Qwen 3.5 9B} & \textbf{36} & \textbf{3.584} & \textbf{28} & \textbf{18.944} & \textbf{$\approx$9\,B} \\
         GPT-3               & 96 & 12.288 & 96 & 49.152  & 175\,B   \\
         \bottomrule
     \end{tabular}
-    \caption{Architekturparameter -- LLaMA\,7B (fett) ist das in dieser Arbeit
+    \caption{Architekturparameter -- Qwen 3.5 9B (fett) ist das in dieser Arbeit
         eingesetzte Modell.}
     \label{tab:modelle}
 \end{table}
 
-Im Vergleich zum Standard-Transformer setzt LLaMA\,7B folgende
+Im Vergleich zum Standard-Transformer setzt Qwen 3.5 folgende
 Anpassungen ein:
 \begin{itemize}
     \item \textbf{RMSNorm} (statt LayerNorm) vor jeder Operation
@@ -119,58 +100,23 @@ Anpassungen ein:
               \label{eq:swiglu}
           \end{equation}
     \item \textbf{RoPE} Positionskodierung (vgl. Gleichung~\ref{eq:rope})
-    \item Maximale Kontextlänge: $T_{\max} = 4096$ Tokens
+    \item \textbf{Grouped Query Attention} (GQA) für effizientere Inferenz
+    \item Maximale Kontextlänge: $T_{\max} = 32.768$ Tokens
 \end{itemize}
 
-Das Modell wird im \textbf{Q4\_K\_M}-Format über \texttt{ollama}
-lokal betrieben, was einen VRAM-Bedarf von ca.\,4\,GB ergibt und
+Das Modell wird über \texttt{ollama}
+lokal betrieben, was einen VRAM-Bedarf von ca.\,6\,GB ergibt und
 den Betrieb auf der verfügbaren Hardware ohne relevante
 Qualitätseinbußen ermöglicht.
-
-\textbf{Sprachsynthese: Piper TTS mit eigenem Stimmmodell.}\label{sec:piper}
-\textbf{Piper TTS}~\cite{piper} ist ein schnelles, Open-Source-TTS-System,
-das auf der VITS-Architektur (vgl. Abschnitt~\ref{sec:theorie_tts})
-basiert und für den lokalen, ressourcenschonenden Betrieb optimiert ist.
-In dieser Arbeit wurde ein eigenes Stimmmodell trainiert, um die
-Sprachausgabe natürlicher zu gestalten. Das Vorgehen folgt dem
-Verfahren von \citeauthor{networkchuck_voice}~\cite{networkchuck_voice}:
-
-\begin{enumerate}
-    \item \textbf{Datenaufbereitung:} Aufnahme von Sprachsamples
-          Die Samples werden           rauschbereinigt, auf $22{.}050$\,Hz normalisiert und den
-          zugehörigen Transkripten zugeordnet.
-    \item \textbf{Finetuning:} Training ausgehend von einem
-          vortrainierten englischen Piper-Checkpoint. Ein Checkpoint repräsentiert die gelernten Parameter des neuronalen Netzes. Eine sogenannte Epoche beschreibt wie oft diese Parameter durch die Trainingsdaten weiter verfeinert wurden. Für das Training des eigenen Stimmmodells wurde ab der 6000 Epoche das Training bis zu 6250 fortgesetzt. Folglich wurden 250 mal die Sprachsamples benutzt um die Parameter des neuronalen Netzes zu verändern.
-\begin{lstlisting}[language=bash, basicstyle=\small\ttfamily]
-python3 -m piper_train \
-  --dataset-dir ~/sprachdaten \
-  --accelerator gpu --gpus 1 \
-  --batch-size 32 --max_epochs 6000 \
-  --resume_from_checkpoint base.ckpt \
-  --precision 16 --quality medium
-\end{lstlisting}
-    \item \textbf{ONNX-Export:} Das trainierte Modell wird in das
-          ONNX-Format (Open Neural Network Exchange) exportiert,
-          das eine hardwareunabhängige Inferenz ohne GPU ermöglicht:
-\begin{lstlisting}[language=bash, basicstyle=\small\ttfamily]
-python3 -m piper_train.export_onnx \
-  checkpoint/epoch=5999.ckpt \
-  output/stimme.onnx
-\end{lstlisting}
-\end{enumerate}
-
-Das resultierende Modell (\texttt{stimme.onnx}, ca.\,60\,MB)
-wird zusammen mit der Konfigurationsdatei \texttt{stimme.onnx.json}
-in Piper eingebunden und ermöglicht die Echtzeitsynthese auf der
-lokalen Hardware.
 
 % ============================================================
 \section{Zusammenfassung}
 % ============================================================
 
 Dieses Kapitel hat die Sprachverarbeitung im Kontext der eingesetzten Pipeline vorgestellt.
-Zunächst wurden die physikalischen Grundlagen von Audiosignalen erläutert, gefolgt von der Theorie hinter Text-to-Speech-Systemen.
-Anschließend wurde das konkret eingesetzte System beschrieben:
+Zunächst wurden die physikalischen Grundlagen von Audiosignalen erläutert,
+gefolgt von der Beschreibung des konkreten Speech-to-Text-Systems.
+Anschließend wurde das eingesetzte Sprachmodell beschrieben:
 
 \begin{table}[H]
     \centering
@@ -179,9 +125,8 @@ Anschließend wurde das konkret eingesetzte System beschrieben:
         \toprule
         Komponente & Eingesetztes Modell & Besonderheit \\
         \midrule
-        STT & Whisper & lokal, mehrsprachig, 80 Mel-Kanäle \\
-        LLM & LLaMA\,7B (Q4\_K\_M, GGUF) & $N{=}32$, $d{=}4096$, $\approx$4\,GB VRAM \\
-        TTS & Piper TTS + eigenes ONNX-Modell & VITS, $f_s{=}22{.}050$\,Hz, kein Cloud \\
+        STT & Parakeet TDT 0.6B (ONNX) & lokal, TDT-Architektur, 600M Parameter \\
+        LLM & Qwen 3.5 9B (ollama) & $N{=}36$, $d{=}3584$, $\approx$6\,GB VRAM \\
         \bottomrule
     \end{tabular}
     \caption{Übersicht der eingesetzten Komponenten.}

@@ -1,25 +1,48 @@
 \relax 
 \providecommand\hyper@newdestlabel[2]{}
-\@writefile{toc}{\contentsline {chapter}{\numberline {5}Evaluation}{25}{chapter.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}Evaluation}{24}{chapter.5}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {5.1}Methodik der Evaluation}{25}{section.5.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces Simulierter VRAM-Bedarf je Quantisierungsstufe im Vergleich zum 12-GB-Limit der RTX 3080 Ti}}{25}{figure.caption.20}\protected@file@percent }
-\newlabel{fig:eval_vram}{{5.1}{25}{Simulierter VRAM-Bedarf je Quantisierungsstufe im Vergleich zum 12-GB-Limit der RTX 3080 Ti}{figure.caption.20}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.2}Antwortzeiten und Performanz}{26}{section.5.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {5.2}{\ignorespaces Generierungsgeschwindigkeit (Tokens/s) in Abhängigkeit der Quantisierung}}{26}{figure.caption.21}\protected@file@percent }
-\newlabel{fig:eval_tokens_per_s}{{5.2}{26}{Generierungsgeschwindigkeit (Tokens/s) in Abhängigkeit der Quantisierung}{figure.caption.21}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.3}{\ignorespaces Prefill-Latenz (Time-to-First-Token) über verschiedene Prompt-Längen (Q4\_K\_M)}}{26}{figure.caption.22}\protected@file@percent }
-\newlabel{fig:eval_ttft}{{5.3}{26}{Prefill-Latenz (Time-to-First-Token) über verschiedene Prompt-Längen (Q4\_K\_M)}{figure.caption.22}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.4}{\ignorespaces Kumulative Token-Ausgabe über die Zeit bei der 4-Bit-Quantisierung}}{27}{figure.caption.23}\protected@file@percent }
-\newlabel{fig:eval_token_gen}{{5.4}{27}{Kumulative Token-Ausgabe über die Zeit bei der 4-Bit-Quantisierung}{figure.caption.23}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.5}{\ignorespaces Zeitlicher VRAM-Verlauf während der Modell-Ausführung gegliedert in Laden, Prefill und Generierung}}{27}{figure.caption.24}\protected@file@percent }
-\newlabel{fig:eval_vram_trace}{{5.5}{27}{Zeitlicher VRAM-Verlauf während der Modell-Ausführung gegliedert in Laden, Prefill und Generierung}{figure.caption.24}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.3}Qualität der Konversation}{27}{section.5.3}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {5.6}{\ignorespaces Qualitätsverlust (Perplexity auf WikiText-2) durch Quantisierungsverfahren}}{28}{figure.caption.25}\protected@file@percent }
-\newlabel{fig:eval_perplexity}{{5.6}{28}{Qualitätsverlust (Perplexity auf WikiText-2) durch Quantisierungsverfahren}{figure.caption.25}{}}
+\newlabel{sec:evaluation}{{5}{24}{Evaluation}{chapter.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.1}LLM-Benchmark: Qwen 3.5 9B}{24}{section.5.1}\protected@file@percent }
+\newlabel{sec:eval_llm}{{5.1}{24}{LLM-Benchmark: Qwen 3.5 9B}{section.5.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.1}Generierungsgeschwindigkeit}{25}{subsection.5.1.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces Token-Generierungsgeschwindigkeit (Tokens/s) für fünf robotikspezifische Prompts. Alle Prompts werden mit einer konsistenten Geschwindigkeit von ca.\,93 Tokens/s verarbeitet.}}{25}{figure.caption.20}\protected@file@percent }
+\newlabel{fig:eval_gen_speed}{{5.1}{25}{Token-Generierungsgeschwindigkeit (Tokens/s) für fünf robotikspezifische Prompts. Alle Prompts werden mit einer konsistenten Geschwindigkeit von ca.\,93 Tokens/s verarbeitet}{figure.caption.20}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.2}Antwortzeit-Aufschlüsselung}{25}{subsection.5.1.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.2}{\ignorespaces Zeitliche Aufschlüsselung der Antwortzeiten: Modell laden, Prompt-Auswertung (Prefill) und Generierung. Die Gesamtzeit skaliert linear mit der Antwortlänge.}}{25}{figure.caption.21}\protected@file@percent }
+\newlabel{fig:eval_latency}{{5.2}{25}{Zeitliche Aufschlüsselung der Antwortzeiten: Modell laden, Prompt-Auswertung (Prefill) und Generierung. Die Gesamtzeit skaliert linear mit der Antwortlänge}{figure.caption.21}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.3}GPU-Auslastung und VRAM}{26}{subsection.5.1.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.3}{\ignorespaces GPU-Auslastung und VRAM-Belegung während des Benchmarks. Die GPU-Auslastung liegt stabil bei ca.\,90\,\%, der VRAM-Bedarf beträgt konstant ca.\,8\,GB.}}{26}{figure.caption.22}\protected@file@percent }
+\newlabel{fig:eval_gpu_vram}{{5.3}{26}{GPU-Auslastung und VRAM-Belegung während des Benchmarks. Die GPU-Auslastung liegt stabil bei ca.\,90\,\%, der VRAM-Bedarf beträgt konstant ca.\,8\,GB}{figure.caption.22}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.4}CPU- und RAM-Auslastung}{27}{subsection.5.1.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.4}{\ignorespaces CPU- und RAM-Auslastung während der LLM-Inferenz. Die CPU-Belastung bleibt unter 15\,\%, der RAM-Bedarf bei ca.\,4\,GB.}}{27}{figure.caption.23}\protected@file@percent }
+\newlabel{fig:eval_cpu_ram}{{5.4}{27}{CPU- und RAM-Auslastung während der LLM-Inferenz. Die CPU-Belastung bleibt unter 15\,\%, der RAM-Bedarf bei ca.\,4\,GB}{figure.caption.23}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.5}GPU-Leistungsaufnahme}{27}{subsection.5.1.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.5}{\ignorespaces GPU-Leistungsaufnahme während des Benchmarks. Die Leistung liegt bei ca.\,320\,W (TDP-Grenze: 350\,W), was einer nahezu vollständigen Auslastung der GPU entspricht.}}{27}{figure.caption.24}\protected@file@percent }
+\newlabel{fig:eval_gpu_power}{{5.5}{27}{GPU-Leistungsaufnahme während des Benchmarks. Die Leistung liegt bei ca.\,320\,W (TDP-Grenze: 350\,W), was einer nahezu vollständigen Auslastung der GPU entspricht}{figure.caption.24}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.6}Netzwerk- und Festplatten-E/A}{28}{subsection.5.1.6}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.6}{\ignorespaces Kumulativer Netzwerk- und Festplatten-E/A während des Benchmarks. Der Netzwerkverkehr resultiert aus der Kommunikation mit der Ollama-API.}}{28}{figure.caption.25}\protected@file@percent }
+\newlabel{fig:eval_io}{{5.6}{28}{Kumulativer Netzwerk- und Festplatten-E/A während des Benchmarks. Der Netzwerkverkehr resultiert aus der Kommunikation mit der Ollama-API}{figure.caption.25}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.2}ASR-Benchmark: Parakeet TDT 0.6B}{28}{section.5.2}\protected@file@percent }
+\newlabel{sec:eval_asr}{{5.2}{28}{ASR-Benchmark: Parakeet TDT 0.6B}{section.5.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.1}Wortfehlerrate pro Satz}{29}{subsection.5.2.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.7}{\ignorespaces Wortfehlerrate (WER) pro Satz. 6 von 14 Sätzen werden fehlerfrei transkribiert. Die durchschnittliche WER beträgt 9,8\,\%.}}{29}{figure.caption.26}\protected@file@percent }
+\newlabel{fig:eval_wer}{{5.7}{29}{Wortfehlerrate (WER) pro Satz. 6 von 14 Sätzen werden fehlerfrei transkribiert. Die durchschnittliche WER beträgt 9,8\,\%}{figure.caption.26}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.2}Fehlerverteilung}{30}{subsection.5.2.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.8}{\ignorespaces Fehlerverteilung pro Satz: Anzahl korrekter Wörter, Ersetzungen, Löschungen und Einfügungen. Die Mehrzahl der Wörter wird korrekt erkannt.}}{30}{figure.caption.27}\protected@file@percent }
+\newlabel{fig:eval_error_dist}{{5.8}{30}{Fehlerverteilung pro Satz: Anzahl korrekter Wörter, Ersetzungen, Löschungen und Einfügungen. Die Mehrzahl der Wörter wird korrekt erkannt}{figure.caption.27}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.3}WER vs. CER}{31}{subsection.5.2.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.9}{\ignorespaces Vergleich von Wortfehlerrate (WER) und Zeichenfehlerrate (CER) pro Satz. Die CER liegt durchgehend unter der WER, was auf phonetisch korrekte Transkriptionen hindeutet.}}{31}{figure.caption.28}\protected@file@percent }
+\newlabel{fig:eval_wer_cer}{{5.9}{31}{Vergleich von Wortfehlerrate (WER) und Zeichenfehlerrate (CER) pro Satz. Die CER liegt durchgehend unter der WER, was auf phonetisch korrekte Transkriptionen hindeutet}{figure.caption.28}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.4}Zusammenfassung der ASR-Ergebnisse}{32}{subsection.5.2.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.10}{\ignorespaces Zusammenfassung der ASR-Benchmark-Kennzahlen: Gesamt-WER 9,8\,\%, Gesamt-CER 5,4\,\%, Echtzeit-Faktor 0,09x (ca.\,11-fache Echtzeitverarbeitung).}}{32}{figure.caption.29}\protected@file@percent }
+\newlabel{fig:eval_asr_summary}{{5.10}{32}{Zusammenfassung der ASR-Benchmark-Kennzahlen: Gesamt-WER 9,8\,\%, Gesamt-CER 5,4\,\%, Echtzeit-Faktor 0,09x (ca.\,11-fache Echtzeitverarbeitung)}{figure.caption.29}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.3}Zusammenfassung der Evaluation}{32}{section.5.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5.1}{\ignorespaces Zusammenfassung der Evaluationsergebnisse.}}{32}{table.caption.30}\protected@file@percent }
+\newlabel{tab:eval_zusammenfassung}{{5.1}{32}{Zusammenfassung der Evaluationsergebnisse}{table.caption.30}{}}
 \@setckpt{kapitel/04_evaluation}{
-\setcounter{page}{29}
+\setcounter{page}{34}
 \setcounter{equation}{0}
 \setcounter{enumi}{2}
 \setcounter{enumii}{0}
@@ -34,14 +57,14 @@
 \setcounter{subsubsection}{0}
 \setcounter{paragraph}{0}
 \setcounter{subparagraph}{0}
-\setcounter{figure}{6}
-\setcounter{table}{0}
+\setcounter{figure}{10}
+\setcounter{table}{1}
 \setcounter{parentequation}{0}
 \setcounter{section@level}{1}
-\setcounter{Item}{8}
+\setcounter{Item}{2}
 \setcounter{Hfootnote}{0}
-\setcounter{bookmark@seq@number}{31}
-\setcounter{lstnumber}{4}
+\setcounter{bookmark@seq@number}{40}
+\setcounter{lstnumber}{1}
 \setcounter{caption@flags}{2}
 \setcounter{continuedfloat}{0}
 \setcounter{float@type}{8}
@@ -54,7 +77,7 @@
 \setcounter{citetotal}{0}
 \setcounter{multicitecount}{0}
 \setcounter{multicitetotal}{0}
-\setcounter{instcount}{32}
+\setcounter{instcount}{26}
 \setcounter{maxnames}{3}
 \setcounter{minnames}{1}
 \setcounter{maxitems}{3}
