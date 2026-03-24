@@ -1,7 +1,7 @@
 \babel@toc {ngerman}{}\relax 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {2.1}{\ignorespaces VRAM-Bedarf eines 7B-Sprachmodells bei verschiedenen Quantisierungsstufen.}}{11}{table.caption.10}%
+\contentsline {table}{\numberline {2.1}{\ignorespaces VRAM-Bedarf eines 7B-Sprachmodells bei verschiedenen Quantisierungsstufen.}}{12}{table.caption.10}%
 \addvspace {10\p@ }
 \contentsline {table}{\numberline {3.1}{\ignorespaces Architekturparameter -- LLaMA\,7B (fett) ist das in dieser Arbeit eingesetzte Modell.}}{17}{table.caption.12}%
 \contentsline {table}{\numberline {3.2}{\ignorespaces Übersicht der eingesetzten Komponenten.}}{18}{table.caption.13}%

@@ -42,25 +42,26 @@ Auf dieser Grundlage sind Modelle entstanden, die komplexe Muster in Textdaten e
 Laut Kasneci ist ein LLM ein KI-System, das auf einer riesigen Menge von Textdaten trainiert wurde, um natürliche Sprache zu interpretieren und menschenähnliche Antworten auf textbasierte Eingabeaufforderungen oder Fragen zu generieren. \cite{llm_definition}.
 
 Seither hat sich die Leistungsfähigkeit dieser Modelle rasant weiterentwickelt. Dabei ist die Anzahl der Parameter und somit auch der Ressourcenbedarf stetig gestiegen.
-Abbildung \ref{fig:vram_llm} zeigt die geschätzten Mengen an schnell zugänglichem Grafikspeicher (VRAM), die für den Betrieb aktueller Flaggschiffmodelle erforderlich sind.
-Für Edge-Geräte, die auf eine begrenzte Speicherkapazität angewiesen sind, kommen diese Modelle daher nicht infrage.
+Für Edge-Geräte, die auf eine begrenzte Speicherkapazität angewiesen sind, kommen die leistungsstärksten Modelle daher nicht infrage.
+
+Zur Bewertung der Leistungsfähigkeit quelloffener Modelle wird der Chatbot-Arena-Elo-Score herangezogen. Dieser basiert auf einem 2024 erschienenen Paper namens ``Chatbot Arena: An Open Platform for Evaluating LLMs by Human Preference'' \cite{chiang2024chatbot} und gilt als objektive Methode, LLMs zu bewerten.
+
+Abbildung~\ref{fig:llm_overall} zeigt die fünf leistungsstärksten quelloffenen Modelle nach Chatbot-Arena-Elo-Score mit ihrer vollen Parameterzahl und dem geschätzten VRAM-Bedarf. Als Referenz dient das derzeit beste proprietäre Modell. Alle gezeigten Modelle erfordern Server-Klasse-Hardware und sind für den Betrieb auf einer einzelnen Consumer-GPU nicht geeignet.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.83\textwidth]{abbildungen/vramllm.jpg}
-    \caption{Geschätzter VRAM-Bedarf aktueller LLM-Flagschiffmodelle}
-    \label{fig:vram_llm}
+    \includegraphics[width=0.95\textwidth]{abbildungen/llm_leaderboard_overall.pdf}
+    \caption{Die fünf leistungsstärksten quelloffenen LLMs nach Chatbot Arena Elo Score (volle Parameterzahl, VRAM-Bedarf). Alle Modelle erfordern Server-Klasse-Hardware. Datenquelle: LM Arena Leaderboard (arena.ai), Stand März~2026.}
+    \label{fig:llm_overall}
 \end{figure}
 
-Die leistungsstärksten quelloffenen Modelle, die für einen On-Premise-Betrieb relevant sind, werden in Abbildung \ref{fig:llm_onpremise} gegenübergestellt.
-Dabei wird der Chatbot-Arena-Elo-Score verwendet. Dieser basiert auf einem 2024 erschienen Paper namens "Chatbot Arena: An Open Platform for Evaluating LLMs by Human Preference" \cite{chiang2024chatbot} und gilt als objektive Methode LLMs zu bewerten. Er wird dem jeweiligen VRAM-Bedarf bei 4-Bit-Quantisierung (INT4) gegenübergestellt. 
-Modelle, die mit maximal 48 GB VRAM auskommen, lassen sich bereits auf einer einzelnen Consumer-GPU betreiben und sind somit für On-Premise-Szenarien besonders interessant.
-Grundsätzlich sind die jeweils neuesten Modellgenerationen die leistungsstärksten. Zum Zeitpunkt der Erstellung dieser Arbeit ist Qwen 3.5 von Alibaba mit einem relativen Chatbot-Arena-Elo-Score von 1384 das leistungsstärkste quelloffene Modell.
+Durch den Einsatz von 4-Bit-Quantisierung (INT4) lässt sich der VRAM-Bedarf signifikant reduzieren.
+Abbildung~\ref{fig:llm_onpremise} stellt die besten quelloffenen Modelle gegenüber, die bei INT4-Quantisierung mit maximal 48\,GB VRAM auskommen und sich somit auf einer einzelnen Consumer-GPU betreiben lassen. Im Vergleich dazu sind die größten Modelle als Referenz dargestellt.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.95\textwidth]{abbildungen/llm_onpremise_leaderboard.pdf}
-    \caption{Vergleich quelloffener LLMs: Chatbot Arena Elo vs.\ VRAM-Bedarf (INT4). Dunkelblau hervorgehobene Modelle sind für den Betrieb auf einer einzelnen GPU ($\leq$\,48\,GB) geeignet. Datenquelle: onyx.app/self-hosted-llm-leaderboard, Stand März 2026.}
+    \caption{Vergleich quelloffener LLMs: Chatbot Arena Elo Score bei INT4-Quantisierung ($\leq$\,48\,GB VRAM). Datenquelle: LM Arena Leaderboard (arena.ai), Stand März~2026.}
     \label{fig:llm_onpremise}
 \end{figure}
 

@@ -1,11 +1,11 @@
 \babel@toc {ngerman}{}\relax 
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {1.1}{\ignorespaces Geschätzter VRAM-Bedarf aktueller LLM-Flagschiffmodelle}}{3}{figure.caption.5}%
-\contentsline {figure}{\numberline {1.2}{\ignorespaces Vergleich quelloffener LLMs: Chatbot Arena Elo vs.\ VRAM-Bedarf (INT4). Grün hervorgehobene Modelle sind für den Betrieb auf einer einzelnen Consumer-GPU ($\leq $\,48\,GB) geeignet. Datenquelle: onyx.app/self-hosted-llm-leaderboard, Stand März 2026.}}{4}{figure.caption.6}%
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Die fünf leistungsstärksten quelloffenen LLMs nach Chatbot Arena Elo Score (volle Parameterzahl, VRAM-Bedarf). Alle Modelle erfordern Server-Klasse-Hardware. Datenquelle: LM Arena Leaderboard (arena.ai), Stand März~2026.}}{3}{figure.caption.5}%
+\contentsline {figure}{\numberline {1.2}{\ignorespaces Vergleich quelloffener LLMs: Chatbot Arena Elo Score bei INT4-Quantisierung ($\leq $\,48\,GB VRAM). Datenquelle: LM Arena Leaderboard (arena.ai), Stand März~2026.}}{4}{figure.caption.6}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Datenfluss eines Large Language Models}}{5}{figure.caption.7}%
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Vektor-Embedding für den Satz „LLMs with Igus Rebel 6 DOF“}}{6}{figure.caption.8}%
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Beispielhafte Darstellung der Tokenisierung}}{7}{figure.caption.9}%
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Datenfluss eines Large Language Models}}{6}{figure.caption.7}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Vektor-Embedding für den Satz „LLMs with Igus Rebel 6 DOF“}}{7}{figure.caption.8}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Beispielhafte Darstellung der Tokenisierung}}{8}{figure.caption.9}%
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {3.1}{\ignorespaces Datenfluss eines Large Language Models}}{15}{figure.caption.11}%
 \addvspace {10\p@ }
