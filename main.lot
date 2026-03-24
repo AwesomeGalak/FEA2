@@ -1,15 +1,15 @@
 \babel@toc {ngerman}{}\relax 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {2.1}{\ignorespaces VRAM-Bedarf eines 7B-Sprachmodells bei verschiedenen Quantisierungsstufen.}}{12}{table.caption.10}%
+\contentsline {table}{\numberline {2.1}{\ignorespaces VRAM-Bedarf eines 7B-Sprachmodells bei verschiedenen Quantisierungsstufen.}}{13}{table.caption.11}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {3.1}{\ignorespaces Architekturparameter -- LLaMA\,7B (fett) ist das in dieser Arbeit eingesetzte Modell.}}{17}{table.caption.12}%
-\contentsline {table}{\numberline {3.2}{\ignorespaces Übersicht der eingesetzten Komponenten.}}{18}{table.caption.13}%
+\contentsline {table}{\numberline {3.1}{\ignorespaces Architekturparameter -- LLaMA\,7B (fett) ist das in dieser Arbeit eingesetzte Modell.}}{18}{table.caption.13}%
+\contentsline {table}{\numberline {3.2}{\ignorespaces Übersicht der eingesetzten Komponenten.}}{19}{table.caption.14}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces Konfiguration des nano-GPT-Modells~\blx@tocontentsinit {0}\cite {bycroft_llm}.}}{20}{table.caption.14}%
-\contentsline {table}{\numberline {4.2}{\ignorespaces Vergleich Cloud-API vs. On-Premise-Betrieb.}}{21}{table.caption.16}%
-\contentsline {table}{\numberline {4.3}{\ignorespaces Gängige GPUs für lokale LLM-Inferenz. \text {$\mathsurround \z@ \mathchar "458$}\,: ausreichend, \text {$\mathsurround \z@ \mathchar "458$}\text {$\mathsurround \z@ \mathchar "458$}\,: gut geeignet, \text {$\mathsurround \z@ \mathchar "458$}\text {$\mathsurround \z@ \mathchar "458$}\text {$\mathsurround \z@ \mathchar "458$}\,: optimal.}}{22}{table.caption.17}%
-\contentsline {table}{\numberline {4.4}{\ignorespaces Hardware- und Software-Konfiguration am IZPL.}}{23}{table.caption.18}%
+\contentsline {table}{\numberline {4.1}{\ignorespaces Konfiguration des nano-GPT-Modells~\blx@tocontentsinit {0}\cite {bycroft_llm}.}}{21}{table.caption.15}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces Vergleich Cloud-API vs. On-Premise-Betrieb.}}{22}{table.caption.17}%
+\contentsline {table}{\numberline {4.3}{\ignorespaces Gängige GPUs für lokale LLM-Inferenz. \text {$\mathsurround \z@ \mathchar "458$}\,: ausreichend, \text {$\mathsurround \z@ \mathchar "458$}\text {$\mathsurround \z@ \mathchar "458$}\,: gut geeignet, \text {$\mathsurround \z@ \mathchar "458$}\text {$\mathsurround \z@ \mathchar "458$}\text {$\mathsurround \z@ \mathchar "458$}\,: optimal.}}{23}{table.caption.18}%
+\contentsline {table}{\numberline {4.4}{\ignorespaces Hardware- und Software-Konfiguration am IZPL.}}{24}{table.caption.19}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

@@ -6,15 +6,16 @@
 \contentsline {figure}{\numberline {2.1}{\ignorespaces Datenfluss eines Large Language Models}}{6}{figure.caption.7}%
 \contentsline {figure}{\numberline {2.2}{\ignorespaces Vektor-Embedding für den Satz „LLMs with Igus Rebel 6 DOF“}}{7}{figure.caption.8}%
 \contentsline {figure}{\numberline {2.3}{\ignorespaces Beispielhafte Darstellung der Tokenisierung}}{8}{figure.caption.9}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Visualisierung der Parameter des Attention Mechanismus}}{10}{figure.caption.10}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Datenfluss eines Large Language Models}}{15}{figure.caption.11}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Datenfluss eines Large Language Models}}{16}{figure.caption.12}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Simulierter VRAM-Bedarf je Quantisierungsstufe im Vergleich zum 12-GB-Limit der RTX 3080 Ti}}{24}{figure.caption.19}%
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Generierungsgeschwindigkeit (Tokens/s) in Abhängigkeit der Quantisierung}}{25}{figure.caption.20}%
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Prefill-Latenz (Time-to-First-Token) über verschiedene Prompt-Längen (Q4\_K\_M)}}{25}{figure.caption.21}%
-\contentsline {figure}{\numberline {5.4}{\ignorespaces Kumulative Token-Ausgabe über die Zeit bei der 4-Bit-Quantisierung}}{26}{figure.caption.22}%
-\contentsline {figure}{\numberline {5.5}{\ignorespaces Zeitlicher VRAM-Verlauf während der Modell-Ausführung gegliedert in Laden, Prefill und Generierung}}{26}{figure.caption.23}%
-\contentsline {figure}{\numberline {5.6}{\ignorespaces Qualitätsverlust (Perplexity auf WikiText-2) durch Quantisierungsverfahren}}{27}{figure.caption.24}%
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Simulierter VRAM-Bedarf je Quantisierungsstufe im Vergleich zum 12-GB-Limit der RTX 3080 Ti}}{25}{figure.caption.20}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Generierungsgeschwindigkeit (Tokens/s) in Abhängigkeit der Quantisierung}}{26}{figure.caption.21}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Prefill-Latenz (Time-to-First-Token) über verschiedene Prompt-Längen (Q4\_K\_M)}}{26}{figure.caption.22}%
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Kumulative Token-Ausgabe über die Zeit bei der 4-Bit-Quantisierung}}{27}{figure.caption.23}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Zeitlicher VRAM-Verlauf während der Modell-Ausführung gegliedert in Laden, Prefill und Generierung}}{27}{figure.caption.24}%
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Qualitätsverlust (Perplexity auf WikiText-2) durch Quantisierungsverfahren}}{28}{figure.caption.25}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
